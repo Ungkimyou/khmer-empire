@@ -146,6 +146,21 @@ client.on("message", async message => {
     return message.reply(" ${user}.Check your direct messages ")
   }
 
+  if (command === "eval") {
+    if(message.author.id !== "356510829920780289") return;
+    try {
+      var code = args.join(" ");
+      var evaled = eval(code);
+
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);
+
+      message.channel.sendCode("xl", clean(evaled));
+    } catch(err) {
+      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+    }
+  }
+
 });
 
 client.login(config.token);
