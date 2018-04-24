@@ -146,7 +146,7 @@ client.on("message", async message => {
   }
 
   if(command === "invite") {
-    const m = await message.channel.send("https://waasdasd654.wixsite.com/tamotoji");
+    const m = await message.channel.send("https://tamotoji533.wixsite.com/healong");
   }
 
 });
