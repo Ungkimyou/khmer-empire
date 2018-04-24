@@ -150,6 +150,7 @@ client.on("message", async message => {
   }
 
   if(command === "botinfo") {
+
      let botembed = new Discord.RichEmbed()
      .setDescription("BOTI-INFO")
      .setColor("#d25bee")
