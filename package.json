@@ -1,14 +1,14 @@
 {
   "name": "HeaLOng",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Best Bot By Khmer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Zendovo",
+  "author": "Me",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.3.2"
+    "discord.js": "^11.3.2"
   }
 }
