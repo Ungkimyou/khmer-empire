@@ -31,7 +31,7 @@ bot.on("message", async message => {
 
   if(cmd === `${prefix}say`){
    if(!message.member.roles.some(r=>["OWNER", "ADMIN"].includes(r.name)) )
-      return message.reply("Sorry, you don't permissions to use this!\nallow role to use permissions [ OWNER , ADMIN ]");
+      return message.reply("```\nSorry, you don't permissions to use this!\nallow role to use [ OWNER,ADMIN ]```");
   let text = args.slice(1).join(" ");
   message.delete();
   message.channel.send(text);
