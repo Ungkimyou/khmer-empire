@@ -146,6 +146,9 @@ client.on("message", async message => {
     return message.reply(" ${user}.Check your direct messages ")
   }
 
+  if(command === "invite") {
+    message.reply(`${user} : https://discordbots.org/bot/438304216893620240`);
+  }
 
 });
 
