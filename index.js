@@ -84,36 +84,32 @@ bot.on("message", async message => {
     message.reply(`ð‡ðšð¬ ððžðžð§ ððšð§ ${member.user.tag} ð…ð«ð¨ð¦ ð’ðžð«ð¯ðžð« ð‘ðžðšð¬ð¨ð§:${reason}`);
   }
 
- if(command === "test") {
-  message.channel.send({embed: {
-    color: 15844367,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    title: "Heist",
-    url: "http://google.com",
-    description: "Starting in **15** minutes!",
-    fields: [{
-        name: "Theme",
-        value: "TBD"
-      },
-      {
-        name: "Objective",
-        value: "TBD"
-      }
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "Accepting help"
-    }
-  }
+ if(cmd === `${prefix}time`){
+   message.channel.send({embed: {
+     color: 15844367,
+     author: {
+       name: client.user.username,
+       icon_url: client.user.avatarURL
+     },
+     title: "Heist",
+     url: "http://google.com",
+     description: "Starting in **15** minutes!",
+     fields: [{
+         name: "Theme",
+         value: "TBD"
+       },
+       {
+         name: "Objective",
+         value: "TBD"
+       }
+     ],
+     timestamp: new Date(),
+     footer: {
+       icon_url: client.user.avatarURL,
+       text: "Accepting help"
+     }
+   }
 });
-.then(newMessage => {
-       newMessage.react('👍')
-})
-    }
-});
+
 
 bot.login(process.env.TOKEN);
