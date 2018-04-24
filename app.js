@@ -146,7 +146,7 @@ client.on("message", async message => {
   }
 
   if(command === "invite") {
-    const m = await message.channel.send("`https://discordbots.org/bot/438304216893620240`");
+    const m = await message.channel.send("https://discordbots.org/bot/438304216893620240");
   }
 
 });
