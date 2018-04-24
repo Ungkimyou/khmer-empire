@@ -134,7 +134,7 @@ client.on("message", async message => {
   }
 
   if(command === "help") {
-   message.channel.send("BOT-Commands: Prefix "-"\n\nsay - {TEXT} u want type\nping - check your ping\nclear - Clean a message\nkick - kick member from server\nban - ban member from server```");
+   message.channel.send("```BOT PREFIX : - \n\nkick - kick member from server\nban - ban member from server```");
   }
 
 });
