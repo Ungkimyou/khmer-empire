@@ -44,7 +44,7 @@ bot.on("message", async message => {
 
  if(cmd === `${prefix}kick`){
     if(!message.member.roles.some(r=>["OWNER", "ADMIN"].includes(r.name)) )
-      return message.reply("Sorry, you don't permissions to use this!\nallow role to use permissions [ OWNER , ADMIN ]");
+      return message.reply("```\nSorry, you don't permissions to use this!\nallow role to use [ OWNER,ADMIN ]```");
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("Please Mention a valid member of this server");
@@ -63,7 +63,7 @@ bot.on("message", async message => {
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
       return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
     if(!message.member.roles.some(r=>["OWNER", "ADMIN"].includes(r.name)) )
-      return message.reply("Sorry, you don't permissions to use this!\nallow role to use permissions [ OWNER , ADMIN ]");
+      return message.reply("```\nSorry, you don't permissions to use this!\nallow role to use [ OWNER,ADMIN ]```");
     const fetched = await message.channel.fetchMessages({count: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
@@ -71,7 +71,7 @@ bot.on("message", async message => {
 
  if(cmd === `${prefix}ban`){
     if(!message.member.roles.some(r=>["ADMIN", "OWNER"].includes(r.name)) )
-      return message.reply("Sorry, you don't permissions to use this!\nallow role to use permissions [ OWNER , ADMIN ]");   
+      return message.reply("```\nSorry, you don't permissions to use this!\nallow role to use [ OWNER,ADMIN ]```");   
     let member = message.mentions.members.first();
     if(!member)
       return message.reply("Please Mention a valid member of this server");
