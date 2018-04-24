@@ -146,29 +146,6 @@ client.on("message", async message => {
     return message.reply(" ${user}.Check your direct messages ")
   }
 
-  if (command === "foo") {
-    let modRole = message.guild.roles.find("OWNER", "ADMIN");
-    if(message.member.roles.has(modRole.id)) {
-      message.channel.sendMessage("bar!").catch(console.error);
-    } else {
-      message.reply("You pleb, you don't have the permission to use this command.").catch(console.error);
-    }
-  }
-
-  if (command === "eval") {
-    if(message.author.id !== "356510829920780289") return;
-    try {
-      var code = args.join(" ");
-      var evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.sendCode("xl", clean(evaled));
-    } catch(err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-  }
 
 });
 
