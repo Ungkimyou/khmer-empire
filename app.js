@@ -150,10 +150,11 @@ client.on("message", async message => {
   }
 
   if(command === "botinfo") {
-    message.channel.sand({embed:{
-        title:"BotName",
-        color: 0x17A589
-    }})
+    lef embed = new Discord.RichEmbed()
+      .setTitle("BOT-INFO")
+      .setDescription("Zz")
+      .setColor("#FF000")
+    message.channel.sand({embed})
   }
 
 });
