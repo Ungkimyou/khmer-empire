@@ -154,6 +154,8 @@ client.on("message", async message => {
      .setDescription("BOTI-NFO")
      .setColor("#d25bee")
      .addField("BotName", bot.user.username);
+
+     return message.channel.sand(botembed)
   }
 
 });
