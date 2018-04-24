@@ -137,6 +137,16 @@ client.on("message", async message => {
    message.channel.send("```BOT PREFIX : - \n\nkick - kick member from server\nban - ban member from server```");
   }
 
+  if(command === "botinfo") {
+    const ce = require("embed-creator");
+    msg.channel.send(ce(
+      "hex code color", "author object", "title",
+      "description",
+      "fields object",
+      "footer object",
+      "image object", "is timestamp enabled (true/false)"
+ ));
+
 });
 
 client.login(config.token);
