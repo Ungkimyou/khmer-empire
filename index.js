@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online!`);
-  bot.user.setActivity(`config`);
+  bot.user.setActivity(`with TaMoToJi`);
 });
 
 bot.on("message", function(message){
