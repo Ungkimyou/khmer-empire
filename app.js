@@ -140,9 +140,10 @@ client.on("message", async message => {
   }
 
   if(command === "avatar") {
-    const m = await message.channel.send(message.author.avatarURL);
+    const m = await message.author.send(message.author.avatarURL);
     message.delete();
     message.channel.send(text);
+    message.channel.sand(" ${user}.Check your direct messages ")
   }
 
 });
