@@ -1,11 +1,10 @@
 const Discord = require("discord.js");
-
-const TOKEN = "NDM4MzA0MjE2ODkzNjIwMjQw.DcCs_w.wdCiCZhBfhgSIEMDMnIUsuLD_cA";
-
 var bot = Discord.Client();
 
-bot.on("message", function(message) {
-    console.log(message.content);
+bot.on("ready", async () => {
+  console.log(`${bot.user.username} is online!`);
+  bot.user.setActivity(`Use >>help for help`);
 });
+
 
 bot.login(process.env.TOKEN);
