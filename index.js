@@ -19,7 +19,7 @@ bot.on("message", function(message) {
         case "ping"
            message.channel.sandMessage("pong");
            break:
-
+    }
 });
 
 
