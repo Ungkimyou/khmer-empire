@@ -4,6 +4,7 @@ const TOKEN = "NDM4MzA0MjE2ODkzNjIwMjQw.DcCs_w.wdCiCZhBfhgSIEMDMnIUsuLD_cA"
 const PREFIX "k!";
 
 var bot = new Discord.Client();
+
 bot.on("ready", function() (
     console.log("Ready");
 )};
