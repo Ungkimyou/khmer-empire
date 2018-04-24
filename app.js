@@ -73,7 +73,7 @@ client.on("message", async message => {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["Administrator", "Moderator"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["OWNER", "ADMIN"].includes(r.name)) )
       return message.reply("Sorry, you don't have permissions to use this!");
     
     // Let's first check if we have a member and if we can kick them!
@@ -143,7 +143,7 @@ client.on("message", async message => {
     const m = await message.author.send(message.author.avatarURL);
     message.delete();
     message.channel.send(text);
-    message.channel.sand(" ${user}.Check your direct messages ")
+    return message.reply(" ${user}.Check your direct messages ")
   }
 
 });
