@@ -150,13 +150,10 @@ client.on("message", async message => {
   }
 
   if(command === "botinfo") {
-
-     let botembed = new Discord.RichEmbed()
-     .setDescription("BOTI-INFO")
-     .setColor("#d25bee")
-     .addField("BotName", bot.user.username);
-
-     return message.channel.sand(botembed);
+    message.channel.sand({embed:{
+        title:"BotName",
+        color: 0x17A589
+    }})
   }
 
 });
