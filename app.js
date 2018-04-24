@@ -146,7 +146,7 @@ client.on("message", async message => {
   }
 
   if(command === "invite") {
-    const m = await message.channel.send("https://github.com/healong/readme/blob/master/README.md");
+    const m = await message.channel.send("https://github.com/healong/readme");
   }
 
 });
