@@ -149,6 +149,13 @@ client.on("message", async message => {
     const m = await message.channel.send("https://tamotoji533.wixsite.com/healong");
   }
 
+  if(command === "botinto") {
+     let botembed = new Discord.RichEmbed()
+     .setDescription("BOTI-NFO")
+     .setColor("#d25bee")
+     .addField("BotName", bot.user.username);
+  }
+
 });
 
 client.login(config.token);
