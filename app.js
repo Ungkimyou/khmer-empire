@@ -143,11 +143,10 @@ client.on("message", async message => {
     const m = await message.author.send(message.author.avatarURL);
     message.delete();
     message.channel.send(text);
-    return message.reply(" ${user}.Check your direct messages ")
   }
 
   if(command === "invite") {
-    message.reply(`${user} : https://discordbots.org/bot/438304216893620240`);
+    message.reply("`https://discordbots.org/bot/438304216893620240`");
   }
 
 });
