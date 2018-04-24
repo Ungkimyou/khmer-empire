@@ -6,5 +6,7 @@ bot.on("ready", async () => {
   bot.user.setActivity(`config`);
 });
 
+bot.on("message", function(message){
+    if (message.author.equals(bot.user)) return;
 
 bot.login(process.env.TOKEN);
