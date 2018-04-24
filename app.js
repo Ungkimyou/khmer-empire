@@ -134,7 +134,7 @@ client.on("message", async message => {
   }
 
   if(command === "help") {
-   message.author.send("```md\n[Website](https://tamotoji533.wixsite.com/healong)```");
+   message.author.send("```md\n[Website](https://tamotoji533.wixsite.com/healong)```\n\n```\nBOT Commands\n- avatar : Search Use Avatar\n- say : Bot Say To From Channel And Delete Your Message\n- ping : Search Your Ping or Ms\n- clear : Clear Massage From Channel- kick [user] [ reason] : Kick Member\n- ban [user] [ reason] : Ban Member```");
    message.delete();
    message.channel.send(text);
   }
