@@ -11,16 +11,6 @@ const config = require("./config.json");
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
 
-const embed = new Discord.RichEmbed();
-
-  if(command === "test");
-    embed.setTitle('This is an example title');
-    embed.setColor('#4caf50');                                        // A Hex color
-    embed.setDescription('A description that supports `markdown`');
-    embed.setURL('https://codebottle.io/');                           // A URL to include
-    embed.setAuthor('OverCoder');
-  
-
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
