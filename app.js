@@ -144,15 +144,7 @@ client.on("message", async message => {
     message.delete();
     message.channel.send(text);
   }
-
-    cost "invite" :
-     var embed = new Discord.RichEmbed()
-            .setColor(`#da89fe`)
-            .setTitle(`Bot Command`)
-            .setDescription(`avatar - seach user avatar`)
-            .setThumbnail(message.author.avatarURL)
-             message.channel.sendEmbed(embed);
- }
+  
 
 });
 
