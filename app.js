@@ -125,9 +125,16 @@ client.on("message", async message => {
 
 
   if(command === "avatar") {
-    const m = await message.author.send(message.author.avatarURL);
+
+     let bicon = bot.user.displayAvatarURL;
+     let botembed = new Discord.RichEmbed()
+    .setImage(message.author.avatarURL.addField)
+    .setColor("#68a4fc")
+    .setFooter(`Bot Create By TaMoToJi#5881`)
+
     message.delete();
     message.channel.send(text);
+    message.channel.send(botembed);
   }
 
   if(command === "serverinfo") {
