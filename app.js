@@ -133,6 +133,15 @@ client.on("message", async message => {
     message.delete();
     message.channel.send(text);
   }
+
+  if(command === "serverinfo") {
+     let serverEmbed = new Discord.RichEmbed()
+     .setTitle("ServerInfo")
+     .setDescription("use -help for help")
+
+     return message.channel.send(serverembed);
+ 
+  }
   
 });
 
