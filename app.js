@@ -161,6 +161,7 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let reportembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setColor("#204499")
     .setDescription(":x: this commands can't not use now !")
     .setFooter("Bot Create By TaMoToJi#5881")
     
