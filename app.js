@@ -157,6 +157,8 @@ client.on("message", async message => {
     .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
      message.author.send(testembed);
+     message.delete().catch(O_o=>{}); 
+     message.channel.send(sayMessage);
  
   }
 
