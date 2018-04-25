@@ -70,9 +70,9 @@ client.on("message", async message => {
   }
   
   if(command === "kick") {
-    if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin')
-    cost member = msg.mention.member.first();
-     if (!member return msg.msg.reply('Invalid usage .please do `-kick @user#1234`');
+    if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
+    let member = msg.mention.member.first();
+    if (!member return msg.msg.reply('Invalid usage .please do `-kick @user#1234`');
 
   }
   
