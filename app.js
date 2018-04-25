@@ -161,7 +161,7 @@ client.on("message", async message => {
      let bicon = bot.user.displayAvatarURL;
      let botembed = new Discord.RichEmbed()
     .setImage(message.author.avatarURL.addField)
-    .setColor("#68a4fc")
+    .setColor("0x68a4fc")
     .setFooter(`Bot Create By TaMoToJi#5881`)
     
     message.channel.send(botembed);
