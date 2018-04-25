@@ -25,7 +25,17 @@ client.on("guildCreate", guild => {
   client.user.setActivity(` ${client.guilds.size} servers | -help`);
 });
 
+client.on("guildMemberAdd", (member) => {
+  const guild = member.guild;
+  newUsers.set(member.id, member.user);
 
+  if (newUsers.size > 10) {
+    const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const userlist = newUsers.map(u => u.toString()).join(" ");
+    defaultChannel.send("Welcome new user to server\n" + userlist);
+    newUsers.clear();
+  }
+});
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
