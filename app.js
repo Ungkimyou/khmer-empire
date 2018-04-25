@@ -173,10 +173,12 @@ client.on("message", async message => {
 
   if(command === "rsetup") {
     let sicon = message.guild.iconURL;
-    let reportembed = new Discord.RichEmbed()
+    let rsetupembed = new Discord.RichEmbed()
     .setAuthor("Report Setup :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .addField("Create Text Channel", "Set Channel Name To [#reports]")
     .setColor("#FF0000")
+
+    message.channel.send(rsetupembed);
 
     }
      
