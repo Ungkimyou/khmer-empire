@@ -67,7 +67,7 @@ client.on("message", async message => {
   if(command === "say") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
-    const sayMessage = args.join(" ");
+    const sayMessage = args.join("");
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
@@ -108,6 +108,7 @@ client.on("message", async message => {
   
   if(command === "clear") {
     // This command removes all messages from all users in the channel, up to 100.
+    if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
     
     // get the delete count, as an actual number.
     const deleteCount = parseInt(args[0], 10);
@@ -122,11 +123,6 @@ client.on("message", async message => {
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
 
-  if(command === "help") {
-   message.author.send("```md\n[Website](https://tamotoji533.wixsite.com/healong)```\n```\nBOT Commands :\n- avatar : Search Use Avatar\n- say : Bot Say To From Channel And Delete Your Message\n- ping : Search Your Ping or Ms\n- clear : Clear Massage From Channel\n- kick [user] [ reason] : Kick Member\n- ban [user] [ reason] : Ban Member\n\nBot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881```");
-   message.delete();
-   message.channel.send(text);
-  }
 
   if(command === "avatar") {
     const m = await message.author.send(message.author.avatarURL);
@@ -151,7 +147,7 @@ client.on("message", async message => {
  
   }
 
-  if(command === "test") {
+  if(command === "help") {
      
      let sicon = message.guild.iconURL;
      let testembed = new Discord.RichEmbed()
@@ -160,7 +156,7 @@ client.on("message", async message => {
     .setImage("https://cdn.discordapp.com/attachments/438339455141543936/438682012232974367/BotCommand.JPG")
     .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
-     message.channel.send(testembed);
+     message.author.send(testembed);
  
   }
 
