@@ -73,7 +73,7 @@ client.on("message", async message => {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
-      return message.reply("Please mention a valid member of this server");
+      return message.reply("Invaild Usage Please do `-kick @user#1234 @reason`");
     if(!member.kickable) 
       return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
     let reason = args.slice(1).join(' ');
@@ -89,7 +89,7 @@ client.on("message", async message => {
     
     let member = message.mentions.members.first();
     if(!member)
-      return message.reply("Please mention a valid member of this server");
+      return message.reply("Invaild Usage Please do `-kick @user#1234 @reason`");
     if(!member.bannable) 
       return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
