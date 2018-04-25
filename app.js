@@ -60,8 +60,8 @@ client.on("message", async message => {
   if(command === "ping") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-    const m = await message.channel.send("Ping?");
-    m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
+    const m = await message.channel.send(":mag: Starting ...?");
+    m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
   }
   
   if(command === "say") {
@@ -187,6 +187,7 @@ e
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .addField("BOT-Invite :", "  [Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
     .addField("Discord-Invite :", "  [Click Here](https://discord.gg/WMxC5rw)")
+    .addField("BOT-Website :", "  [Click Here](https://tamotoji533.wixsite.com/healong)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
