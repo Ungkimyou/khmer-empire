@@ -136,10 +136,10 @@ client.on("message", async message => {
 
   if(command === "serverinfo") {
 
+     let sicon = message.guild.iconURL;
      let serverembed = new Discord.RichEmbed()
     .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
     .setDescription("wacting....:mag: ")
-    .setImgae(message.author.avatarURL)
 
      message.channel.send(serverembed);
  
