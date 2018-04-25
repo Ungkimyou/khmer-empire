@@ -172,10 +172,14 @@ client.on("message", async message => {
   }
 
   if(command === "rsetup") {
-   message.author.send("```md # Report Setup :\n1- Create New #Text Channel And Rename a #Text Channem To #reports ```");
+    let sicon = message.guild.iconURL;
+    let reportembed = new Discord.RichEmbed()
+    .setAuthor("Report Setup :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .addField("Create Text Channel", "Set Channel Name To [#reports]")
+    .setColor("#FF0000")
 
-  }
-  
+    }
+     
 });
 
 client.login(config.token);
