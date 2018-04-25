@@ -137,8 +137,13 @@ client.on("message", async message => {
   if(command === "serverinfo") {
 
      let serverembed = new Discord.RichEmbed()
-     .setTitle("ServerInfo")
-     .setDescription("use -help for help")
+    .setDescription("Server Info")
+    .setColor("#f58be1")
+    .setThumbnail(sicon)
+    .addField("Server Name", message.guild.name)
+    .addField("Created On", message.guild.createdAt)
+    .addField("You Joined", message.member.joinedAt)
+    .addField("Total Members", message.guild.memberCount);
 
      message.channel.send(serverembed);
  
