@@ -162,8 +162,8 @@ client.on("message", async message => {
 
      let sicon = message.guild.iconURL;
      let reportembed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setColor("#b883f7")
+    .setAuthor("KhmerEmpire Commands !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setColor("#FF0000")
     .setDescription(":x: this commands can't not allow use now ![Click Here](https://tamotoji533.wixsite.com/healong) View More :mag:")
     .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
     
@@ -171,6 +171,10 @@ client.on("message", async message => {
 
   }
 
+  if(command === "report setup") {
+     message.reply("```md\n# Channel Report Setup :\n1- Create Channel #reports !```");
+
+  }
   
 });
 
