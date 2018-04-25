@@ -70,15 +70,15 @@ client.on("message", async message => {
   }
   
   if(command === "kick") {
-    if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
+    if(!message.member.permissions.has('ADMINISTRATOR')) 
+      return msg.reply('you aren\'t n admin');
+
     let member = msg.mention.member.first();
     if (!member return msg.msg.reply('Invalid usage .please do `-kick @user#1234`');
 
   }
   
   if(command === "ban") {
-    // Most of this command is identical to kick, except that here we'll only let admins do it.
-    // In the real world mods could ban too, but this is just an example, right? ;)
     if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
       return message.reply("Sorry, you don't have permissions to use this!");
     
