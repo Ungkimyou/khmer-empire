@@ -129,7 +129,6 @@ client.on("message", async message => {
     message.channel.send(text);
   }
   
-
 });
 
 client.login(config.token);
