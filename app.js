@@ -187,6 +187,7 @@ client.on("message", async message => {
      let inviteembed = new Discord.RichEmbed()
     .setAuthor("Invite-BOT Now :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .addField("KhmerEmpire :", "  [Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
+    .addField("Discord-Invite :", "  [Click Here](https://discord.gg/WMxC5rw)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
