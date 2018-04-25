@@ -145,6 +145,7 @@ client.on("message", async message => {
      
      let sicon = message.guild.iconURL;
      let testembed = new Discord.RichEmbed()
+    .setColor("#67ffbd")
     .setAuthor("KhmerEmpire Help Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View To Website :globe_with_meridians:")
     .setImage("https://cdn.discordapp.com/attachments/438339455141543936/438682012232974367/BotCommand.JPG")
@@ -161,7 +162,8 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let reportembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setColor("#204499")
+    .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View More :mag: !")
+    .setColor("#b883f7")
     .setDescription(":x: this commands can't not use now !")
     .setFooter("Bot Create By TaMoToJi#5881")
     
