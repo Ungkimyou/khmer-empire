@@ -189,6 +189,7 @@ client.on("message", async message => {
     .addField("KhmerEmpire", "[Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
     .setColor("#437afb")
     .setImage("siocn")
+    .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
 
     message.channel.send(inviteembed);
     message.delete().catch(O_o=>{}); 
