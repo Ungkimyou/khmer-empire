@@ -162,7 +162,7 @@ client.on("message", async message => {
     .setImage("https://cdn.discordapp.com/attachments/438339455141543936/438682012232974367/BotCommand.JPG")
     .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
-     message.channel.send(serverembed);
+     message.channel.send(botembed);
  
   }
 
