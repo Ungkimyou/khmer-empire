@@ -137,9 +137,9 @@ client.on("message", async message => {
   if(command === "serverinfo") {
 
      let serverembed = new Discord.RichEmbed()
-    .setDescription("Server Info")
-    .setColor("#f58be1")
-    .setThumbnail(sicon)
+    .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
+    .setDescription("wacting....:mag: ")
+    .setImgae(message.author.avatarURL)
 
      message.channel.send(serverembed);
  
