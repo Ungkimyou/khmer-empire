@@ -186,7 +186,7 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let inviteembed = new Discord.RichEmbed()
     .setAuthor("Invite-BOT Now :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .addField("KhmerEmpire", "[Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
+    .addField("KhmerEmpire :", " [Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
     .setColor("#437afb")
     .setImage("https://png.icons8.com/ios/1600/discord-logo.png")
     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
