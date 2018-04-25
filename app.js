@@ -135,7 +135,8 @@ client.on("message", async message => {
   }
 
   if(command === "serverinfo") {
-     let serverEmbed = new Discord.RichEmbed()
+     let sicon = message.guild.iconURL;
+     let serverembed = new Discord.RichEmbed()
      .setTitle("ServerInfo")
      .setDescription("use -help for help")
 
