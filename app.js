@@ -156,16 +156,17 @@ client.on("message", async message => {
  
   }
 
-  if(command === "avatar") {
+  if(command === "report") {
 
-     let bicon = bot.user.displayAvatarURL;
-     let botembed = new Discord.RichEmbed()
-    .setImage(message.author.avatarURL.addField)
+     let sicon = message.guild.iconURL;
+     let reportembed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setColor("#5d98fd")
+    .setDescription(":x: this commands can't not use now !"
     .setFooter(`Bot Create By TaMoToJi#5881`)
     
-    message.channel.send(botembed);
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
+    message.channel.send(reportembed);
+
   }
 
   
