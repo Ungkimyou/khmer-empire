@@ -138,9 +138,11 @@ client.on("message", async message => {
 
      let sicon = message.guild.iconURL;
      let serverembed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
     .setThumbnail(sicon)
     .setDescription("Wacting....:mag:")
+    .setFooter(`BotCreate By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881:flag_kh: `)
 
      message.channel.send(serverembed);
  
