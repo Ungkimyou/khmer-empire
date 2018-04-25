@@ -187,12 +187,10 @@ client.on("message", async message => {
     .setAuthor("Invite-BOT Now :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .addField("KhmerEmpire", "[Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
     .setColor("#437afb")
-    .setImage("siocn")
+    .setImage("sicon")
     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
 
     message.channel.send(inviteembed);
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
 
     }
 
