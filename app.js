@@ -148,7 +148,6 @@ client.on("message", async message => {
     .setColor("#67ffbd")
     .setAuthor("KhmerEmpire Help Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View To Website :globe_with_meridians:")
-    .addField("ServerWebsite :", "[Click Here](https://tamotoji533.wixsite.com/healong)")
     .setImage("https://cdn.discordapp.com/attachments/438339455141543936/438682012232974367/BotCommand.JPG")
     .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
@@ -182,6 +181,20 @@ client.on("message", async message => {
 
     }
      
+  if(command === "invite") {
+    let sicon = message.guild.iconURL;
+    let inviteembed = new Discord.RichEmbed()
+    .setAuthor("Invite-BOT Now :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .addField("KhmerEmpire", "[Click Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
+    .setColor("#437afb")
+
+    message.channel.send(inviteembed);
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
+
+    }
+
+
 });
 
 client.login(config.token);
