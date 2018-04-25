@@ -139,7 +139,8 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let serverembed = new Discord.RichEmbed()
     .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
-    .setDescription("wacting....:mag: ")
+    .setThumbnail(sicon)
+    .setDescription("Wacting....:mag:")
 
      message.channel.send(serverembed);
  
