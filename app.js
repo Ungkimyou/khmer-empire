@@ -171,8 +171,8 @@ client.on("message", async message => {
 
   }
 
-  if(command === "report setup") {
-     message.reply("```md\n# Channel Report Setup :\n1- Create Channel #reports !```");
+  if(command === "rsetup") {
+   message.author.send("```md# Report Setup :\n1- Create New #Text Channel And Rename a #Text Channem To #reports `");
 
   }
   
