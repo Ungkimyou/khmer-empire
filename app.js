@@ -71,7 +71,6 @@ client.on("message", async message => {
   
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
-      return msg.reply("Invalid Usage, Please do `-kick @user#1324`");
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("Please mention a valid member of this server");
@@ -91,7 +90,7 @@ client.on("message", async message => {
   }
   
   if(command === "ban") {
-    if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
+    if(!message.member.permissions.some(r=>["ADMINISTRATOR"].includes(r.name)) )
       return message.reply("Sorry, you don't have permissions to use this!");
     
     let member = message.mentions.members.first();
