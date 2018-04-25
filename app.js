@@ -124,19 +124,6 @@ client.on("message", async message => {
   }
 
 
-  if(command === "avatar") {
-
-     let bicon = bot.user.displayAvatarURL;
-     let botembed = new Discord.RichEmbed()
-    .setImage(message.author.avatarURL.addField)
-    .setColor("#68a4fc")
-    .setFooter(`Bot Create By TaMoToJi#5881`)
-
-    message.delete();
-    message.channel.send(text);
-    message.channel.send(botembed);
-  }
-
   if(command === "serverinfo") {
      
      let sicon = message.guild.iconURL;
@@ -167,6 +154,19 @@ client.on("message", async message => {
      message.delete().catch(O_o=>{}); 
      message.channel.send(sayMessage);
  
+  }
+
+  if(command === "avatar") {
+
+     let bicon = bot.user.displayAvatarURL;
+     let botembed = new Discord.RichEmbed()
+    .setImage(message.author.avatarURL.addField)
+    .setColor("#68a4fc")
+    .setFooter(`Bot Create By TaMoToJi#5881`)
+    
+    message.channel.send(botembed);
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
   }
 
   
