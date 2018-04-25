@@ -71,6 +71,7 @@ client.on("message", async message => {
   
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
+    if (!member) return msg.reply.('Invalid Usage, Please do `-kick @user#1324`');
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("Please mention a valid member of this server");
