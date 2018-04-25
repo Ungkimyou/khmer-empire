@@ -145,9 +145,14 @@ client.on("message", async message => {
     message.channel.send(text);
   }
 
-  if(command === "invite") {
-    const m = await message.channel.send("https://tamotoji533.wixsite.com/healong");
-  }
+    cost "invite" :
+     var embed = new Discord.RichEmbed()
+            .setColor(`#da89fe`)
+            .setTitle(`Bot Command`)
+            .setDescription(`avatar - seach user avatar`)
+            .setThumbnail(message.author.avatarURL)
+             message.channel.sendEmbed(embed);
+ }
 
 });
 
