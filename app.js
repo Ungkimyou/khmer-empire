@@ -163,10 +163,9 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let reportembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View More :mag: !")
     .setColor("#b883f7")
-    .setDescription(":x: this commands can't not use now !")
-    .setFooter("Bot Create By TaMoToJi#5881")
+    .setDescription(":x: this commands can't not allow use now ![Click Here](https://tamotoji533.wixsite.com/healong) View More :mag:")
+    .setFooter("Bot Create By TaMoToJi#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
     
      message.channel.send(reportembed);
 
