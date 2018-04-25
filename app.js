@@ -74,7 +74,7 @@ client.on("message", async message => {
       return msg.reply('you aren\'t n admin');
 
     let member = msg.mention.member.first();
-    if (!member return msg.msg.reply('Invalid usage .please do `-kick @user#1234`');
+    if (!member return msg.reply('Invalid usage .please do `-kick @user#1234`');
 
   }
   
