@@ -290,18 +290,15 @@ e
   }
   
   if (command === "type") {
-  
      let bicon = bot.user.displayAvatarURL;
      let typeembed = new Discord.RichEmbed()
-     .setTitle("introduction")
      .setColor("#ae67fc")
      .setThumbnail(bicon)
      .addField("Username", message.author.username)
-     .addField("Descriptions", sayMessage);
 
      message.channel.send(typeembed);
 
- }
+  }
 
 
 });
