@@ -284,8 +284,15 @@ e
    message.channel.send(sayMessage);
 
  }
-  
 
+  if(command === "addrole") {
+    let role = message.guild.roles.find("name", "TEST-BOT");
+    let member = message.mentions.members.first();
+    member.addRole(role).catch(console.error);
+    member.removeRole(role).catch(console.error);
+
+  }
+  
 
 });
 
