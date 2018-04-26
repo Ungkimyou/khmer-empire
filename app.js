@@ -283,10 +283,18 @@ e
 
   if(command === "addrole") {
     let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone ");
-    return message.reply("```md # bot allow to addrole , removerole for \nADMIN, \nMEMBER, \nMOD, \nDJ, \nTEAM, \nSQUAD, \nBOT, \n@everyone ");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
     member.removeRole(role).catch(console.error);
+    
+    let sicon = message.guild.iconURL;
+    let addroleembed = new Discord.RichEmbed()
+    .setTitle("addRole Info :")
+    .setColor("#FF0000")
+    .addDescription("ADMIN, MEMNER, MOD, DJ, TEAM, SQUAD, BOT, @everyone")
+    .setThumbnail(sicon)
+    
+    message.channel.sand(addroleembed);  
 
   }
   
