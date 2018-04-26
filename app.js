@@ -267,9 +267,19 @@ e
     }
 
   if (command == "clean") {
-    message.channel.sendMessage('Cleaning...');
-    message.channel.bulkDelete(cleanarr);
-    var cleanarr = [];
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.bulkDelete(100)
+    message.channel.send("Clean.... !!!")
+    message.channel.delete(5000)
+    message.channel.bulkDelete(1)
+        
   }
 
 });
