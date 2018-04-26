@@ -252,9 +252,9 @@ e
 
   if (command == "clean") {
     if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
+     message.channel.send('Message Clean Sccessful.......:wastebasket:');
      message.channel.bulkDelete(10);
-     message.channel.sendMessage('Message Clean Sccessful.......:wastebasket:');
-     var cleanarr = [];
+     var cleanarr = [2];
  
   }
 
