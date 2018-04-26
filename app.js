@@ -274,7 +274,7 @@ e
  }
 
   if(command === "ayy") {
-   const ayy = client.emojis.find("name", "ayy");
+   const ayy = client.emojis.find("name", "ayy", "dab",);
    message.reply(`${ayy} LMAO`);
    message.delete().catch(O_o=>{}); 
    message.channel.send(sayMessage);
@@ -290,9 +290,6 @@ e
   }
   
   if (command === "type") {
-     let age = args[0]; // Remember arrays are 0-based!.
-     let sex = args[1];
-     let location = args[2];
   
      let bicon = bot.user.displayAvatarURL;
      let typeembed = new Discord.RichEmbed()
