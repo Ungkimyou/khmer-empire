@@ -12,7 +12,7 @@ client.on("message", message => {
   if(message.content.indexOf(config.prefix)) return;
   if (message.author.bot) return;
 
-  if (!points[message.author.id]) points[message.author.id] = {
+  let (!points[message.author.id]) points[message.author.id] = {
     points: 0,
     level: 0
   };
