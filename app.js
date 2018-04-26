@@ -7,8 +7,9 @@ const config = require("./config.json");
 
 
 
+
 client.on("message", message => {
-if(message.content.indexOf(config.prefix)) return;
+  if(message.content.indexOf(config.prefix)) return;
   if (message.author.bot) return;
 
   if (!points[message.author.id]) points[message.author.id] = {
@@ -25,7 +26,7 @@ if(message.content.indexOf(config.prefix)) return;
     message.reply(`You"ve leveled up to level **${curLevel}**! Ain"t that dandy?`);
   }
 
-  if(command === "level") {
+  if (message.content.indexOf(configprefix + "level")) {
     message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
   }
   fs.writeFile("./points.json", JSON.stringify(points), (err) => {
