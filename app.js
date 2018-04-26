@@ -5,6 +5,8 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
 var eightball = [ // sets the answers to an eightball
     "yes!",
@@ -308,16 +310,12 @@ e
 
  }
   
-  if(command === "dm") {
-    clbot.write(message.content, (response) => {
-      message.channel.startTyping();
-      setTimeout(() => {
-        message.channel.send(response.output).catch(console.error);
-        message.channel.stopTyping();
-      }, Math.random() * (1 - 3) + 1 * 1000);
-    });
-  }
-
+  if(command === "row") {
+    if (!row) { // Can't find the row.
+     sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+     } else { // Can find the row.
+     sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+ }
 
 });
 
