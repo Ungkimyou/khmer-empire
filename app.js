@@ -95,8 +95,9 @@ client.on("message", async message => {
     const embed1 = new Discord.RichEmbed()
     .setDescription(args.join(" "))
     .setColor('RANDOM')
+    message.delete().catch(O_o=>{});
     message.channel.send(embed1);
-
+    
   } 
   
  
@@ -327,26 +328,10 @@ client.on("message", async message => {
 
   if(command === "addroles") {
     let myRole = message.guild.roles.find("name", "ADMIN");
-  } else {
-    let myRole = message.guild.roles.find("name", "BOT-TEST");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
 
   }
-
-  if(command === "removeroles") {
-    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone");
-    let member = message.mentions.members.first();
-    member.removeRole(role).catch(console.error);
-
-  }
-
-  if(command === "roleadd") {   
-    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone");
-    let member = message.mentions.members.first();
-    member.addRole(role).catch(console.error);
-
-  } 
 
   
   if(command === "username") {
