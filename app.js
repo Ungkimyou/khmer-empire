@@ -1,15 +1,21 @@
-// Load up the discord.js library
+
 const Discord = require("discord.js");
 
-// This is your client. Some people call it `bot`, some people call it `self`, 
-// some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
-// this is what we're refering to. Your client.
 const client = new Discord.Client();
 
-// Here we load the config.json file that contains our token and our prefix values. 
 const config = require("./config.json");
-// config.token contains the bot's token
-// config.prefix contains the message prefix.
+
+var eightball = [ // sets the answers to an eightball
+    "yes!",
+    "no...",
+    "maybe?",
+    "probably",
+    "I don't think so.",
+    "never!",
+    "you can try...",
+    "up to you!",
+]
+
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -260,9 +266,13 @@ e
     const deleteCount = parseInt(args[1], 1);
     if(!deleteCount || deleteCount < 2 || deleteCount > 0)
       return message.reply("Limit To Clear Message 2 - 100");
-    const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(fetched)
-      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+    const fetched = await message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
+            messages.forEach(m => {
+                if (m.author.id == bot.user.id) {
+                    m.delete().catch(console.error);
+                if (deletedMessages === -1) deletedMessages = 0;
+                message.channel.send(`:white_check_mark: Purged \`${deletedMessages}\` messages.`)
+                    .then(m => m.delete(2000));
   }
 
   if(command === "purge") {
