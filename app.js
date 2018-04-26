@@ -297,8 +297,6 @@ e
      .setColor("#ae67fc")
      .setThumbnail(bicon)
      .addField("Username", message.author.username)
-     .addField("Year Old", {age})
-     .addField("From", {sex})
      .addField("Descriptions", sayMessage);
 
      message.channel.send(typeembed);
