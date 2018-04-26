@@ -30,18 +30,15 @@ client.on("ready", () => {
 client.on("guildCreate", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(` ${client.guilds.size} servers | -help`);
+  client.user.setActivity(` ${client.guilds.size} servers | k!help`);
 });
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
   let playRole = guild.roles.find("name", "Playing PLAYERUNKNOWN'S BATTLEGROUNDS");
-  let playRole = guild.roles.find("name", "Playing Minecraft");
-  let playRole = guild.roles.find("name", "Playing Counter-Strike: Global Offensive");
   if(!playRole) return;  
+
   if(newMember.user.presence.game && newMember.user.presence.game.name === "PLAYERUNKNOWN'S BATTLEGROUNDS") {
-  if(newMember.user.presence.game && newMember.user.presence.game.name === "Minecraft") {
-  if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike: Global Offensive") {
     newMember.addRole(playRole);
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
