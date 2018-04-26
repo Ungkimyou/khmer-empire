@@ -93,7 +93,7 @@ client.on("message", async message => {
 
   if(command == "embed") {
     const embed1 = new Discord.RichEmbed()
-    .setTitle(':scroll: ServerAnnoucement')
+    .setDescription(':scroll: ServerAnnoucement')
     .setColor('RANDOM')
     .addDescription(args.join(" "))
     message.channel.send(embed1);
