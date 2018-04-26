@@ -95,18 +95,11 @@ client.on("message", async message => {
     const embed1 = new Discord.RichEmbed()
     .setDescription(':scroll: ServerAnnoucement')
     .setColor('RANDOM')
-    .addDescription(args.join(" "))
+    .addField(args.join(" "))
     message.channel.send(embed1);
 
   } 
  
-  if(command === 'bug') {
-   const bugfound = args.join(' ')
-   let = member.guild.channels.find(`name`, "chat").send(`${bugfound}`);  
-   message.delete().catch(O_o=>{}); 
-   message.channel.send(sayMessage);
-
-  }
   
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
