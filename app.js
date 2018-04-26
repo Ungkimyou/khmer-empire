@@ -40,7 +40,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   
   if(newMember.user.presence.game && newMember.user.presence.game.name == "PLAYERUNKNOWN'S BATTLEGROUNDS") {
     newMember.addRole(playRole);
-  ) else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
+  } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
   }
 });
