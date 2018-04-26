@@ -191,6 +191,7 @@ e
         else message.channel.send("Ummmm, what is your question? :rolling_eyes: (Correct usage: k!8ball [question])"); // if not, error
     }
 
+
   if (command == "mute") { // creates the command mute
          if (!message.member.roles.some(r=>["ADMIN"].includes(r.name)) ) return message.reply("Sorry, you do not have the permission to do this!"); // if author has no perms
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
@@ -300,6 +301,11 @@ e
 
   }
 
+  if (command === "role")
+     let roleID = "430632487199309824";
+     let membersWithRole = message.guild.roles.get(roleID).members;
+     console.log(`Got ${membersWithRole.size} members with that role.`);
+ }  
 
 });
 
