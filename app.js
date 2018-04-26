@@ -262,18 +262,10 @@ e
     let sex = args[1];
     let location = args[2];
     message.reply(` I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
  }  
 
-  if(command === "quote") {
-  const [channelid, messageid, quotename, ...note] = args.splice(1);
-  // I also support "here" as a channelID using this:
-  const channel = channelid == "here" ? message.channel : client.channels.get(channelid);
-  // I do the same with message ID, which can be "last":
-  const message = messageid === "last" ? msg.channel.messages.last(2)[0] : await channel.messages.get(messageid);
-  // pretend for a second this is the rest of the function:
-  insertInDB(quotename, channel.id, message.id, note.join(" "));
- 
- }
 
   if (command === "listemojis") {
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
@@ -290,7 +282,8 @@ e
  }
 
   if(command === "addrole") {
-    let role = message.guild.roles.find("name", "TEST-BOT");
+    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone ");
+    return message.reply("```md # bot allow to addrole , removerole for \nADMIN, \nMEMBER, \nMOD, \nDJ, \nTEAM, \nSQUAD, \nBOT, \n@everyone ");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
     member.removeRole(role).catch(console.error);
