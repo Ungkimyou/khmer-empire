@@ -45,7 +45,8 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
 
   if(!playRole) return;
-  
+    
+  }  
 });
 
 
