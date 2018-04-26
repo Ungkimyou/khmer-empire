@@ -348,7 +348,7 @@ client.on("message", async message => {
    let filtered = client.points.filterArray( p => p.guildID === message.guild.id );
    let sorted = filtered.sort((a, b) => a.points < b.points);
    let top10 = sorted.splice(0, 10);
-   let embed = new Discord.RichEmbed()
+   let leaderembed = new Discord.RichEmbed()
      .setTitle("Leaderboard")
      .setAuthor(client.user.username, client.user.avatarURL)
      .setDescription("Our top 10 points leaders!")
@@ -356,7 +356,7 @@ client.on("message", async message => {
    for(data of top10) {
      embed.addField(client.users.get(data.userID).tag, `${data.points} points (level ${data.level})`);
    }
-   return message.channel.send({embed});
+   message.channel.send(leaderembed);
  }
 
   if(command === "eval") {
