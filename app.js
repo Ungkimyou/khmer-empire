@@ -6,13 +6,16 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 
+client.commands.set('serverinfo', require('./commands/serverinfo.js'));
+
+client.commands = new Discord.Collection();
 
 
 client.on("message", message => {
-  if(message.content.indexOf(config.prefix)) return;
+  if (message.content.indexOf(config.prefix)) return;
   if (message.author.bot) return;
 
-  let (!points[message.author.id]) points[message.author.id] = {
+  if (!points[message.author.id]) points[message.author.id] = {
     points: 0,
     level: 0
   };
