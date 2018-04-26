@@ -301,10 +301,10 @@ e
 
   }
 
-  if (command === "role")
-     let roleID = "430632487199309824";
-     let membersWithRole = message.guild.roles.get(roleID).members;
-     console.log(`Got ${membersWithRole.size} members with that role.`);
+  if (command === "roleadd")
+     let role = message.guild.roles.find("name", "ADMIN");
+     let member = message.mentions.members.first();
+     member.addRole(role)
  }  
 
 });
