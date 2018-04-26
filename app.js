@@ -359,16 +359,10 @@ client.on("message", async message => {
     
   }
 
-  if(command === "leval") {
-   if (message.author.bot) return;
-  if (message.guild) {
-    // Let's simplify the `key` part of this. 
-    const key = `${message.guild.id}-${message.author.id}`;
-    if(!client.points.has(key)) {
-      client.points.set(key, {
-        user: message.author.id, guild: message.guild.id, points: 0, level: 1      
-  }
-
+  if (command === "points") {
+    return message.channel.send(`You currently have ${client.points.getProp(key, "points")}, and are level ${client.points.getProp(key, "level")}!`);
+ 
+ }
 
 });
 
