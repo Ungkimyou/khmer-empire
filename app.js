@@ -8,7 +8,7 @@ const config = require("./config.json");
 
 client.on("guildMemberAdd", member => {
    let guild = member.guild;
-   guild.defaultChannel.sandMessage("Welcome $(member.user) to this server");
+   guild.defaultChannel.sand("Welcome $(member.user) to this server");
 
  });
 
