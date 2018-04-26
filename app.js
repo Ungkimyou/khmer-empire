@@ -8,7 +8,7 @@ const config = require("./config.json");
 
 client.commands = new Discord.Collection();
 
-client.commands.set('server', require('./commands/serverinfo.js'));
+client.commands.set('server', require('./commands/server.js'));
 
 
 client.on("guildMemberAdd", (member) => {
