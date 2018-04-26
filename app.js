@@ -38,31 +38,23 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   let playRole = guild.roles.find("name", "Playing PLAYERUNKNOWN'S BATTLEGROUNDS");
   if(!playRole) return;
   
-  if(newMember.user.presence.game && newMember.user.presence.game.name == "PLAYERUNKNOWN'S BATTLEGROUNDS") {
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "PLAYERUNKNOWN'S BATTLEGROUNDS") {
     newMember.addRole(playRole);
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
-  }
-});
-
-client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
   let playRole = guild.roles.find("name", "Playing Minecraft");
   if(!playRole) return;
   
-  if(newMember.user.presence.game && newMember.user.presence.game.name == "Minecraft") {
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "Minecraft") {
     newMember.addRole(playRole);
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
-  }
-});
-
-client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
   let playRole = guild.roles.find("name", "Playing Counter-Strike: Global Offensive");
   if(!playRole) return;
   
-  if(newMember.user.presence.game && newMember.user.presence.game.name == "Counter-Strike: Global Offensive") {
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike: Global Offensive") {
     newMember.addRole(playRole);
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
@@ -366,6 +358,8 @@ client.on("message", async message => {
 
       message.channel.send(clean(evaled), {code:"xl"});
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.delete().catch(O_o=>{}); 
+      message.channel.send(sayMessage);
     
   }
 
