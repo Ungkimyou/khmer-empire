@@ -289,6 +289,25 @@ e
 
   }
   
+  if (command === "type") {
+     let age = args[0]; // Remember arrays are 0-based!.
+     let sex = args[1];
+     let location = args[2];
+  
+     let bicon = bot.user.displayAvatarURL;
+     let typeembed = new Discord.RichEmbed()
+     .setTitle("introduction")
+     .setColor("#ae67fc")
+     .setThumbnail(bicon)
+     .addField("Username", message.author.username)
+     .addField("Year Old", ${age})
+     .addField("From", ${sex})
+     .addField("Descriptions", sayMessage);
+
+     message.channel.send(typeembed);
+
+ }
+
 
 });
 
