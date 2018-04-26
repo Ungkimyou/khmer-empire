@@ -276,11 +276,11 @@ e
   }
 
   if (command === "asl") {
-  let age = args[0]; // Remember arrays are 0-based!.
-  let sex = args[1];
-  let location = args[2];
-  message.channel.sandMessage(`Hello ${message.author.username}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
-}  
+    let age = args[0]; // Remember arrays are 0-based!.
+    let sex = args[1];
+    let location = args[2];
+    message.reply(` I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
+ }  
 
 
 });
