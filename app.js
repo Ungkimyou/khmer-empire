@@ -286,15 +286,6 @@ e
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
     member.removeRole(role).catch(console.error);
-    
-    let sicon = message.guild.iconURL;
-    let addroleembed = new Discord.RichEmbed()
-    .setTitle("addRole Info :")
-    .setColor("#FF0000")
-    .addDescription("ADMIN, MEMNER, MOD, DJ, TEAM, SQUAD, BOT, @everyone")
-    .setThumbnail(sicon)
-    
-    message.channel.sand(addroleembed);  
 
   }
   
