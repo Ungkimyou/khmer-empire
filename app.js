@@ -262,35 +262,14 @@ e
   }
 
   if(command === "clear") {
-    if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
-    const deleteCount = parseInt(args[1], 1);
-    if(!deleteCount || deleteCount < 2 || deleteCount > 0)
-      return message.reply("Limit To Clear Message 2 - 100");
-    const fetched = await message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
-            messages.forEach(m => {
-                if (m.author.id == bot.user.id) {
-                    m.delete().catch(console.error);
-                if (deletedMessages === -1) deletedMessages = 0;
-                message.channel.send(`:white_check_mark: Purged \`${deletedMessages}\` messages.`)
-                    .then(m => m.delete(2000));
+    if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send("you don't have permissions to use this !");
+    const deleteCount = parseInt(args[0], 0);
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("limit to clear message 2 | 100 !");
+    const fetched = await message.channel.fetchMessages({count: deleteCount});
+    message.channel.bulkDelete(fetched)
+      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
-
-  if(command === "purge") {
-        let messagecount = parseInt(args[1]) || 1;
-        var deletedMessages = -1;
-        message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
-            messages.forEach(m => {
-                if (m.author.id == bot.user.id) {
-                    m.delete().catch(console.error);
-                    deletedMessages++;
-                }
-            });
-        }).then(() => {
-                if (deletedMessages === -1) deletedMessages = 0;
-                message.channel.send(`:white_check_mark: Purged \`${deletedMessages}\` messages.`)
-                    .then(m => m.delete(2000));
-        }).catch(console.error);
-    }
 
   if (command == "cookie") { // creates the command cookie
         if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
