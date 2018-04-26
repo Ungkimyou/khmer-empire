@@ -56,7 +56,6 @@ client.on("message", async message => {
   // Also good practice to ignore any message that does not start with our prefix, 
   // which is set in the configuration file.
   if(message.content.indexOf(config.prefix) !== 0) return;
-  if(message.author.id !== config.ownerID) return;
 
   // Now we have to save the file.
 
@@ -336,8 +335,6 @@ e
   } 
 
   if(command === "eval") {
-   if(message.author.id !== config.ownerID) return;
-    try {
       const code = args.join(" ");
       let evaled = eval(code);
 
