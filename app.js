@@ -5,6 +5,11 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
+const swearWords = ["fuck", "shit", "sh*t", "dick"];
+if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) {
+ message.reply("Oh no you said a bad word!!!");
+}
+
 
 client.commands = new Discord.Collection();
 
@@ -98,15 +103,9 @@ client.on("message", async message => {
     message.channel.send(embed1);
 
   } 
-
-  if(command == "test") {
-    let myRole = message.guild.roles.find('name', 'args.join(" ")');
-    return message.channel.sand("Search Roles.....")
-
-  }
-    
+  
  
-  if(command == "no") {
+  if(command == "test") {
     let falseval = args.slice(0).join('');
     if(!falseval) falseval =`${novalue}`;
     const novalue = await message.channel.send(`Please Include Message Content...`)
@@ -332,7 +331,11 @@ client.on("message", async message => {
  }
 
   if(command === "addroles") {
-    message.member.addRoles("name", "ADMIN");
+    let myRole = message.guild.roles.find("name", "ADMIN");
+  } else {
+    let myRole = message.guild.roles.find("name", "BOT-TEST");
+    let member = message.mentions.members.first();
+    member.addRole(role).catch(console.error);
 
   }
 
