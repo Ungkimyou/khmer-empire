@@ -270,7 +270,7 @@ client.on("message", async message => {
        let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
        if(!rMember) return message.reply("Couldn't find that user, yo.");
        let role = args.join(" ").slice(22);
-       if(!role) return message.reply("Specify a role!");
+       if(!role) return message.reply("ADMIN");
        let gRole = message.guild.roles.find(`name`, role);
        if(!gRole) return message.reply("Couldn't find that role.");
 
@@ -344,13 +344,6 @@ client.on("message", async message => {
    message.channel.send(sayMessage);
 
  }
-
-  if(command === "addroles") {
-    let myRole = message.guild.roles.find("name", "ADMIN");
-    let member = message.mentions.members.first();
-    member.addRole(role).catch(console.error);
-
-  }
 
   
   if(command === "username") {
