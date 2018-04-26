@@ -252,8 +252,8 @@ e
   }
 
   if(command === "clear") {
-    if(!message.member.permissions.has("manageMessages")) return message.channel.send("you don't have permissions to use this !");
-    const deleteCount = parseInt(args[0], 0);
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
+    const deleteCount = parseInt(args[0], 2);
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
       return message.reply("limit to clear message 2 | 100 !");
     const fetched = await message.channel.fetchMessages({count: deleteCount});
