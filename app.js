@@ -55,7 +55,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
-
+client.on("message", message => {
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   
@@ -358,6 +358,22 @@ client.on("message", async message => {
       message.channel.send(sayMessage);
     
   }
+
+  if(command === "leval") {
+   if (message.author.bot) return;
+  if (message.guild) {
+    // Let's simplify the `key` part of this. 
+    const key = `${message.guild.id}-${message.author.id}`;
+    if(!client.points.has(key)) {
+      client.points.set(key, {
+        user: message.author.id, guild: message.guild.id, points: 0, level: 1
+      });
+    }
+    let currentPoints = client.points.getProp(key, "points");
+    client.points.setProp(key, "points", currentPoints++);
+  }
+  // Rest of message handler
+});
 
 
 }); //END MESSAGE HANDLER
