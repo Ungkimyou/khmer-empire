@@ -10,7 +10,7 @@ client.on("guildMemberAdd", member => {
    let guild = member.guild;
    guild.defaultChannel.sandMessage("Welcome $(member.user) to this server");
 
- }
+ });
 
 
 client.on("ready", () => {
