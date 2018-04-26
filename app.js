@@ -218,11 +218,11 @@ client.on("message", async message => {
 
   if(command === "avatar") {
 
-     let sicon = message.guild.iconURL;
+     let sicon = message.mentions.iconURL;
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
-     .setImage(client.user.avatarURL)
+     .setImage(message.author.avatarURL)
      .setColor("#ebb8fa")
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
