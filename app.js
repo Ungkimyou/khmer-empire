@@ -289,6 +289,15 @@ e
     member.removeRole(role).catch(console.error);
 
   }
+
+  if(command === "roleadd")
+
+    let role = message.guild.roles.find("name", "ADMIN");
+    let member = message.mentions.members.first();
+    member.addRole(role).catch(console.error);
+
+  } 
+
   
   if(command === "username") {
      let sicon = message.guild.iconURL;
@@ -299,16 +308,7 @@ e
 
      message.channel.send(typeembed);
 
-  }
-
-  if (command === "roleadd")
-
-    let role = message.guild.roles.find("name", "ADMIN");
-    let member = message.mentions.members.first();
-
-    member.addRole(role)
-
- }  
+  } 
 
 });
 
