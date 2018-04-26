@@ -8,7 +8,7 @@ const config = require("./config.json");
 
 
 client.on("message", message => {
-if(message.content.indexOf(config.prefix) !== 0) return;
+if(message.content.indexOf(config.prefix)) return;
   if (message.author.bot) return;
 
   if (!points[message.author.id]) points[message.author.id] = {
