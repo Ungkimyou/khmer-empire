@@ -299,6 +299,12 @@ e
 
  }
 
+  if(command === "ayy") {
+   const ayy = client.emojis.find("name", "ayy");
+   message.reply(`${ayy} LMAO`);
+
+ }
+
 });
 
 client.login(config.token);
