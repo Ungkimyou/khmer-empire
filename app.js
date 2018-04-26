@@ -293,6 +293,12 @@ e
  
  }
 
+  if (command === "listemojis") {
+  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+  message.channel.send(emojiList);
+
+ }
+
 });
 
 client.login(config.token);
