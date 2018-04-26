@@ -343,21 +343,21 @@ client.on("message", async message => {
    
      message.channel.send(usernameembed);
   } 
+  
+  if(command === "test") {
+    message.channel.awaitMessages(response => response.content === 'test', {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then((collected) => {
+      message.channel.send(`The collected message was: ${collected.first().content}`);
+    })
+    .catch(() => {
+      message.channel.send('There was no collected message that passed the filter within the time limit!');
+    });
+});
 
-  if(command === "leaderboard") {
-   let filtered = client.points.filterArray( p => p.guildID === message.guild.id );
-   let sorted = filtered.sort((a, b) => a.points < b.points);
-   let top10 = sorted.splice(0, 10);
-   let leaderembed = new Discord.RichEmbed()
-     .setTitle("Leaderboard")
-     .setAuthor(client.user.username, client.user.avatarURL)
-     .setDescription("Our top 10 points leaders!")
-     .setColor(0x00AE86);
-   for(data of top10) {
-     embed.addField(client.users.get(data.userID).tag, `${data.points} points (level ${data.level})`);
-   }
-   message.channel.send(leaderembed);
- }
 
   if(command === "eval") {
       const code = args.join(" ");
