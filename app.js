@@ -373,8 +373,6 @@ client.on("message", async message => {
     client.points.setProp(key, "points", currentPoints++);
   }
   // Rest of message handler
-});
-
 
 }); //END MESSAGE HANDLER
 
