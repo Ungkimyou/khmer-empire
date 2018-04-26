@@ -218,6 +218,8 @@ e
     }
 
   if (command == "mute") { // creates the command mute
+         if (!message.member.roles.some(r=>["ADMIN"].includes(r.name)) ) return message.reply("Sorry, you do not have the permission to do this!"); // if author has no perms
+        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
         var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
