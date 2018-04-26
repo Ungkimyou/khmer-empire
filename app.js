@@ -1,6 +1,8 @@
 
 const Discord = require("discord.js");
 
+const superagent = require("superagent");
+
 const client = new Discord.Client();
 
 const config = require("./config.json");
@@ -374,6 +376,18 @@ client.on("message", async message => {
 
  }
 
+  if(command === "dog") {
+     let {body} = await superagent
+     .get(`https://random.dog/woof.json`);
+
+     let dogembed = Discord.RichEmbed()
+     .setColor("ff9900")
+     .setTitle("Doggo")
+     .setImage(body.url);
+    
+     message.channel.sand(dogembed);
+
+}
   
   if(command === "username") {
      let sicon = message.guild.iconURL;
