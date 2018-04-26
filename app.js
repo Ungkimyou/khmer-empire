@@ -32,6 +32,7 @@ client.on("guildCreate", guild => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
   client.user.setActivity(` ${client.guilds.size} servers | k!help`);
 });
+  
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
@@ -108,6 +109,16 @@ client.on("message", async message => {
 
     }
   
+  if(command === "warn") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't do that.");
+    let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
+    if(!wUser) return message.reply("Couldn't find them yo");
+    let warnlevel = warns[wUser.id].warns;
+
+  message.reply(`<@${wUser.id}> has ${warnlevel} warnings.`);
+
+}
+
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
