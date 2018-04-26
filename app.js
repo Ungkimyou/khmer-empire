@@ -35,10 +35,9 @@ client.on("guildCreate", guild => {
 });
 
 client.on("guildMemberAdd", (member) => {
-  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
   member.guild.channels.get("chat").send(`"${member.user.username}" has joined this server`);
 
-});
+})
 
 
 client.on("guildMemberAdd", (member) => {
