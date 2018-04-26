@@ -6,6 +6,11 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 
+client.on("guildMemberAdd", member => {
+   let guild = member.guild;
+   guild.defaultChannel.sandMessage("Welcome $(member.user) to this server");
+
+ }
 
 
 client.on("ready", () => {
@@ -283,14 +288,11 @@ e
  }
 
   if(command === "addroles") {
-    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone ");
-    let member = message.mentions.members.first();
-    member.addRole(role).catch(console.error);
-    member.removeRole(role).catch(console.error);
+    message.member.addRoles("name", "ADMIN");
 
   }
 
-  if(command === "roleremove") {
+  if(command === "removeroles") {
     let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone");
     let member = message.mentions.members.first();
     member.removeRole(role).catch(console.error);
