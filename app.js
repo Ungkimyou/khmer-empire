@@ -139,8 +139,8 @@ client.on("message", async message => {
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
-    .addField("Roles", message.guild.roles)
-    .addField("Total Members", message.guild.roles.map(role => role.name).join)
+    .addField("Roles", message.guild.roles.map(role => role.name).join)
+    .addField("Total Members", message.guild.memberCount)
     .setThumbnail(sicon)
     .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
