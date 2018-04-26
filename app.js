@@ -342,7 +342,7 @@ client.on("message", async message => {
 
       message.channel.send(clean(evaled), {code:"xl"});
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
+    
   }
 
 }); //END MESSAGE HANDLER
