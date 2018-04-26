@@ -366,9 +366,7 @@ client.on("message", async message => {
     const key = `${message.guild.id}-${message.author.id}`;
     if(!client.points.has(key)) {
       client.points.set(key, {
-        user: message.author.id, guild: message.guild.id, points: 0, level: 1
-      }
-    }
+        user: message.author.id, guild: message.guild.id, points: 0, level: 1      
     let currentPoints = client.points.getProp(key, "points");
     client.points.setProp(key, "points", currentPoints++);
   }
