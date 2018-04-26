@@ -79,26 +79,6 @@ client.on("message", async message => {
     m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
   }
   
-    if(command == "embed") {
-      const embed1 = new Discord.RichEmbed()
-      .setTitle(':scroll: ServerAnnoucement')
-      .setColor('RANDOM')
-      .addDescription(args.join(" "))
-      message.channel.send(embed1);
-
-      message.delete().catch(O_o=>{}); 
-      message.channel.send(sayMessage);
-
-  } 
- 
-   if (command === 'bug') {
-  const bugfound = args.join(' ')
-  client.channels.get(args.join).send(`${bugfound}`);  
-
-  message.delete().catch(O_o=>{}); 
-  message.channel.send(sayMessage);
-
-  }
 
 
   if(command === "say") {
@@ -109,6 +89,25 @@ client.on("message", async message => {
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
+  }
+
+  if(command == "embed") {
+    const embed1 = new Discord.RichEmbed()
+    .setTitle(':scroll: ServerAnnoucement')
+    .setColor('RANDOM')
+    .addDescription(args.join(" "))
+    message.channel.send(embed1);
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
+
+  } 
+ 
+  if(command === 'bug') {
+   const bugfound = args.join(' ')
+   client.channels.get(args.join).send(`${bugfound}`);  
+   message.delete().catch(O_o=>{}); 
+   message.channel.send(sayMessage);
+
   }
   
   if(command === "kick") {
