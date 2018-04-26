@@ -5,11 +5,6 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
-const swearWords = ["darn", "shucks", "frak", "shite"];
-  if( swearWords.some(word => message.content.includes(word)) ) {
-  message.reply("Oh no you said a bad word!!!");
-  // Or just do message.delete();
-}
 
 client.commands = new Discord.Collection();
 
