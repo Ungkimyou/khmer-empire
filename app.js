@@ -55,7 +55,6 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
-client.on("message", message => {
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   
@@ -360,9 +359,8 @@ client.on("message", async message => {
   }
 
   if (command === "points") {
-    return message.channel.send(`You currently have ${client.points.getProp(key, "points")}, and are level ${client.points.getProp(key, "level")}!`);
- 
- }
+    return message.channel.send(`You currently have ${client.points.getProp(key, "points")}, and are level ${client.points.getProp(key, "level")}!`); 
+  }
 
 });
 
