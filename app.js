@@ -329,9 +329,9 @@ e
         msg_array.length = messagecount + 1;
         // Has to delete messages individually. Cannot use `deleteMessages()` on selfbots.
         msg_array.map(m => m.delete().catch(console.error));
-      });
-
+      
    }
+
 });
 
 client.login(config.token);
