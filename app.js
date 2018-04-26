@@ -93,20 +93,25 @@ client.on("message", async message => {
 
   if(command == "embed") {
     const embed1 = new Discord.RichEmbed()
-    .setDescription(':scroll: ServerAnnoucement')
+    .setDescription(args.join(" "))
     .setColor('RANDOM')
-    .addField(args.join(" "))
     message.channel.send(embed1);
 
   } 
+
+  if(command == "test") {
+    let myRole = message.guild.roles.find('name', 'args.join(" ")');
+    return message.channel.sand("Search Roles.....")
+
+  }
+    
  
-  if(command === "works") {
-    let myRole = member.addRole(myRole);
-    let member = message.mentions.users.first().member
+  if(command == "no") {
+    let falseval = args.slice(0).join('');
+    if(!falseval) falseval =`${novalue}`;
+    const novalue = await message.channel.send(`Please Include Message Content...`)
 
-    member.addRole(WORKS).catch(console.error);
-}
-
+    }
   
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
