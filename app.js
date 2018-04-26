@@ -84,10 +84,16 @@ client.on("message", async message => {
       .setDescription(':scroll: ServerAnnoucement')
       .setColor('RANDOM')
       .addField(args.join(" "))
-      .addField('No')
       message.channel.send(embed1);
 
   } 
+ 
+   if (command === 'bug') {
+  const bugfound = args.join(' ')
+
+  client.channels.get('439050442618699779').send(`${bugfound}`);  
+  }
+
 
   if(command === "say") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
