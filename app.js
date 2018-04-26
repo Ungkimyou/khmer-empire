@@ -80,6 +80,11 @@ client.on("message", async message => {
     m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
   }
   
+  if(command === "userinfo") {
+    let infoMember = message.guild.member(message.mentions.users.first());
+
+  } 
+
   if(command === "say") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
