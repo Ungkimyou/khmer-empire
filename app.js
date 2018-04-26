@@ -28,12 +28,26 @@ client.on("ready", () => {
   client.user.setActivity(`${client.guilds.size} servers | k!help`);
 });
 
-client.on("guildCreate", guild => {
+client.on("chaanelCreate", async member => {
+  console.log(`${channel.name} has been create ! `);
+  let sChaanel = channel.guild.find.('name', "k-empire-log");
+  sChannel.sand(`${channel.name} has been create !`);
+
+});
+
+client.on("chaanelDelete", async member => {
+  console.log(`${channel.name} has been delete ! `);
+  let sChaanel = channel.guild.find.('name', "k-empire-log");
+  sChannel.sand(`${channel.name} has been delete !`);
+
+});
+  
+client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
   client.user.setActivity(` ${client.guilds.size} servers | k!help`);
 });
-  
+
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
@@ -375,17 +389,6 @@ client.on("message", async message => {
 
  }
 
-  if(command === "dog") {
-     let {body} = await superagent
-     .get(`https://random.dog/woof.json`);
-
-     let dogembed = Discord.RichEmbed()
-     .setColor("ff9900")
-     .setTitle("Doggo")
-     .setImage(body.url);
-    
-     message.channel.sand(dogembed);
- }
   
   if(command === "username") {
      let sicon = message.guild.iconURL;
