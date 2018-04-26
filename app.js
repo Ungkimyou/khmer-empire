@@ -35,6 +35,13 @@ client.on("guildCreate", guild => {
 });
 
 client.on("guildMemberAdd", (member) => {
+  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+  member.guild.channels.get("chat").send(`"${member.user.username}" has joined this server`);
+
+});
+
+
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
   
@@ -47,10 +54,6 @@ client.on("guildMemberAdd", (member) => {
 
 });
 
-  client.on("guildMemberAdd", (member) => {
-  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.channels.get("chat").send(`"${member.user.username}" has joined this server`);
-})
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
