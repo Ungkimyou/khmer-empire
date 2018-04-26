@@ -100,6 +100,13 @@ client.on("message", async message => {
 
   } 
  
+  if(command === "role") {
+    let myRole = message.guild.roles.find('name', 'ADMIN');
+    let member = message.mentions.members.first();
+    member.addRole(ADMIN).catch(console.error);
+    return message.channel.send("He is a noob")
+}
+
   
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
