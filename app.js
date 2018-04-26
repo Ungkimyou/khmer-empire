@@ -5,7 +5,6 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
-const fs = require("fs")
 
 
 
@@ -37,9 +36,6 @@ client.on("message", async message => {
   if(message.author.id !== config.ownerID) return;
 
   // Now we have to save the file.
-  fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
- 
- }
 
   var mutedrole = message.guild.roles.find("name", "Muted");
   
