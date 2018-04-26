@@ -208,7 +208,7 @@ e
   }
 
   if (command == "8ball") { // creates the command 8ball
-        if (args[1] != null) message.reply(eightball[Math.floor(Math.random() * eightball.length).toString(16)]); // if args[1], post random answer
+        if (args[1] != null) message.reply(eightball[Math.floor(Math.random() * eightball.length).toString(16)]);
         else message.channel.send("Ummmm, what is your question? :rolling_eyes: (Correct usage: k!8ball [question])"); // if not, error
     }
 
@@ -257,9 +257,9 @@ e
 
   if(command === "clear") {
     if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
-    const deleteCount = parseInt(args[0], 10);
-    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
-      return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
+    const deleteCount = parseInt(args[1], 1);
+    if(!deleteCount || deleteCount < 2 || deleteCount > 0)
+      return message.reply("Limit To Clear Message 2 - 100");
     const fetched = await message.channel.fetchMessages({count: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
@@ -284,7 +284,7 @@ e
 
   if (command == "cookie") { // creates the command cookie
         if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
-        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
+        message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
     }
 
 
