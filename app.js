@@ -334,7 +334,7 @@ client.on("message", async message => {
   } 
 
   if(command === "eval") {
-    if(message.author.id !== config.ownerID) return;
+    if(message.author.id !== ownerID) return;
     try {
       const code = args.join(" ");
       let evaled = eval(code);
