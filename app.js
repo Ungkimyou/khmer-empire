@@ -231,7 +231,7 @@ e
         message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
     }
 
-  if(command === "clean", "c") {
+  if(command === "clean") {
         let messagecount = parseInt(args[1]) || 1;
 
         var deletedMessages = -1;
