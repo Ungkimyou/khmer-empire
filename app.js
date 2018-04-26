@@ -252,8 +252,8 @@ e
 
   if (command == "clean") {
     if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-     message.channel.sendMessage('Cleaning...');
      message.channel.bulkDelete(10);
+     message.channel.sendMessage('Message Clean Sccessful.......:wastebasket:');
      var cleanarr = [];
  
   }
@@ -282,7 +282,7 @@ e
 
  }
 
-  if(command === "addrole") {
+  if(command === "addroles") {
     let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone ");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
@@ -290,8 +290,15 @@ e
 
   }
 
+  if(command === "roleremove") {
+    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone");
+    let member = message.mentions.members.first();
+    member.removeRole(role).catch(console.error);
+
+  }
+
   if(command === "roleadd") {   
-    let role = message.guild.roles.find("name", "ADMIN");
+    let role = message.guild.roles.find("name", "ADMIN", "MEMBER", "MOD", "DJ", "TEAM", "SQUAD", "BOT", "@everyone");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
 
@@ -300,13 +307,12 @@ e
   
   if(command === "username") {
      let sicon = message.guild.iconURL;
-     let typeembed = new Discord.RichEmbed()
+     let usernameembed = new Discord.RichEmbed()
      .setColor("#ae67fc")
      .setThumbnail(sicon)
      .addField("Your Username :", message.author.username);
-
-     message.channel.send(typeembed);
-
+   
+     message.channel.send(usernameembed);
   } 
 
 });
