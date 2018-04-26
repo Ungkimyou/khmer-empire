@@ -80,7 +80,7 @@ client.on("message", async message => {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
-      return message.reply("Invaild Usage Please do `-kick @user#1234 @reason`");
+      return message.reply("```md Please mention one user in order to kick them! - k!kick [@user] [reason]```");
     if(!member.kickable) 
       return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
     let reason = args.slice(1).join(' ');
@@ -96,7 +96,7 @@ client.on("message", async message => {
     
     let member = message.mentions.members.first();
     if(!member)
-      return message.reply("Invaild Usage Please do `-kick @user#1234 @reason`");
+      return message.reply("```md Please mention one user in order to ban them! - k!ban [@user] [reason]```");
     if(!member.bannable) 
       return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
@@ -109,17 +109,10 @@ client.on("message", async message => {
   }
   
   if(command === "clear") {
-    // This command removes all messages from all users in the channel, up to 100.
     if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
-    
-    // get the delete count, as an actual number.
     const deleteCount = parseInt(args[0], 10);
-    
-    // Ooooh nice, combined conditions. <3
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
       return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
-    
-    // So we get our messages, and delete them. Simple enough, right?
     const fetched = await message.channel.fetchMessages({count: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
@@ -239,11 +232,42 @@ e
 
   }
 
-  if(command === "clean") {
+  if (command == "unmute") {
+        if(!message.member.hasPermission("MUTE_MEMBER")) return message.channel.send("You Need To [BAN MEMBER] Permissions !"); // if author has no perms
+        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!unmutedmember) return message.reply("```md Please mention one user in order to unmute them! - k!unmute [@user] [reason]```") // if there is no kickedmmeber var
+        unmutedmember.removeRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
+    }
+
+
+  if(command === "botinfo") {
+
+     let bicon = bot.user.displayAvatarURL;
+     let botembed = new Discord.RichEmbed()
+     .setTitle("Bot Information")
+     .setColor("#ae67fc")
+     .setThumbnail(bicon)
+     .addField("Bot Name", bot.user.username)
+     .addField("Created On", bot.user.createdAt);
+
+     message.channel.send(botembed);
+  }
+
+  if(command === "clear") {
+    if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
+    const deleteCount = parseInt(args[0], 10);
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
+    const fetched = await message.channel.fetchMessages({count: deleteCount});
+    message.channel.bulkDelete(fetched)
+      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+  }
+
+  if(command === "purge") {
         let messagecount = parseInt(args[1]) || 1;
-
         let deletedMessages = -1;
-
         message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
             messages.forEach(m => {
                 if (m.author.id == bot.user.id) {
@@ -257,7 +281,6 @@ e
                     .then(m => m.delete(2000));
         }).catch(console.error);
     }
-
 
 });
 
