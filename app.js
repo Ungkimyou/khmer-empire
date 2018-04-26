@@ -290,8 +290,7 @@ e
 
   }
 
-  if(command === "roleadd")
-
+  if(command === "roleadd") {   
     let role = message.guild.roles.find("name", "ADMIN");
     let member = message.mentions.members.first();
     member.addRole(role).catch(console.error);
