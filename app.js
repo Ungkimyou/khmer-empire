@@ -266,7 +266,7 @@ e
         message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
     }
 
-  if (command == "clear 10") {
+  if (command == "clean") {
     if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
      message.channel.sendMessage('Cleaning...');
      message.channel.bulkDelete(10);
