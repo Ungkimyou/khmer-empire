@@ -43,7 +43,6 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
   let guild = newMember.guild;
-
   if(!playRole) return;
     
   }  
@@ -81,7 +80,7 @@ client.on("message", async message => {
   }
   
   if(command === "userinfo") {
-    let infoMember = message.guild.member(message.mentions.users.first());
+    let message.mentions.members.first().user.displayAvatarURL
 
   } 
 
