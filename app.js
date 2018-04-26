@@ -279,7 +279,7 @@ e
   let age = args[0]; // Remember arrays are 0-based!.
   let sex = args[1];
   let location = args[2];
-  message.channel.sand(`Hello ${message.author.username}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
+  message.channel.sandMessage(`Hello ${message.author.username}, I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
 }  
 
 
