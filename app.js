@@ -289,12 +289,12 @@ e
 
   }
   
-  if (command === "type") {
-     let bicon = bot.user.displayAvatarURL;
+  if (command === "username") {
+     let sicon = message.guild.iconURL;
      let typeembed = new Discord.RichEmbed()
      .setColor("#ae67fc")
-     .setThumbnail(bicon)
-     .addField("Username", message.author.username)
+     .setThumbnail(sicon)
+     .addField("Your Username :", message.author.username);
 
      message.channel.send(typeembed);
 
