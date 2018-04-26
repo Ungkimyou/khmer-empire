@@ -81,17 +81,23 @@ client.on("message", async message => {
   
     if(command == "embed") {
       const embed1 = new Discord.RichEmbed()
-      .setDescription(':scroll: ServerAnnoucement')
+      .setTitle(':scroll: ServerAnnoucement')
       .setColor('RANDOM')
-      .addField(args.join(" "))
+      .addDescription(args.join(" "))
       message.channel.send(embed1);
+
+      message.delete().catch(O_o=>{}); 
+      message.channel.send(sayMessage);
 
   } 
  
    if (command === 'bug') {
   const bugfound = args.join(' ')
+  client.channels.get(args.join).send(`${bugfound}`);  
 
-  client.channels.get('439050442618699779').send(`${bugfound}`);  
+  message.delete().catch(O_o=>{}); 
+  message.channel.send(sayMessage);
+
   }
 
 
