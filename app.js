@@ -34,11 +34,6 @@ client.on("guildCreate", guild => {
   client.user.setActivity(` ${client.guilds.size} servers | -help`);
 });
 
-client.on("guildMemberAdd", (member) => {
-  member.guild.channels.get("chat").send(`"${member.user.username}" has joined this server`);
-
-})
-
 
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
