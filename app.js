@@ -226,10 +226,30 @@ e
         var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
         var mutereason = mutereason.join(" "); // joins the list kickreason into one line
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
-        mutedmember.addRole(mute) //if reason, kick
+        mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
     }
+
+  if(command === "clean", "c") {
+        let messagecount = parseInt(args[1]) || 1;
+
+        var deletedMessages = -1;
+
+        message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
+            messages.forEach(m => {
+                if (m.author.id == bot.user.id) {
+                    m.delete().catch(console.error);
+                    deletedMessages++;
+                }
+            });
+        }).then(() => {
+                if (deletedMessages === -1) deletedMessages = 0;
+                message.channel.send(`:white_check_mark: Purged \`${deletedMessages}\` messages.`)
+                    .then(m => m.delete(2000));
+        }).catch(console.error);
+    }
+
 
 });
 
