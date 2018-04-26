@@ -5,6 +5,8 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
+hook.sand("KhmerEmpire is restart successful !")
+
 var eightball = [ // sets the answers to an eightball
     "yes!",
     "no...",
