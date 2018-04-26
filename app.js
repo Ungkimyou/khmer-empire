@@ -14,7 +14,7 @@ client.commands.set('speak', require('./commands/speak.js'));
 
 
 client.on("guildMemberAdd", (member) => {
-  let welcomechannel = member.guild.channels.find(`name`, "chat");
+  let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
     welcomechannel.send(`DING! ${member} has join The server!`);
     member.send(`Welcome To Server, **${member.user.username}**!`);  
 });
@@ -30,14 +30,14 @@ client.on("ready", () => {
 
 client.on("chaanelCreate", async member => {
   console.log(`${channel.name} has been create ! `);
-  let sChaanel = channel.guild.find('name', "k-empire-log");
+  let sChaanel = channel.guild.find('name', "k-empire-logs");
   sChannel.sand(`${channel.name} has been create !`);
 
 });
 
 client.on("chaanelDelete", async member => {
   console.log(`${channel.name} has been delete ! `);
-  let sChaanel = channel.guild.find('name', "k-empire-log");
+  let sChaanel = channel.guild.find('name', "k-empire-logs");
   sChannel.sand(`${channel.name} has been delete !`);
 
 });
