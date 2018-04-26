@@ -79,8 +79,14 @@ client.on("message", async message => {
     m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
   }
   
-  if(command === "userinfo") {
-    let message.mentions.members.first().user.displayAvatarURL
+    if(command == "embed") {
+      const embed1 = new Discord.RichEmbed()
+      .setDescription(':scroll: ServerAnnoucement')
+      .setColor('RANDOM')
+      .addField(args.join(" "))
+      .addField('No')
+      message.channel.send(embed1);
+      }
 
   } 
 
