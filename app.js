@@ -30,14 +30,14 @@ client.on("ready", () => {
 
 client.on("chaanelCreate", async member => {
   console.log(`${channel.name} has been create ! `);
-  let sChaanel = channel.guild.find.('name', "k-empire-log");
+  let sChaanel = channel.guild.find('name', "k-empire-log");
   sChannel.sand(`${channel.name} has been create !`);
 
 });
 
 client.on("chaanelDelete", async member => {
   console.log(`${channel.name} has been delete ! `);
-  let sChaanel = channel.guild.find.('name', "k-empire-log");
+  let sChaanel = channel.guild.find('name', "k-empire-log");
   sChannel.sand(`${channel.name} has been delete !`);
 
 });
