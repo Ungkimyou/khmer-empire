@@ -113,16 +113,6 @@ client.on("message", async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
-  
-  if(command === "clear") {
-    if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
-    const deleteCount = parseInt(args[0], 10);
-    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
-      return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
-    const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(fetched)
-      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
-  }
 
 
   if(command === "serverinfo") {
@@ -239,7 +229,7 @@ e
   }
 
   if (command == "unmute") {
-        if(!message.member.hasPermission("MUTE_MEMBER")) return message.channel.send("You Need To [BAN MEMBER] Permissions !"); // if author has no perms
+        if(!message.member.hasPermission("administrator")) return message.channel.send("You Need To have Permissions to this !"); // if author has no perms
         var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!unmutedmember) return message.reply("```md Please mention one user in order to unmute them! - k!unmute [@user] [reason]```") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
@@ -262,7 +252,7 @@ e
   }
 
   if(command === "clear") {
-    if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send("you don't have permissions to use this !");
+    if(!message.member.permissions.has("manageMessages")) return message.channel.send("you don't have permissions to use this !");
     const deleteCount = parseInt(args[0], 0);
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
       return message.reply("limit to clear message 2 | 100 !");
