@@ -356,7 +356,7 @@ client.on("message", async message => {
     .catch(() => {
       message.channel.send('There was no collected message that passed the filter within the time limit!');
     });
-});
+  }
 
 
   if(command === "eval") {
