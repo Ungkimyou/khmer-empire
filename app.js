@@ -262,11 +262,12 @@ e
   }
 
   if (command == "cookie") { // creates the command cookie
-        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
+        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1] .toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
         message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
     }
 
-  if (command == "clean") {
+  if (command == "clear 10") {
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
      message.channel.sendMessage('Cleaning...');
      message.channel.bulkDelete(10);
      var cleanarr = [];
