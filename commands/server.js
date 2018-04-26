@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = (client, message, args) => {
-  let serverembed = new Discord.MessageEmbed()
+  let serverembed = new Discord.RichEmbed()
     .setDescription(`${message.guild.name}'s Information and Details`)
     .setThumbnail(message.guild.iconURL())
     .setFooter(message.guild.owner.user.tag, message.guild.owner.user.avatarURL())
