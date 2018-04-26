@@ -359,7 +359,7 @@ client.on("message", async message => {
     
   }
    if(command === "speak") {
-   if(message.author.id !== .config.ownerID) return message.reply('Arrooo???');
+   if(message.author.id !== config.ownerID) return message.reply('Arrooo???');
   message.channel.send(args.join(' '));
   message.delete();
 
