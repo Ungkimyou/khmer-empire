@@ -6,9 +6,9 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 
-client.commands.set('serverinfo', require('./commands/serverinfo.js'));
-
 client.commands = new Discord.Collection();
+
+client.commands.set('serverinfo', require('./commands/serverinfo.js'));
 
 
 client.on("message", message => {
