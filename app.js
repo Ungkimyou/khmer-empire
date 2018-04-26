@@ -344,21 +344,6 @@ client.on("message", async message => {
      message.channel.send(usernameembed);
   } 
   
-  if(command === "test") {
-    message.channel.awaitMessages(response => response.content === 'test', {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then((collected) => {
-      message.channel.send(`The collected message was: ${collected.first().content}`);
-    })
-    .catch(() => {
-      message.channel.send('There was no collected message that passed the filter within the time limit!');
-    });
-  }
-
-
   if(command === "eval") {
       const code = args.join(" ");
       let evaled = eval(code);
