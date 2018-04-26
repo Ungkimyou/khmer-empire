@@ -35,13 +35,14 @@ client.on("guildCreate", guild => {
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
-
+  
   if (newUsers.size > 10) {
     const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const userlist = newUsers.map(u => u.toString()).join(" ");
     defaultChannel.send("Welcome new user to server\n" + userlist);
     newUsers.clear();
   }
+
 });
 
 client.on("message", async message => {
@@ -302,9 +303,35 @@ e
   if(command === "ayy") {
    const ayy = client.emojis.find("name", "ayy");
    message.reply(`${ayy} LMAO`);
+   message.delete().catch(O_o=>{}); 
+   message.channel.send(sayMessage);
 
  }
+  
+  if (command === "userinfo") {
 
+   if (message.author !== client.user) return;
+   if (!message.content.startsWith(config.prefix)) return; // ignore messages that... you know the drill.
+   // We covered this already, yay!
+   const params = message.content.split(" ").slice(1);
+   if (message.content.startsWith(config.prefix + "prune")) {
+    // get number of messages to prune
+    let messagecount = parseInt(params[0]);
+    // get the channel logs
+    message.channel.fetchMessages({
+        limit: 100
+      })
+      .then(messages => {
+        let msg_array = messages.array();
+        // filter the message to only your own
+        msg_array = msg_array.filter(m => m.author.id === client.user.id);
+        // limit to the requested number + 1 for the command message
+        msg_array.length = messagecount + 1;
+        // Has to delete messages individually. Cannot use `deleteMessages()` on selfbots.
+        msg_array.map(m => m.delete().catch(console.error));
+      });
+
+   }
 });
 
 client.login(config.token);
