@@ -47,7 +47,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
-  let playRole = guild.roles.find("name", "Minecraft");
+  let playRole = guild.roles.find("name", "Playing Minecraft");
   if(!playRole) return;
   
   if(newMember.user.presence.game && newMember.user.presence.game.name == "Minecraft") {
@@ -59,7 +59,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
-  let playRole = guild.roles.find("name", "Counter-Strike: Global Offensive");
+  let playRole = guild.roles.find("name", "Playing Counter-Strike: Global Offensive");
   if(!playRole) return;
   
   if(newMember.user.presence.game && newMember.user.presence.game.name == "Counter-Strike: Global Offensive") {
