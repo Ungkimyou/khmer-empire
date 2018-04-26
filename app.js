@@ -328,7 +328,10 @@ e
         // limit to the requested number + 1 for the command message
         msg_array.length = messagecount + 1;
         // Has to delete messages individually. Cannot use `deleteMessages()` on selfbots.
-        msg_array.map(m => m.delete().catch(console.error)};
+        msg_array.map(m => m.delete().catch(console.error));
+     
+      });
+   }
 
 });
 
