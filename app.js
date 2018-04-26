@@ -148,7 +148,6 @@ client.on("message", async message => {
     .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
      message.author.send(testembed);
-e
  
   }
 
@@ -335,6 +334,8 @@ e
   } 
 
   if(command === "eval") {
+    if(message.author.id !== config.ownerID) return;
+    try {
       const code = args.join(" ");
       let evaled = eval(code);
 
