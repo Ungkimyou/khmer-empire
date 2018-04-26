@@ -372,9 +372,9 @@ client.on("message", async message => {
     let currentPoints = client.points.getProp(key, "points");
     client.points.setProp(key, "points", currentPoints++);
   }
-  // Rest of message handler
 
-}); //END MESSAGE HANDLER
+
+});
 
 function clean(text) {
   if (typeof(text) === "string")
