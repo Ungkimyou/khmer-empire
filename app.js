@@ -48,7 +48,7 @@ client.on("message", async message => {
   // which is set in the configuration file.
   if(message.content.indexOf(config.prefix) !== 0) return;
 
-  var mutedrole = message.guild.roles.find("name", "muted");
+  var mutedrole = message.guild.roles.find("name", "Muted");
   
   // Here we separate our "command" name, and our "arguments" for the command. 
   // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
@@ -231,12 +231,18 @@ e
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
-    }
+  
+       let mutedchannel = message.guild.channels.find(`name`, "muted");
+       if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
+       message.delete().catch(O_o=>{}); 
+       message.channel.send(sayMessage);
+
+  }
 
   if(command === "clean") {
         let messagecount = parseInt(args[1]) || 1;
 
-        var deletedMessages = -1;
+        let deletedMessages = -1;
 
         message.channel.fetchMessages({limit: Math.min(messagecount + 1, 100)}).then(messages => {
             messages.forEach(m => {
