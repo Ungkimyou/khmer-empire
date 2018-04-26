@@ -97,14 +97,12 @@ client.on("message", async message => {
     .setColor('RANDOM')
     .addDescription(args.join(" "))
     message.channel.send(embed1);
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
 
   } 
  
   if(command === 'bug') {
    const bugfound = args.join(' ')
-   client.channels.get(args.join).send(`${bugfound}`);  
+   let = member.guild.channels.find(`name`, "chat").send(`${bugfound}`);  
    message.delete().catch(O_o=>{}); 
    message.channel.send(sayMessage);
 
