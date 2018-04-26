@@ -358,8 +358,8 @@ client.on("message", async message => {
     
   }
 
-  if (command === "points") {
-    return message.channel.send(`You currently have ${client.points.getProp(key, "points")}, and are level ${client.points.getProp(key, "level")}!`); 
+  if(command === "points") {
+     return message.channel.send(`You currently have ${client.points.getProp(key, "points")}, and are level ${client.points.getProp(key, "level")}!`); 
   }
 
 });
