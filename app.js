@@ -86,7 +86,6 @@ client.on("message", async message => {
       .addField(args.join(" "))
       .addField('No')
       message.channel.send(embed1);
-      }
 
   } 
 
