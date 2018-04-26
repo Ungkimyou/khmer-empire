@@ -139,6 +139,7 @@ client.on("message", async message => {
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
+    .addField("Roles", message.guild.roles)
     .addField("Total Members", message.guild.memberCount)
     .setThumbnail(sicon)
     .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
@@ -357,6 +358,13 @@ client.on("message", async message => {
       message.channel.send(sayMessage);
     
   }
+   if(command === "speak") {
+   if(message.author.id !== .config.ownerID) return message.reply('Arrooo???');
+  message.channel.send(args.join(' '));
+  message.delete();
+
+ }
+
 
 }); //END MESSAGE HANDLER
 
