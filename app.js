@@ -135,11 +135,11 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let serverembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setColor("#bb90ff")
     .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
-    .addField("Roles", message.guild.roles.map)
     .addField("Total Members", message.guild.memberCount)
     .setThumbnail(sicon)
     .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
@@ -358,12 +358,6 @@ client.on("message", async message => {
       message.channel.send(sayMessage);
     
   }
-   if(command === "speak") {
-   if(message.author.id !== config.ownerID) return message.reply('Arrooo???');
-  message.channel.send(args.join(' '));
-  message.delete();
-
- }
 
 
 }); //END MESSAGE HANDLER
