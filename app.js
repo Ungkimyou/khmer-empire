@@ -14,8 +14,8 @@ client.commands.set('speak', require('./commands/speak.js'));
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "chat");
-    welcomechannel.send(`DING! ${member} has walked into The server!`);
-    member.send(`Welcome to The server, **${member.user.username}**!`);  
+    welcomechannel.send(`DING! ${member} has join The server!`);
+    member.send(`Welcome To Server, **${member.user.username}**!`);  
 });
 
 
