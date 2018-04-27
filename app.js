@@ -2,9 +2,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const db = require('quick.db');
+const db = require("quick.db");
 
 const fs = require("fs")
+
+exports.run = (bot, message, args, func) => {
 
 const responses1 = [
    'Size 8====D', 'Size 8======D', 'Size 8======D', 'Size 8======D', 'Size 8======D'
