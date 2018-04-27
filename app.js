@@ -155,7 +155,7 @@ client.on("message", async message => {
   
     if(command == "report") {
        if(args[0] == "help"){
-      message.reply("Usage: !report <user> <reason>");
+      message.reply("```md Please mention one user in order to report them! - k!report [@user] [reason]```");
       return;
     }
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
@@ -164,15 +164,16 @@ client.on("message", async message => {
 
     let reportEmbed = new Discord.RichEmbed()
     .setDescription("Reports")
+    .setThumbnail(message.author.avatarURL)
     .setColor('RANDOM')
-    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)
-    .addField("Reported By", `${message.author} with ID: ${message.author.id}`)
+    .addField("Reported User", `${rUser} `)
+    .addField("Reported By", `${message.author}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
     .addField("Reason", rreason);
 
     let reportschannel = message.guild.channels.find(`name`, "reports");
-    if(!reportschannel) return message.channel.send("Couldn't find reports channel.");
+    if(!reportschannel) return message.channel.send("you need create channel #reprots to report player !");
 
 
     message.delete().catch(O_o=>{});
@@ -246,18 +247,6 @@ client.on("message", async message => {
  
   }
 
-  if(command === "reports") {
-
-     let sicon = message.guild.iconURL;
-     let reportembed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire Commands !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setColor("#FF0000")
-    .setDescription(":x: this commands can't not allow use now ![Click Here](https://tamotoji533.wixsite.com/healong) View More :mag:")
-    .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
-    
-     message.channel.send(reportembed);
-
-  }
 
   if(command === "rsetup") {
     let sicon = message.guild.iconURL;
