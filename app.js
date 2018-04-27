@@ -4,11 +4,13 @@ const client = new Discord.Client();
 const config = require("./config.json");
 client.commands = new Discord.Collection();
 
+let cooldown = new Set();
+let cdseconds = 10;
+
+
 client.commands.set('server', require('./commands/server.js'));
 client.commands.set('speak', require('./commands/speak.js'));
 
-let cooldown = new set();
-let cdseconds = 10;
 
 
 client.on('messageDelete', async (message) => {
