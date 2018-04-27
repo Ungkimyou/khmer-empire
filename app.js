@@ -6,7 +6,7 @@ const config = require("./config.json");
 const fs = require("fs")
 
 const responses1 = [
-   'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D'
+   'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D'
 ]
 
 const responses = [
@@ -145,10 +145,12 @@ client.on("message", async message => {
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
+   message.delete()
 }  
 
   if(command === "dick") {
    message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
+   message.delete()
 }  
 
 
