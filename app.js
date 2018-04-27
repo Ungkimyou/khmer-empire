@@ -8,9 +8,6 @@ const fs = require("fs")
 let cooldown = new Set();
 let cdseconds = 5;
 
-var rand = ['Yes', 'No', 'Why are you even trying?', 'What do you think? NO', 'Maybe', 'Never', 'Yep'];
-var yesOrNo = rand[Math.floor(Math.random()*rand.length)];
-
 const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
@@ -126,11 +123,6 @@ client.on("message", async message => {
  });
 
 }
-
-  if(command === "8BALL") {
-    message.reply(message, 'Your anwser is: ' + yesOrNo);
- }
-
 
 
   if(command === "say") {
