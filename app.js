@@ -7,7 +7,7 @@ const fs = require("fs")
 
 
 const responses1 = [
-   'Size 8====D', 'Size 8======D', 'Size 8======D', 'Size 8======D', 'Size 8======D'
+   'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
 ]
 
 const responses = [
@@ -169,7 +169,8 @@ client.on("message", async message => {
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setAuthor("KhmerEmpire :", message.author.avatarURL)
+    .setTitle(args.join(" "))
     .setDescription(args.join(" "))
     .setColor('RANDOM')
      message.delete().catch(O_o=>{});
