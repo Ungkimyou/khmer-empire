@@ -111,13 +111,8 @@ client.on("message", async message => {
   
   // Let's go with a few common example commands! Feel free to delete or change those.
   if(command === "ping") {
-    if (talkedRecently.has(message.author.id)) {
     const m = await message.channel.send(":mag: Starting ...?");
     m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
-    talkedRecently.add(message.author.id);
-    setTimeout(() => {
-    talkedRecently.delete(message.author.id);
-    }, 2500);
   }
   
   if(command === "clear") {
