@@ -43,12 +43,15 @@ client.on("guildMemberAdd", (member) => {
 client.on("message", (message) => {
   if(message.content === "fk u") {
     message.channel.send("im not gay");
+    message.delete()
   }
   if(message.content === "wat") {
     message.channel.send("Say what?");
+    message.delete()
   }
   if(message.content === "lol") {
     message.channel.send("luy");
+    message.delete()
   }
 });
 
