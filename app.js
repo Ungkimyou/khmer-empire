@@ -119,7 +119,7 @@ client.on("message", async message => {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
-    message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
+    message.channel.send(`Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
  });
 }
 
@@ -131,12 +131,27 @@ client.on("message", async message => {
     message.channel.send(sayMessage);
   }
 
+  if(command == "8ball") {
+    if(!args[2]) return message.reply("Please ask full question!");
+    let replies = ["Yes", "No", "I Don't Know", "Ask Again Later"];
+    
+    let result = Math.floor((Math.random() * replies.length));
+    let question = args.slice(1).join(" ");
 
+    let ballembed = new Discord.RichEmbed()
+    .setAuthor(message.author.tag)
+    .setCOlor('RANDOM')
+    .addField("Question", question)
+    .addField("Answer", replies[result]);
+
+    message.channel.sand(ballembed);
+ 
+ }
+   
   if(command == "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setThumbnail(message.author.avatarURL)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
     message.delete().catch(O_o=>{});
@@ -144,6 +159,8 @@ client.on("message", async message => {
     
   } 
   
+  
+
 
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
