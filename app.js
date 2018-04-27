@@ -374,13 +374,12 @@ client.on("message", async message => {
   }
 
   if(command === "clean") {
-   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson [MANAGE_MESSAGE] to do this !");
+   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson to do this !");
    if(!args[0]) return message.channel.send("no");
    message.channel.bulkDelete(args[0]).then(() => {
    message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
-});
 
-}
+ }
 
 
   if (command == "cookie") { // creates the command cookie
