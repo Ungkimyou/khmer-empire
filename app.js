@@ -14,7 +14,7 @@ const talkedRecently = new Set();
 client.commands = new Discord.Collection();
 
 client.on('messageReactionAdd', (reaction, user) => {
-  if(!reaction.message.id == '430635174917701662') return;
+  if(!reaction.message.id == '439503618865889280') return;
     if(reaction.emoji.id == '439501940796293120') {
       user.addRole(message.guild.roles.get("431035407443034112"))
     }
