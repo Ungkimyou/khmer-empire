@@ -157,10 +157,10 @@ client.on("message", async message => {
     .catch(() => {
       message.channel.send('There was no collected message that passed the filter within the time limit!');
     });
-});
 
 
   if(command == "embed") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't do that.");
     const embed1 = new Discord.RichEmbed()
     .setDescription(args.join(" "))
     .setColor('RANDOM')
