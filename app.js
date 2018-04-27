@@ -39,7 +39,7 @@ client.on('messageDelete', async (message) => {
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
-    welcomechannel.send(`DING! ${member} has join The server!`);
+    welcomechannel.send(`:speaking_head:  ${member} Has Join The Server!`);
     member.send(`Welcome To Server, **${member.user.username}**!`);  
 });
 
@@ -146,16 +146,19 @@ client.on("message", async message => {
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
   }
+  if(command === "prefix") {
+    return message.author.sand("Prefix for ${bot.user.username} is ${prefix}")
+ }
 
-  if(command == "8ball") {
+  if(command === "8ball") {
     if(!args[2]) return message.reply("Please ask full question!");
     let responses = ["Yes", "No", "I Don't Know", "Ask Again Later"];
     result = Math.floor((Math.random() * sayings.length) + 0);
-    message.reply(message, sayings[result]);
+    message.reply(message, say[result]);
  
  }
    
-  if(command == "embed") {
+  if(command ==+ "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
