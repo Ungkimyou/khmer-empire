@@ -153,7 +153,7 @@ client.on("message", async message => {
 
     db.updateText(`autoRole_${message.guild.id}`, args.join(" ").trim()).then(i => { // .trim() removes the whitespaces on both ends of the string. 
 
-        message.channel.send('Successfully changed auto-role to: `' + i.text + '`'); // This tells them what they just set the autorole to.
+        message.channel.send('Successfully changed auto-role to: `' + i.text + '`') // This tells them what they just set the autorole to.
 
     })   
 
