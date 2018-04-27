@@ -20,8 +20,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 
     if(reaction.emoji.id == '439499601079435285') {
       user.addRole(message.guild.roles.get("431035407443034112"))
-    }
-})
+   }
 
 
 client.on('messageDelete', async (message) => {
