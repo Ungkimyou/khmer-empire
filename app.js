@@ -103,7 +103,7 @@ client.on("message", async message => {
   //if(!message.member.hasPermission("ADMINISTRATOR")){
      cooldown.add(message.author.id);
 // }
-  setTimeout()) => {
+  setTimeout(() => {
     cooldown.delete(message.author.id)
 }, cdseconds * 1000)
 
