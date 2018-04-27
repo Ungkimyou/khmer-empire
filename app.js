@@ -15,7 +15,7 @@ const responses = [
 ]
 
 const swearWords = ["darn", "shucks", "frak", "shite"];
-if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) {
+if( swearWords.some(word => message.content.toLowerCase() .includes(word)) ) {
  message.reply("Oh no you said a bad word!!!");
 }
 
