@@ -12,8 +12,16 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.commands.set('server', require('./commands/server.js'));
-client.commands.set('speak', require('./commands/speak.js'));
+client.commands.set('server', require('../commands/server.js'));
+client.commands.set('speak', require('../commands/speak.js'));
+
+client.on('messageReactionAdd', (reaction, user) => {
+  if(!reaction.message.id == '430635174917701662') return;
+
+    if(reaction.emoji.id == '439499601079435285') {
+      user.addRole(message.guild.roles.get("431035407443034112"))
+    }
+})
 
 
 client.on('messageDelete', async (message) => {
