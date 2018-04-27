@@ -140,7 +140,7 @@ client.on("message", async message => {
 }
 
   if(command === "9ball") {
-   result.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+   message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
 }  
 
 
