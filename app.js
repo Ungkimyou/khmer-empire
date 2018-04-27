@@ -2,12 +2,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-client.commands = new Discord.Collection();
-
-
-
-client.commands.set('server', require('./commands/server.js'));
-client.commands.set('speak', require('./commands/speak.js'));
 
 
 
@@ -93,10 +87,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 client.on("message", async message => {
 
   if(message.author.bot) return;
-  
-
   if(message.content.indexOf(config.prefix) !== 0) return;
-
 
 
   var mutedrole = message.guild.roles.find("name", "Muted");
@@ -130,7 +121,8 @@ client.on("message", async message => {
     if(cooldown.has(message.author.id)){
     message.delete();
     message.reply("You have to wait 10 seconds to do again !")
-  }
+
+   }
 
 
   if(command == "8ball") {
