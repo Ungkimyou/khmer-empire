@@ -16,7 +16,6 @@ client.commands.set('server', require('./commands/server.js'));
 client.commands.set('speak', require('./commands/speak.js'));
 
 
-
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
@@ -95,6 +94,22 @@ client.on("presenceUpdate", (oldMember, newMember) => {
     
   }  
 });
+
+client.on("presenceUpdate", (oldMember, newMember) => {
+  let guild = newMember.guild;
+  let playRole = guild.roles.find("name", "Playing Counter-Strike: Global Offensive");
+  if(!playRole) return;  
+
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike: Global Offensive") {
+    newMember.addRole(playRole);
+  } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
+    newMember.removeRole(playRole);
+  let guild = newMember.guild;
+  if(!playRole) return;
+    
+  }  
+});
+
 
 client.on("message", async message => {
 
