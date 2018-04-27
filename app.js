@@ -362,16 +362,6 @@ client.on("message", async message => {
      message.channel.send(botembed);
   }
 
-  if(command === "clear") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-    const deleteCount = parseInt(args[0], 2);
-    if(!deleteCount || deleteCount < 2 || deleteCount > 2)
-      return message.reply("limit to clear message 2 | 100 !");
-    const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(fetched)
-      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
-  }
-
 
 
   if (command == "cookie") { // creates the command cookie
