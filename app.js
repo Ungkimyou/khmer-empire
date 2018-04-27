@@ -368,17 +368,10 @@ client.on("message", async message => {
     if(!deleteCount || deleteCount < 2 || deleteCount > 2)
       return message.reply("limit to clear message 2 | 100 !");
     const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(fetched)
+    message.channel.bulkDelete(args[0]).then(() => {
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
 
-  if(command === "clean") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson to do this !");
-    const deleteCount = parseInt(args[0], 1);
-    message.channel.bulkDelete(args[0]).then(() => {
-    message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
- });
- }
 
 
   if (command == "cookie") { // creates the command cookie
