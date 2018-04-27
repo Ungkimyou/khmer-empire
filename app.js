@@ -2,11 +2,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-client.commands = new Discord.Collection();
+
 
 const talkedRecently = new Set();
 
-
+client.commands = new Discord.Collection();
 
 client.commands.set('server', require('./commands/server.js'));
 client.commands.set('speak', require('./commands/speak.js'));
@@ -98,19 +98,6 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
-      if (talkedRecently.has(msg.author.id)) {
-            msg.channel.send("Wait 1 seconds before getting typing this again. - " + msg.author);
-    } else {
-
-           // the user can type the command ... your command code goes here :)
-
-        // Adds the user to the set so that they can't talk for a minute
-        talkedRecently.add(msg.author.id);
-        setTimeout(() => {
-          // Removes the user from the set after a minute
-          talkedRecently.delete(msg.author.id);
-        }, 1000);
-    }
 
   var mutedrole = message.guild.roles.find("name", "Muted");
   
