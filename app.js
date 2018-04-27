@@ -138,13 +138,7 @@ client.on("message", async message => {
     let result = Math.floor((Math.random() * replies.length));
     let question = args.slice(1).join(" ");
 
-    let ballembed = new Discord.RichEmbed()
-    .setAuthor(message.author.tag)
-    .setColor("#FF9900")
-    .addField("Question", question)
-    .addField("Answer", replies[result]);
-
-    message.channel.sand(ballembed);
+    message.reply("Question ${questions} , Answer replies${result}");
  
  }
    
