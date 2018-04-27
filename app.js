@@ -13,6 +13,26 @@ client.commands = new Discord.Collection();
 client.commands.set('server', require('./commands/server.js'));
 client.commands.set('speak', require('./commands/speak.js'));
 
+client.on('messageDelete', async (message) => {
+  const logs = message.guild.channels.find('name', 'k-empire-logs');
+  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
+    message.guild.createChannel('k-empire-logs', 'logs');
+  }
+  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
+    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
+  }  
+  let user = ""
+    if (entry.extra.channel.id === message.channel.id
+      && (entry.target.id === message.author.id)
+      && (entry.createdTimestamp > (Date.now() - 5000))
+      && (entry.extra.count >= 1)) {
+    user = entry.executor.username
+  } else { 
+    user = message.author.username
+  }
+  logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
+})
+
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
@@ -414,43 +434,6 @@ client.on("message", async message => {
       message.channel.send(sayMessage);
     
   }
-  if(command === "start") {
-    if (reaction.emoji.name !== '⭐') return;
-    if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
-    if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
-    const { starboardChannel } = this.client.settings.get(message.guild.id);
-    const fetch = await message.guild.channels.find('name', starboard).fetchMessages({ limit: 100 });
-    const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
-    if (stars) {
-      const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
-      const foundStar = stars.embeds[0];
-      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      const embed = new RichEmbed()
-        .setColor(foundStar.color)
-        .setDescription(foundStar.description)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
-        .setTimestamp()
-        .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
-        .setImage(image);
-      const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
-      await starMsg.edit({ embed });
-    }
-    if (!stars) {
-      if (!message.guild.channels.exists('name',  starboardChannel)) throw `It appears that you do not have a \`${starboard}\` channel.`;
-      const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : '';
-      if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-      const embed = new RichEmbed()
-        .setColor(15844367)
-        .setDescription(message.cleanContent)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
-        .setTimestamp(new Date())
-        .setFooter(`⭐ 1 | ${message.id}`)
-        .setImage(image);
-      await message.guild.channels.find('name', starboard).send({ embed });
-    }
-  }
-
-
 
 });
 
