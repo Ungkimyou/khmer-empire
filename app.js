@@ -4,8 +4,6 @@ const client = new Discord.Client();
 const config = require("./config.json");
 client.commands = new Discord.Collection();
 
-let cooldown = new Set();
-let cdseconds = 10;
 
 
 client.commands.set('server', require('./commands/server.js'));
@@ -98,16 +96,6 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
-  if(cooldown.has(message.author.id)){
-    message.delete();
-    message.reply("You have to wait 10 seconds to do again !")
-  }
-  //if(!message.member.hasPermission("ADMINISTRATOR")){
-     cooldown.add(message.author.id);
-// }
-  setTimeout(() => {
-    cooldown.delete(message.author.id)
-}, cdseconds * 2000)
 
 
 
@@ -143,14 +131,7 @@ client.on("message", async message => {
     message.delete();
     message.reply("You have to wait 10 seconds to do again !")
   }
-  //if(!message.member.hasPermission("ADMINISTRATOR")){
-     cooldown.add(message.author.id);
-// }
-  setTimeout(() => {
-    cooldown.delete(message.author.id)
-}, cdseconds * 2000)
 
-  }
 
   if(command == "8ball") {
     if(!args[2]) return message.reply("Please ask full question!");
