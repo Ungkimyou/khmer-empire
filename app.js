@@ -135,11 +135,8 @@ client.on("message", async message => {
   if(command == "8ball") {
     if(!args[2]) return message.reply("Please ask full question!");
     let responses = ["Yes", "No", "I Don't Know", "Ask Again Later"];
-    
-    let result = Math.floor((Math.random() * replies.length));
-    let question = args.slice(1).join(" ");
-
-    message.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+    result = Math.floor((Math.random() * sayings.length) + 0);
+    message.reply(message, sayings[result]);
  
  }
    
