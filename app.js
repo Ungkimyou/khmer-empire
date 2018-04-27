@@ -2,6 +2,12 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+client.commands = new Discord.Collection();
+
+
+
+client.commands.set('server', require('./commands/server.js'));
+client.commands.set('speak', require('./commands/speak.js'));
 
 
 
@@ -87,8 +93,9 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 client.on("message", async message => {
 
   if(message.author.bot) return;
-  if(message.content.indexOf(config.prefix) !== 0) return;
+  
 
+  if(message.content.indexOf(config.prefix) !== 0) return;
 
   var mutedrole = message.guild.roles.find("name", "Muted");
   
@@ -118,12 +125,7 @@ client.on("message", async message => {
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
-    if(cooldown.has(message.author.id)){
-    message.delete();
-    message.reply("You have to wait 10 seconds to do again !")
-
-   }
-
+  }
 
   if(command == "8ball") {
     if(!args[2]) return message.reply("Please ask full question!");
@@ -215,13 +217,13 @@ client.on("message", async message => {
      let serverembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setColor("#bb90ff")
-    .setTitle("𝐒𝐞𝐫𝐯𝐞𝐫𝐈𝐧𝐟𝐨")
+    .setTitle("Server-Info :¨")
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
     .addField("Total Members", message.guild.memberCount)
     .setThumbnail(sicon)
-    .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
+    .setFooter("Bot Create By á´›á´€á´á´á´›á´á´ŠÉªâœ“áµ›áµ‰Ê³á¶¦á¶ á¶¦áµ‰áµˆ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
      message.channel.send(serverembed);
  
@@ -235,7 +237,7 @@ client.on("message", async message => {
     .setAuthor("KhmerEmpire Help Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View To Website :globe_with_meridians:")
     .setImage("https://cdn.discordapp.com/attachments/438367679724781579/438751636811415564/BotCommand.JPG")
-    .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
+    .setFooter("Bot Create By á´›á´€á´á´á´›á´á´ŠÉªâœ“áµ›áµ‰Ê³á¶¦á¶ á¶¦áµ‰áµˆ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
      message.author.send(testembed);
  
@@ -263,7 +265,7 @@ client.on("message", async message => {
     .addField("BOT-Website :", "  [Check Here](https://tamotoji533.wixsite.com/healong)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
-    .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
+    .setFooter("Bot Create By : á´›á´€á´á´á´›á´á´ŠÉªâœ“áµ›áµ‰Ê³á¶¦á¶ á¶¦áµ‰áµˆ#5881")
 
     message.channel.send(inviteembed);
     message.delete().catch(O_o=>{}); 
@@ -279,7 +281,7 @@ client.on("message", async message => {
      .setDescription("Avatar !")
      .setImage(message.author.avatarURL)
      .setColor('RANDOM')
-     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
+     .setFooter("Bot Create By : á´›á´€á´á´á´›á´á´ŠÉªâœ“áµ›áµ‰Ê³á¶¦á¶ á¶¦áµ‰áµˆ#5881")
             
      message.channel.send(avatarembed);
 
