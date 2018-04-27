@@ -368,7 +368,7 @@ client.on("message", async message => {
     if(!deleteCount || deleteCount < 2 || deleteCount > 2)
       return message.reply("limit to clear message 2 | 100 !");
     const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(args[0]).then(() => {
+    message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
 
