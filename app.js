@@ -14,10 +14,10 @@ const talkedRecently = new Set();
 client.commands = new Discord.Collection();
 
 client.on('messageReactionAdd', (reaction, user) => {
-  if(!reaction.message.id == '439482958613577758') return;
+  if(!reaction.message.id == '430635174917701662') return;
 
-    if(reaction.emoji.id == '418398023349960714') {
-      user.addRole(message.guild.roles.get("422363177557164035"))
+    if(reaction.emoji.id == '439501940796293120') {
+      user.addRole(message.guild.roles.get("431035407443034112"))
     }
 })
 
