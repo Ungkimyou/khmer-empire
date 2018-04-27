@@ -2,11 +2,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const db = require("quick.db");
 
 const fs = require("fs")
 
-exports.run = (bot, message, args, func) => {
 
 const responses1 = [
    'Size 8====D', 'Size 8======D', 'Size 8======D', 'Size 8======D', 'Size 8======D'
@@ -145,19 +143,6 @@ client.on("message", async message => {
  });
 
 }
-  
-  if(command === "setAutoRole") {
-
-    if (!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('This requires you to have a role with `Administrator`') // Tell them that they dont have the proper perms
-    if (!args.join(" ")) return message.channel.send('Please enter arguments. `setAutoRole <roleName>`') // Tell them if they didn't supply arguments
-
-    db.updateText(`autoRole_${message.guild.id}`, args.join(" ").trim()).then(i => { // .trim() removes the whitespaces on both ends of the string. 
-
-        message.channel.send('Successfully changed auto-role to: `' + i.text + '`') // This tells them what they just set the autorole to.
-
-    })   
-
-}
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
@@ -180,13 +165,6 @@ client.on("message", async message => {
     return message.author.sand("Prefix for ${bot.user.username} is ${prefix}")
  }
 
-  if(command === "8ball") {
-    if(!args[2]) return message.reply("Please ask full question!");
-    let responses = ["Yes", "No", "I Don't Know", "Ask Again Later"];
-    result = Math.floor((Math.random() * sayings.length) + 0);
-    message.reply(message, say[result]);
- 
- }
    
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
