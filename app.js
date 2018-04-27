@@ -9,7 +9,6 @@ let cooldown = new Set();
 let cdseconds = 5;
 
 const talkedRecently = new Set();
-let talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
