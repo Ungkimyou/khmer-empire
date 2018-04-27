@@ -5,8 +5,12 @@ const config = require("./config.json");
 
 const fs = require("fs")
 
+const responses1 = [
+   'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D', 'Size 8====D'
+]
+
 const responses = [
-   'yes', 'no', 'maybe', 'okay', 'sure', 'ask me later', 'naw'
+   'Yes', 'No', 'Maybe', 'I Don`t Know', 'Nope', 'ask me later', 'Sub 1'
 ]
 
 let cooldown = new Set();
@@ -139,8 +143,12 @@ client.on("message", async message => {
 
 }
 
-  if(command === "9ball") {
+  if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
+}  
+
+  if(command === "dick") {
+   message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
 }  
 
 
