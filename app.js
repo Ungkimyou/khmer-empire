@@ -10,7 +10,10 @@ const config = require("./config.json");
 
 client.commands = new Discord.Collection();
 
+client.commands.set('tempmute', require('./commands/tempmute.js'));
+
 client.commands.set('server', require('./commands/server.js'));
+
 client.commands.set('speak', require('./commands/speak.js'));
 
 client.on('messageDelete', async (message) => {
