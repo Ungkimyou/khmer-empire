@@ -24,7 +24,7 @@ client.commands = new Discord.Collection();
 client.on("serverNewMember", function (server, user) {
            mybot.addMemberToRole(user, server.roles.get("name", "MEMBER"), function (err) { if (err) console.log(err) })
 
-}
+})
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
