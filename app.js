@@ -139,6 +139,17 @@ client.on("message", async message => {
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
+    if(cooldown.has(message.author.id)){
+    message.delete();
+    message.reply("You have to wait 10 seconds to do again !")
+  }
+  //if(!message.member.hasPermission("ADMINISTRATOR")){
+     cooldown.add(message.author.id);
+// }
+  setTimeout(() => {
+    cooldown.delete(message.author.id)
+}, cdseconds * 2000)
+
   }
 
   if(command == "8ball") {
