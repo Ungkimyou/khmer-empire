@@ -14,11 +14,6 @@ const responses = [
    'Yes', 'No', 'Maybe', 'I Don`t Know', 'Nope', '50%'
 ]
 
-const swearWords = ["darn", "shucks", "frak", "shite"];
-if( swearWords.some(word => message.content.toLowerCase() .includes(word)) ) {
- message.reply("Oh no you said a bad word!!!");
-}
-
 let cooldown = new Set();
 let cdseconds = 5;
 
