@@ -172,17 +172,18 @@ client.on("message", async message => {
  
  }
    
-  if(command ==+ "embed") {
+  if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .setDescription(args.join(" "))
     .setColor('RANDOM')
-    message.delete().catch(O_o=>{});
-    message.channel.send(embed1);
+     message.delete().catch(O_o=>{});
+     message.channel.send(embed1);
     
   } 
-  
+    
+
     if(command == "report") {
        if(args[0] == "help"){
       message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]`");
