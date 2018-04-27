@@ -251,7 +251,6 @@ client.on("message", async message => {
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
     .addField("BOT-Invite :", "  [Check Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
     .addField("Discord-Invite :", "  [Check Here](https://discord.gg/WMxC5rw)")
-    .addField("Roles", "message.guild.roles")
     .addField("BOT-Website :", "  [Check Here](https://tamotoji533.wixsite.com/healong)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
@@ -374,11 +373,11 @@ client.on("message", async message => {
   }
 
   if(command === "clean") {
-   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson to do this !");
-   if(!args[0]) return message.channel.send("no");
-   message.channel.bulkDelete(args[0]).then(() => {
-   message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
-
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson to do this !");
+    if(!args[0]) return message.channel.send("no");
+    message.channel.bulkDelete(args[0]).then(() => {
+    message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
+ });
  }
 
 
