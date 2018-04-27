@@ -189,6 +189,17 @@ client.on("message", async message => {
 
 }
 
+  if(command === "userinfo") {
+    if(message.mentions.users.first()) {
+    let user = message.mentions.users.first();
+    let output = user.username + user.discriminator
+    "\nAvatar URL: " + user.avatarURL;
+    message.channel.sendMessage(output);
+  } else {
+          message.reply("Invalid user."); 
+    }
+}
+
 
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
