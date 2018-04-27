@@ -450,16 +450,6 @@ client.on("message", async message => {
     }
   }
 
-  // Here we add the this.extension function to check if there's anything attached to the message.
-  extension(reaction, attachment) {
-    const imageLink = attachment.split('.');
-    const typeOfImage = imageLink[imageLink.length - 1];
-    const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
-    if (!image) return '';
-    return attachment;
-  }
-}
-
 
 
 });
