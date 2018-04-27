@@ -40,6 +40,18 @@ client.on("guildMemberAdd", (member) => {
     member.send(`Welcome To Server, **${member.user.username}**!`);  
 });
 
+client.on("message", (message) => {
+  if(message.content === "fk u") {
+    message.channel.send("im not gay");
+  }
+  if(message.content === "wat") {
+    message.channel.send("Say what?");
+  }
+  if(message.content === "lol") {
+    message.channel.send("luy");
+  }
+});
+
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
