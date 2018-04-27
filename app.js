@@ -140,7 +140,7 @@ client.on("message", async message => {
 
     let ballembed = new Discord.RichEmbed()
     .setAuthor(message.author.tag)
-    .setCOlor('RANDOM')
+    .setColor("#FF9900")
     .addField("Question", question)
     .addField("Answer", replies[result]);
 
