@@ -14,7 +14,7 @@ client.commands.set('server', require('./commands/server.js'));
 client.commands.set('speak', require('./commands/speak.js'));
 
 client.on('messageDelete', async (message) => {
-  const logs = message.guild.channels.find('name', 'k-empire-logs');
+  const logs = message.guild.channels.find('name', "k-empire-logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     message.guild.createChannel('k-empire-logs', 'logs');
   }
