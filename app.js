@@ -158,7 +158,7 @@ client.on("message", async message => {
       let rembed = new Discord.RichEmbed()
       .setDescription("Please mention one user in order to report them! - k!report [@user] [reason]")
       .setColor('RANDOM')
-      message.channel.sand(rembed);
+      message.reply(rembed);
       return;
     }
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
