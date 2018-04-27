@@ -5,6 +5,9 @@ const config = require("./config.json");
 
 const fs = require("fs")
 
+const responses = [
+   'yes', 'no', 'maybe', 'okay', 'sure', 'ask me later', 'naw'
+]
 
 let cooldown = new Set();
 let cdseconds = 5;
@@ -12,14 +15,6 @@ let cdseconds = 5;
 const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
-
-client.on('messageReactionAdd', (reaction, user) => {
-  if(!reaction.message.id == '439503618865889280') return;
-    if(reaction.emoji.id == '439501940796293120') {
-      user.addRole(message.guild.roles.get("431035407443034112"))
-    }
-})
-
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
@@ -143,6 +138,10 @@ client.on("message", async message => {
  });
 
 }
+
+  if(command === "8ball") {
+   <Message>.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
+}  
 
 
   if(command === "say") {
