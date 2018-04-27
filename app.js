@@ -7,6 +7,31 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 
+const fetch = await message.guild.channels.find('name', "starboardChannel").fetchMessages({ limit: 100 }); 
+// We check the messages within the fetch object to see if the message that was reacted to is already a message in the starboard,
+const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id)); 
+// Now we setup an if statement for if the message is found within the starboard.
+if (stars) {
+  // Regex to check how many stars the embed has.
+  const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+  // A variable that allows us to use the color of the pre-existing embed.
+  const foundStar = stars.embeds[0];
+  // We use the this.extension function to see if there is anything attached to the message.
+  const image = message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
+  const embed = new RichEmbed()
+    .setColor(foundStar.color)
+    .setDescription(foundStar.description)
+    .setAuthor(message.author.tag, message.author.displayAvatarURL)
+    .setTimestamp()
+    .setFooter(`⭐ ${parseInt(star[1])+1} | ${message.id}`)
+    .setImage(image);
+  // We fetch the ID of the message already on the starboard.
+  const starMsg = await message.guild.channels.find('name',  starboardChannel).fetchMessage(stars.id);
+  // And now we edit the message with the new embed!
+  await starMsg.edit({ embed }); 
+}
+
+
 client.commands = new Discord.Collection();
 
 client.commands.set('server', require('./commands/server.js'));
