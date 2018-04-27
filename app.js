@@ -2,15 +2,16 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const db = require('quick.db');
 
 const fs = require("fs")
 
 const responses1 = [
-   'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D', 'Size 8=====D'
+   'Size 8====D', 'Size 8======D', 'Size 8======D', 'Size 8======D', 'Size 8======D'
 ]
 
 const responses = [
-   'Yes', 'No', 'Maybe', 'I Don`t Know', 'Nope', 'ask me later', 'Sub 1'
+   'Yes', 'No', 'Maybe', 'I Don`t Know', 'Nope', '50%'
 ]
 
 let cooldown = new Set();
@@ -140,6 +141,19 @@ client.on("message", async message => {
      message.channel.bulkDelete(args[0]).then(() => {
     message.channel.send(`Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
  });
+
+}
+  
+  if(command === "setAutoRole") {
+
+    if (!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('This requires you to have a role with `Administrator`') // Tell them that they dont have the proper perms
+    if (!args.join(" ")) return message.channel.send('Please enter arguments. `setAutoRole <roleName>`') // Tell them if they didn't supply arguments
+
+    db.updateText(`autoRole_${message.guild.id}`, args.join(" ").trim()).then(i => { // .trim() removes the whitespaces on both ends of the string. 
+
+        message.channel.send('Successfully changed auto-role to: `' + i.text + '`'); // This tells them what they just set the autorole to.
+
+    })   
 
 }
 
