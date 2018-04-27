@@ -12,8 +12,6 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.commands.set('server', require('../commands/server.js'));
-client.commands.set('speak', require('../commands/speak.js'));
 
 client.on('messageReactionAdd', (reaction, user) => {
   if(!reaction.message.id == '430635174917701662') return;
