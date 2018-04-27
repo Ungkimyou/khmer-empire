@@ -110,6 +110,7 @@ client.on("message", async message => {
 
     const m = await message.channel.send(":mag: Starting ...?");
     m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
+    setTimeout(function(){},1000)
   }
   
   if(command === "clear") {
