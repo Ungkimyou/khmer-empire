@@ -41,16 +41,8 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on("message", (message) => {
-  if(message.content === "fk u") {
-    message.channel.send("im not gay");
-    message.delete()
-  }
-  if(message.content === "wat") {
-    message.channel.send("Say what?");
-    message.delete()
-  }
-  if(message.content === "lol") {
-    message.channel.send("luy");
+  if(message.content === "k!") {
+    message.channel.send(" do k!help for help !");
     message.delete()
   }
 });
@@ -134,19 +126,17 @@ client.on("message", async message => {
 
 
   if(command === "say") {
-    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
-    // To get the "message" itself we join the `args` back into a string with spaces: 
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
     const sayMessage = args.join(" ");
-    // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{}); 
-    // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
   }
 
 
   if(command == "embed") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't do that.");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
     const embed1 = new Discord.RichEmbed()
+    .setTitle
     .setDescription(args.join(" "))
     .setColor('RANDOM')
     message.delete().catch(O_o=>{});
@@ -154,17 +144,10 @@ client.on("message", async message => {
     
   } 
   
- 
-  if(command == "test") {
-    let falseval = args.slice(0).join('');
-    if(!falseval) falseval =`${novalue}`;
-    const novalue = await message.channel.send(`Please Include Message Content...`)
-
-    }
   
   if(command === "warn") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't do that.");
     let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
     if(!wUser) return message.reply("Couldn't find them yo");
     let warnlevel = warns[wUser.id].warns;
 
@@ -249,6 +232,16 @@ client.on("message", async message => {
      message.channel.send(reportembed);
 
   }
+
+  if(command === "clean")
+   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !");
+   if(!args[0]) return message.channel.send("no");
+   message.channel.bulkDelete(args[0]).then(() => {
+   message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
+});
+
+}
+
 
   if(command === "rsetup") {
     let sicon = message.guild.iconURL;
@@ -395,7 +388,7 @@ client.on("message", async message => {
         message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
     }
 
-  if (command == "clean") {
+  if (command == "purg") {
     if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
      message.channel.send('Message Clean Sccessful.......:wastebasket:');
      message.channel.bulkDelete(10);
