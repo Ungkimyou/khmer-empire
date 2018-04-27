@@ -116,7 +116,7 @@ client.on("message", async message => {
   }
   
   if(command === "clear") {
-     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("No.");
+     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
     message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
@@ -125,6 +125,7 @@ client.on("message", async message => {
 
 
   if(command === "say") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
@@ -132,8 +133,10 @@ client.on("message", async message => {
 
 
   if(command == "embed") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
-    .setTitle(args.join(" "))
+    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setThumbnail(message.author.avatarURL)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
     message.delete().catch(O_o=>{});
