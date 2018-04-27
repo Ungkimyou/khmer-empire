@@ -126,7 +126,7 @@ client.on("message", async message => {
 
 
   if(command === "say") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
@@ -134,9 +134,9 @@ client.on("message", async message => {
 
 
   if(command == "embed") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
     const embed1 = new Discord.RichEmbed()
-    .setTitle
+    .setTitle(args.join(" "))
     .setDescription(args.join(" "))
     .setColor('RANDOM')
     message.delete().catch(O_o=>{});
@@ -144,16 +144,6 @@ client.on("message", async message => {
     
   } 
   
-  
-  if(command === "warn") {
-    let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !);
-    if(!wUser) return message.reply("Couldn't find them yo");
-    let warnlevel = warns[wUser.id].warns;
-
-    message.reply(`<@${wUser.id}> has ${warnlevel} warnings.`);
-
- }
 
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
@@ -275,11 +265,6 @@ client.on("message", async message => {
      message.channel.send(avatarembed);
 
   }
-
-  if (command == "8ball") { // creates the command 8ball
-        if (args[1] != null) message.reply(eightball[Math.floor(Math.random() * eightball.length).toString(16)]);
-        else message.channel.send("Ummmm, what is your question? :rolling_eyes: (Correct usage: k!8ball [question])"); // if not, error
-    }
 
 
   if (command == "mute") { // creates the command mute
