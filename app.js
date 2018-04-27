@@ -13,7 +13,13 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
+client.on('messageReactionAdd', (reaction, user) => {
+  if(!reaction.message.id == '439482958613577758') return;
 
+    if(reaction.emoji.id == '418398023349960714') {
+      user.addRole(message.guild.roles.get("422363177557164035"))
+    }
+})
 
 
 client.on('messageDelete', async (message) => {
