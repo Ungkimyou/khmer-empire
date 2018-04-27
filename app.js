@@ -233,16 +233,6 @@ client.on("message", async message => {
 
   }
 
-  if(command === "clean")
-   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permisson [MANAGE_MESSAGE] to do this !");
-   if(!args[0]) return message.channel.send("no");
-   message.channel.bulkDelete(args[0]).then(() => {
-   message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
-});
-
-}
-
-
   if(command === "rsetup") {
     let sicon = message.guild.iconURL;
     let rsetupembed = new Discord.RichEmbed()
@@ -382,6 +372,16 @@ client.on("message", async message => {
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
+
+  if(command === "clean") {
+   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sand("you don't have permisson [MANAGE_MESSAGE] to do this !");
+   if(!args[0]) return message.channel.send("no");
+   message.channel.bulkDelete(args[0]).then(() => {
+   message.channel.send(`Clear ${args[0]} messages.`).then(msg => msg.delete(2000));
+});
+
+}
+
 
   if (command == "cookie") { // creates the command cookie
         if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1] .toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
