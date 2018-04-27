@@ -1,18 +1,15 @@
 
 const Discord = require("discord.js");
-
-
 const client = new Discord.Client();
-
 const config = require("./config.json");
-
-
-
 client.commands = new Discord.Collection();
 
 client.commands.set('server', require('./commands/server.js'));
-
 client.commands.set('speak', require('./commands/speak.js'));
+
+let cooldown = new set();
+let cdseconds = 10;
+
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
@@ -99,6 +96,16 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
+  if(cooldown.has(message.author.id)){
+    message.delete();
+    message.reply("You have to wait 10 seconds to do again !")
+  }
+  //if(!message.member.hasPermission("ADMINISTRATOR")){
+     cooldown.add(message.author.id);
+// }
+  setTimeout()) => {
+    cooldown.delete(message.author.id)
+}, cdseconds * 1000)
 
 
 
