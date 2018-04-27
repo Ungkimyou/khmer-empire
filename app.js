@@ -5,8 +5,6 @@ const config = require("./config.json");
 
 const fs = require("fs")
 
-client.commands.set('server', require('./commands/server.js'));
-client.commands.set('speak', require('./commands/speak.js'));
 
 let cooldown = new Set();
 let cdseconds = 5;
