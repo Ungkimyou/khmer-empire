@@ -64,7 +64,7 @@ client.on("serverNewMember", function (server, user) {
 
 
 client.on("guildMemberAdd", member => {
-  console.log('User' + member.use.username + 'has join to server')
+  console.log('User' + member.user.username + 'has join to server')
   let role = member.guild.roles.find(`name`, "MEMBER");
   member.addRole(role)
 });
