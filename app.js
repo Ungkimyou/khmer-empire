@@ -235,6 +235,25 @@ client.on("message", async message => {
     
   } 
     
+   if(command == "tochat") {
+    if(args[0] == "help"){
+    message.reply("Plesae Create a Channel #chat For Bot Can Reply Chat To #chat")
+    return;
+ }
+    let reportEmbed = new Discord.RichEmbed()
+    .setDescription(args.join(" "))
+    .setThumbnail(message.author.avatarURL)
+    .setColor('RANDOM')
+
+    let chatchannel = message.guild.channels.find(`name`, "chat");
+    if(!chatchannel) return message.channel.send("you need create channel #chat to chat !");
+
+    message.delete().catch(O_o=>{});
+    chatchannel.send(reportEmbed);
+
+   }
+       
+
 
     if(command == "report") {
        if(args[0] == "help"){
