@@ -82,8 +82,8 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setStatus('Online')
-  client.user.setGame('Config Fill')
-  client.user.setGame('Config Fill', 'https://youtube.com/c/LONGYT');
+  client.user.setGame('Config-BOT.js')
+  client.user.setGame('Config-BOT.js', 'https://youtube.com/c/LONGYT');
 });
 
 client.on("chaanelCreate", async member => {
