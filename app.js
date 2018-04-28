@@ -242,15 +242,12 @@ client.on("message", async message => {
   if(command === "say") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const sayMessage = args.join(" ");
-    message.react('👍').then(() => message.react('👎'));
-      const filter = (reaction, user) => {
-	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
-  };
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
   }
+
   if(command === "prefix") {
-    return message.author.sand("Prefix for ${bot.user.username} is ${prefix}")
+    return message.author.sand("Prefix is ${prefix}")
  }
 
 
