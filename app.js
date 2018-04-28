@@ -141,6 +141,9 @@ client.on("message", async message => {
   }
   
   if(command === "clear") {
+      if(args[0] == "help"){
+      message.reply("do **k!clear [limit] to clear**");
+      return;
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
@@ -373,49 +376,6 @@ client.on("message", async message => {
         message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
     }
 
-  if(command == "addrole") {
-      if(args[0] == "help"){
-      message.reply("Please mention one user in order to addRole them! - `k!addrole [@user] [roles]`");
-      return;
-    }
-      if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
-      let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-      if(!rMember) return message.reply("Couldn't find that user, nope.");
-      let role = args.join(" ").slice(22);
-      if(!role) return message.reply("ADMIN");
-      let gRole = message.guild.roles.find(`name`, "ADMIN");
-  } else {
-      let gRole = message.guild.roles.find(`name`, "OWNER");
-      if(!gRole) return message.reply("Couldn't find that role.");
-
-      if(!rMember.roles.has(gRole.id)) return message.reply("They don't have that role.");
-      await(rMember.addRole(gRole.id));
-
-      try{
-         await rMember.send(`Yee .You Just Get Role ${gRole.name} Now ....`)
-      }catch(e){
-         message.channel.send(`GG, <@${rMember.id}>, We AddRole ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
-  }
-}
-
-  if(command == "removerole") {
-      if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
-      let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-      if(!rMember) return message.reply("Couldn't find that user, yo.");
-      let role = args.join(" ").slice(22);
-      if(!role) return message.reply("ADMIN");
-      let gRole = message.guild.roles.find(`name`, role);
-      if(!gRole) return message.reply("Couldn't find that role.");
-
-      if(!rMember.roles.has(gRole.id)) return message.reply("They don't have that role.");
-      await(rMember.removeRole(gRole.id));
-
-      try{
-         await rMember.send(`RIP, you lost the ${gRole.name} role.`)
-      }catch(e){
-         message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
-  }
-}
 
   if(command === "botinfo") {
 
