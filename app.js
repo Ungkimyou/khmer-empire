@@ -242,6 +242,7 @@ client.on("message", async message => {
   if(command === "say") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const sayMessage = args.join(" ");
+    message.react('👍').then(() => message.react('👎'));
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
   }
