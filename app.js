@@ -15,6 +15,7 @@ const responses = [
 
 let cooldown = new Set();
 let cdseconds = 5;
+let args = cont.slice(1);
 
 const talkedRecently = new Set();
 
