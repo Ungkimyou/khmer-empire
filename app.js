@@ -471,7 +471,7 @@ client.on("message", async message => {
             .addField(" - dick", "bot is tell your dick size")
             .addField(" - Invite", "Invite KhmerEmpire to the server !")
             .addField(" - serverinfo ", "tell info about server ")
-            .addField(" - helpadmin ", "list of admin commands - allow user have permsisson ADMINISTRATOR")
+            .addField(" - helpadmin ", "list of admin commands ")
             .setColor('RANDOM') // sets the color of the embed box to orange
             .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer to "You need help, do you?"
         message.channel.send(embedhelpmember);
@@ -489,7 +489,6 @@ client.on("message", async message => {
             .addField(" - rsetup", "rsetup is report setup channel ")
             .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer
         message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     }
 
 
