@@ -507,10 +507,6 @@ client.on("message", async message => {
 
 
   if (command === "info") {
-       if(args[0] == "help"){
-      message.reply("Type Your info :```| Name | YearOld | Gander | LikeColor | Location | Like | DisLike | LikeGame | SleepTime |```");
-      return;
-    }
     let name = args[0]; // Remember arrays are 0-based!.
     let yearold = args[1];
     let Gender = args[2];
@@ -532,10 +528,9 @@ client.on("message", async message => {
     .addField("Like :", Like)
     .addField("DisLike :", Dislike)
     .addField("LikeGame", LikeGame)
-    .addField("SleepTime :", SleepTime)
+    .addField("SleepTime :", SleepTime);
 
     
-    message.delete().catch(O_o=>{}); 
     message.channel.send(infoembed);
  }  
 
