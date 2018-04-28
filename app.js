@@ -376,7 +376,7 @@ client.on("message", async message => {
   if(!rMember) return message.reply("Can't Find That User Please mention one user in order to mute them! - k!mute [@user] [reason]");
   let role = args.join(" ").slice(22);
   if(!role) return message.reply("Specify a role!");
-  let gRole = message.guild.roles.find(`name`, role);
+  let gRole = message.guild.roles.find(`name`, "KE-Muted");
   if(!gRole) return message.reply("Couldn't find that role.");
 
   if(rMember.roles.has(gRole.id)) return message.reply("That User In The Roles");
