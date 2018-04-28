@@ -224,17 +224,6 @@ client.on("message", async message => {
     return message.author.sand("Prefix for ${bot.user.username} is ${prefix}")
  }
 
-  if(command === "avatar") {
-
-   let avatarembed = new Discord.RichEmbed()
-
-   .setDescription("Your Avatar !")
-   .setImage(message.author.avatarURL)
- 
-   message.channel.sand(avatarembed);  
- 
-}
-
 
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
@@ -306,7 +295,7 @@ client.on("message", async message => {
 
 }
 
-  if(command === "userinfo") {
+  if(command === "username") {
     if(message.mentions.users.first()) {
     let user = message.mentions.users.first();
     let output = user.username + user.discriminator
@@ -417,11 +406,11 @@ client.on("message", async message => {
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
-     .setImage(message.mentions.user.avatarURL)
+     .setImage(message.author.avatarURL)
      .setColor('RANDOM')
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
-     message.channel.send(avatarembed);
+     message.reply(avatarembed);
 
   }
 
