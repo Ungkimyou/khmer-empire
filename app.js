@@ -15,6 +15,7 @@ const responses = [
 
 let cooldown = new Set();
 let cdseconds = 5;
+
 const talkedRecently = new Set();
 
 client.on('guildMemberAdd', member => {
@@ -81,9 +82,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setStatus('Online')
-  client.user.setGame('Config-BOT.js')
-  client.user.setGame('Config-BOT.js', 'https://youtube.com/c/LONGYT');
+  client.user.setActivity("Index.js", {type: "Wacthing"});
 });
 
 client.on("chaanelCreate", async member => {
