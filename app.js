@@ -407,7 +407,7 @@ else if (command === 'avatar') {
     });
 
 
-    if (command == "help") { // creates a command *help
+    if(command == "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
             .setThumbnail(message.author.avatarURL)
@@ -427,7 +427,7 @@ else if (command === 'avatar') {
 
      }
 
-    if (command == "helpadmin") {
+    if(command == "helpadmin") {
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
             .setTitle("**List of Admin Commands**\n") // sets the title
@@ -447,14 +447,14 @@ else if (command === 'avatar') {
 
 
 
-    if (command == "cookie") { // creates the command cookie
+    if(command == "cookie") { // creates the command cookie
         if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
         else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username @munber)")
         message.delete() // sends the error message if no-one is mentioned
     }
 
 
-  if (command === "info") {
+  if(command === "info") {
     let name = args[0]; // Remember arrays are 0-based!.
     let yearold = args[1];
     let Gender = args[2];
@@ -484,7 +484,7 @@ else if (command === 'avatar') {
  }  
 
 
-  if (command === "listemojis") {
+  if(command === "listemojis") {
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
   message.channel.send(emojiList);
 
