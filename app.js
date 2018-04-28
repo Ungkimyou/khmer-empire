@@ -407,7 +407,7 @@ else if (command === 'avatar') {
     });
 
 
-    if(command == "help") { // creates a command *help
+    if(command === "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
             .setThumbnail(message.author.avatarURL)
@@ -423,11 +423,11 @@ else if (command === 'avatar') {
             .addField(" - helpadmin ", "list of admin commands - this cmd allow for have perms ADMINISTRATOR")
             .setColor('RANDOM') // sets the color of the embed box to orange
             .setFIeld("Join The Support Server :", "[Click Here](https://discord/7mS9GEY)") // sets the footer to "You need help, do you?"
-             message.channel.send(embedhelpmember);
+             message.author.send(embedhelpmember);
 
      }
 
-    if(command == "helpadmin") {
+    if(command === "helpadmin") {
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
             .setTitle("**List of Admin Commands**\n") // sets the title
@@ -442,7 +442,7 @@ else if (command === 'avatar') {
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
             .setFooter("Join The Support Server :", "[Click Here](https://discord/7mS9GEY)") // sets the footer
-           message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
+           message.author.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
     }
 
 
