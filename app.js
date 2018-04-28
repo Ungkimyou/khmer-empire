@@ -242,7 +242,7 @@ client.on("message", async message => {
     return;
  }
     let reportEmbed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
+    .setAuthor(message.author.tag, message.author.avatar)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
 
