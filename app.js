@@ -428,8 +428,7 @@ client.on("message", async message => {
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
 
-        let bicon = bot.user.displayAvatarURL;
-        let muteembed = new Discord.RichEmbed()
+       let muteembed = new Discord.RichEmbed()
         
        .setTitle("~Mute~")
        .setColor('#A9B5FD')
