@@ -242,7 +242,7 @@ client.on("message", async message => {
     return;
  }
     let reportEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.tag, message.author.avatar)
+    .setAuthor(message.author.tag)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
 
@@ -411,6 +411,18 @@ client.on("message", async message => {
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
      message.channel.send(avatarembed);
+
+  }
+
+  if(command === "dog") {
+
+     let sicon = message.mentions.iconURL;
+     let dogembed = new Discord.RichEmbed()
+     .setDescripton("Dog")
+     .setImage("https://random.dog/")
+     .setColor('RANDOM')
+            
+     message.channel.send(dogembed);
 
   }
 
