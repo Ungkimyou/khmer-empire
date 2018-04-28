@@ -338,7 +338,7 @@ client.on("message", async message => {
 
 
   if(command === "kick") {
-    if(!message.member.permissions.has('ADMINISTRATOR')) return msg.reply('you aren\'t n admin');
+    if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("```md Please mention one user in order to kick them! - k!kick [@user] [reason]```");
@@ -353,7 +353,7 @@ client.on("message", async message => {
   }
   
   if(command === "ban") {
-    if(!message.member.permissions.has("ADMINISTRATOR")) return msg.reply('you aren\'t n admin');
+   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     
     let member = message.mentions.members.first();
     if(!member)
@@ -368,6 +368,26 @@ client.on("message", async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
+
+
+   if(command === 'mute') {
+  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry : you don't have MANAGE_MEMBERS ADMINISTRATOR permission to do this");
+  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!rMember) return message.reply("Can't Find That User Please mention one user in order to mute them! - k!mute [@user] [reason]");
+  let role = args.join(" ").slice(22);
+  if(!role) return message.reply("Specify a role!");
+  let gRole = message.guild.roles.find(`name`, role);
+  if(!gRole) return message.reply("Couldn't find that role.");
+
+  if(rMember.roles.has(gRole.id)) return message.reply("That User In The Roles");
+  await(rMember.addRole(gRole.id));
+
+  try{
+    await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
+  }catch(e){
+    message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+  }
+}
 
 
   if(command === "serverinfo") {
@@ -440,49 +460,6 @@ else if (command === 'avatar') {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
 
-
-  if (command == "mute") { // creates the command mute
-   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this ");
-        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
-        if (mutedmember.hasPermission("MUTE_MEMBERS")) return message.reply("I cannot mute this member!") // if memebr is an admin
-        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
-        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
-        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
-        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
-        mutedmember.addRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-
-       let muteembed = new Discord.RichEmbed()
-        
-       .setTitle("~==Mute==~")
-       .setColor('#FF0000')
-       .setThumbnail(mutedmember.user)
-       .addField('User:', mutedmember.user)  
-       .addField('Muted By:', message.author)
-       .addField('Reason:', mutereason)
-       
-       return message.channel.send(muteembed);
-       
-  }
-
-  if (command == "unmute") {
-   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this ");
-        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!unmutedmember) return message.reply("```md Please mention one user in order to unmute them! - k!unmute [@user] [reason]```") // if there is no kickedmmeber var
-        unmutedmember.removeRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-   
-       let unmuteembed = new Discord.RichEmbed()
-        
-       .setTitle("~==UnMute==~")
-       .setColor('#FF0000')
-       .setThumbnail(unmutedmember.user)
-       .addField('User:', unmutedmember.user)  
-       .addField('UnMuted By:', message.author)
-
-       return message.channel.send(unmuteembed); 
-  }
 
     if (command == "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
