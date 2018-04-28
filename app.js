@@ -255,6 +255,8 @@ client.on("message", async message => {
     .setColor('RANDOM')
      message.delete().catch(O_o=>{});
      message.channel.send(embed1);
+    .then((newMessage) => {
+     newMessage.react("1️⃣")
     
   } 
     
