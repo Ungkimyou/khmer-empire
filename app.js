@@ -83,7 +83,7 @@ client.on("ready", () => {
   // docs refer to as the "ClientUser".
   client.user.setStatus('Online')
   client.user.setGame('k!help')
-  client.user.setGame('Hello', 'https://www.twitch.tv/dotatv247');
+  client.user.setGame('k!help', 'https://www.twitch.tv/dotatv247');
 });
 
 client.on("chaanelCreate", async member => {
@@ -104,8 +104,8 @@ client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
   client.user.setStatus('Online')
-  client.user.setGame('Hello')
-  client.user.setGame('Hello', 'https://youtube.com/c/LONGYT');
+  client.user.setGame('k!help')
+  client.user.setGame('k!help', 'https://youtube.com/c/LONGYT');
 
 });
 
