@@ -413,7 +413,6 @@ client.on("message", async message => {
       console.log(e.stack);
     }
   }
-  //end of create role
   let mutetime = args[1];
   if(!mutetime) return message.reply("You didn't specify a time!");
 
@@ -427,7 +426,7 @@ client.on("message", async message => {
 
  }
 
-}
+
 
 
   if(command === "serverinfo") {
