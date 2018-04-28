@@ -467,14 +467,14 @@ client.on("message", async message => {
             .addField(" - help", "Displays this message (Correct usage: k!help)") // sets the first field to explain the command *help
             .addField(" - info", "Tells info about myself :grin:") // sets the field information about the command *info
             .addField(" - ping", "Tests your ping (Correct usage: k!ping)") // sets the second field to explain the command *ping
-            .addField(" - cookie", "Sends a cookie to the desired player! :cookie: (Correct usage: k!cookie @username)") // sets the third field to explain the command *cookie
+            .addField(" - cookie", "Sends a cookie to the desired player! :cookie: (Correct usage: k!cookie @username @munber)") // sets the third field to explain the command *cookie
             .addField(" - gay", "bot is tell your gay or not") 
             .addField(" - dick", "bot is tell your dick size")
             .addField(" - Invite", "Invite KhmerEmpire to the server !")
             .addField(" - serverinfo ", "tell info about server ")
             .addField(" - helpadmin ", "list of admin commands - this cmd allow for have perms ADMINISTRATOR")
             .setColor('RANDOM') // sets the color of the embed box to orange
-            .setFooter("[Click Here To Copy Link Support Server](https://discord/7mS9GEY)") // sets the footer to "You need help, do you?"
+            .setFIeld("Join The Support Server :", "[Click Here](https://discord/7mS9GEY)") // sets the footer to "You need help, do you?"
              message.channel.send(embedhelpmember);
 
      }
@@ -493,23 +493,33 @@ client.on("message", async message => {
             .setColor('RANDOM') // sets a color
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
-            .setFooter("[Click Here To Copy Link Support Server](https://discord/7mS9GEY)") // sets the footer
+            .setFooter("Join The Support Server :", "[Click Here](https://discord/7mS9GEY)") // sets the footer
            message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
     }
 
 
 
     if (command == "cookie") { // creates the command cookie
-        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
-        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username)") // sends the error message if no-one is mentioned
+        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
+        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username @munber)")
+        message.delete() // sends the error message if no-one is mentioned
     }
 
 
-  if (command === "info") {
-    let age = args[0]; // Remember arrays are 0-based!.
-    let sex = args[1];
-    let location = args[2];
-    message.reply(` am ${age} year old home from ${location}.${sex} Wanna date?`);
+  if (command === "selfinfo") {
+       if(args[0] == "help"){
+      message.reply("Type Selfinfo : Name | YearOld | Gander | LikeColor | Location | Like | DisLike | LikeGame|");
+      return;
+    }
+    let name = args[0]; // Remember arrays are 0-based!.
+    let yearold = args[1];
+    let Gender = args[2];
+    let LikeColor = args[3]
+    let Location = args[4];
+    let Like = args[5];
+    let Dislike = args[6];
+    let LikeGame = args[7];
+    message.reply(` My Name Is ${name} \n${yearold} Year Old, \nGender :${Gender} \nLikeColor : ${LikeColor} \nLocation : ${Location} \nLike : ${Like} \nDislike : ${Dislike} \nLikeGame : ${LikeGame}`);
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
  }  
