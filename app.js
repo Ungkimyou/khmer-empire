@@ -374,12 +374,18 @@ client.on("message", async message => {
     }
 
   if(command == "addrole") {
+      if(args[0] == "help"){
+      message.reply("Please mention one user in order to addRole them! - `k!addrole [@user] [roles]`");
+      return;
+    }
       if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
       let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
       if(!rMember) return message.reply("Couldn't find that user, nope.");
       let role = args.join(" ").slice(22);
       if(!role) return message.reply("ADMIN");
-      let gRole = message.guild.roles.find(`name`, role);
+      let gRole = message.guild.roles.find(`name`, "ADMIN");
+  } else {
+      let gRole = message.guild.roles.find(`name`, "OWNER");
       if(!gRole) return message.reply("Couldn't find that role.");
 
       if(!rMember.roles.has(gRole.id)) return message.reply("They don't have that role.");
