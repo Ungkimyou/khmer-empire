@@ -354,8 +354,7 @@ client.on("message", async message => {
      let sicon = message.guild.iconURL;
      let inviteembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .addField("BOT-Invite :", "  [Check Here](https://discordapp.com/oauth2/authorize?client_id=438304216893620240&permissions=16796742&scope=bot)")
-    .addField("Discord-Invite :", "  [Check Here](https://discord.gg/WMxC5rw)")
+    .addField("Discord-Invite :", "  [Check Here](https://discord.gg/7mS9GEY)")
     .addField("BOT-Website :", "  [Check Here](https://tamotoji533.wixsite.com/healong)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
