@@ -401,26 +401,14 @@ client.on("message", async message => {
 
     }
 
-  if(command === "avatar") {
 
-     let sicon = message.mentions.iconURL;
-     let avatarembed = new Discord.RichEmbed()
-     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-     .setDescription("Avatar !")
-     .setImage(message.username.displayAvatarURL)
-     .setColor('RANDOM')
-            
-     message.mentions.users.map(avatarembed);
-
-  }
-
-else if (command === 'av') {
+else if (command === 'avatar', 'av') {
     if (!message.mentions.users.size) {
-        return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+        return message.channel.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
     }
 
     const avatarList = message.mentions.users.map(user => {
-        return `${user.username}'s avatar: ${user.displayAvatarURL}`;
+        return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
 
 
