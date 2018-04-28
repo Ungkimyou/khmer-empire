@@ -246,9 +246,15 @@ client.on("message", async message => {
     message.channel.send(sayMessage);
   }
 
-  if(command === "prefix") {
-    return message.author.sand("Prefix is ${prefix}")
- }
+ if(command === "sr") {
+    message.channel.send(":apple:***SONDAGE :apple:\n "+choix1+" ou "+""+choix2+"***")
+    .then(function (message) {
+     message.react("👍")
+     message.react("👎")
+      message.pin()
+       message.delete()
+ });
+}
 
 
   if(command === "embed") {
