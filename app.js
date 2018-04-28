@@ -526,10 +526,7 @@ client.on("message", async message => {
   }
 
   if(command === "addrole") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
-    if(args[0] == "help"){
-    message.reply("```md #Plesae Create a Channel #chat Frist , For Bot Can Reply Chat To - #chat```")
-    return;
+   if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
     let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if(!rMember) return message.reply("Couldn't find that user, yo.");
     let role = args.join(" ").slice(22);
