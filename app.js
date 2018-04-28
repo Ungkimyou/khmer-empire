@@ -392,6 +392,7 @@ client.on("message", async message => {
     let botembed = new Discord.RichEmbed()
     .setDescription("Bot Information")
     .setColor("#15f153")
+    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881")
     .setThumbnail(bicon)
     .addField("Bot Name", client.user.username)
     .addField("Created On", client.user.createdAt);
