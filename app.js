@@ -439,11 +439,11 @@ client.on("message", async message => {
  
   }
 
-  if (command === "asl") {
+  if (command === "info") {
     let age = args[0]; // Remember arrays are 0-based!.
     let sex = args[1];
     let location = args[2];
-    message.reply(` I see you're a ${age} year old ${sex} from ${location}. Wanna date?`);
+    message.reply(` am ${age} year old home from ${location}.${sex} Wanna date?`);
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
  }  
@@ -475,6 +475,7 @@ client.on("message", async message => {
   } 
   
   if(command === "eval") {
+    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
       const code = args.join(" ");
       let evaled = eval(code);
 
