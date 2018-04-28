@@ -462,7 +462,7 @@ client.on("message", async message => {
     if (command == "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
-            .addField(" - report". "report player from server k!report [user] [reason]")
+            .addField(" - report", "report player from server k!report [user] [reason]")
             .addField(" - help", "Displays this message (Correct usage: k!help)") // sets the first field to explain the command *help
             .addField(" - info", "Tells info about myself :grin:") // sets the field information about the command *info
             .addField(" - ping", "Tests your ping (Correct usage: k!ping)") // sets the second field to explain the command *ping
