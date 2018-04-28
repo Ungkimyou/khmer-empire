@@ -425,7 +425,9 @@ client.on("message", async message => {
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
 
+ }
 
+}
 
 
   if(command === "serverinfo") {
