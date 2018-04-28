@@ -430,18 +430,16 @@ client.on("message", async message => {
 
        let muteembed = new Discord.RichEmbed()
         
-       .setTitle("~Mute~")
-       .setColor('#A9B5FD')
+       .setTitle("~==Mute==~")
+       .setColor('#FF0000')
+       .setThumbnail(mutedmember.user)
        .addField('User:', mutedmember.user)  
        .addField('Muted By:', message.author)
        .addField('Reason:', mutereason)
-
+       
        return message.channel.send(muteembed);
+       message.delete()
 
-       let mutedchannel = message.guild.channels.find(`name`, "muted");
-       if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
-       message.delete().catch(O_o=>{}); 
-       message.channel.send(sayMessage);
 
   }
 
@@ -452,7 +450,19 @@ client.on("message", async message => {
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
-    }
+   
+       let unmuteembed = new Discord.RichEmbed()
+        
+       .setTitle("~==UnMute==~")
+       .setColor('#FF0000')
+       .setThumbnail(mutedmember.user)
+       .addField('User:', mutedmember.user)  
+       .addField('UnMuted By:', message.author)
+       
+       return message.channel.send(unmuteembed);
+       message.delete()
+
+  }
 
 
   if(command === "botinfo") {
