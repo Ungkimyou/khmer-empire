@@ -136,6 +136,20 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
+client.on("presenceUpdate", (oldMember, newMember) => {
+  let guild = newMember.guild;
+  let playRole = guild.roles.find("name", "Playing Grand Theft Auto V");
+  if(!playRole) return;  
+
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "Grand Theft Auto V") {
+    newMember.addRole(playRole);
+  } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
+    newMember.removeRole(playRole);
+  let guild = newMember.guild;
+  if(!playRole) return;
+    
+  }  
+});
 
 
 client.on("message", async message => {
