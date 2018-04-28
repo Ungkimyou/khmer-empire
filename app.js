@@ -63,6 +63,21 @@ client.on("message", (message) => {
   }
 });
 
+client.on("messageReactionAdd", (reaction, user) => {
+      myMessage.react("🤠");
+      myMessage.react("☠");
+      myMessage.react("🤖");
+      const filter = (reaction, user) => reaction.emoji.name === "🤠";
+      //const filter = (reaction, user) => ({});
+      myMessage
+        .awaitReactions(filter, { time: 100000 })
+        .then((collected) => {
+          console.log("got reaction");
+        })
+        .catch((collected) => {
+          console.log("error reaction");
+        });
+    });
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
