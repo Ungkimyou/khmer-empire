@@ -354,7 +354,7 @@ client.on("message", async message => {
   }
   
   if(command === "ban") {
-   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
+  if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     
     let member = message.mentions.members.first();
     if(!member)
@@ -371,63 +371,35 @@ client.on("message", async message => {
   }
 
 
-   if(command === 'mute') {
-  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry : you don't have MANAGE_MEMBERS ADMINISTRATOR permission to do this");
-  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!rMember) return message.reply("Can't Find That User Please mention one user in order to mute them! - k!mute [@user] [reason]");
-  let role = args.join(" ").slice(22);
-  if(!role) return message.reply("Specify a role!");
-  let gRole = message.guild.roles.find(`name`, "KE-Muted");
-  if(!gRole) return message.reply("Couldn't find that role.");
+  if (command == "mute") { // creates the command mute
+   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");// if author has no perms
+        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
+        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
+        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
+        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
+        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
+        mutedmember.addRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
 
-  if(rMember.roles.has(gRole.id)) return message.reply("That User In The Roles");
-  await(rMember.addRole(gRole.id));
+       let muteembed = new Discord.RichEmbed()
+        
+       .setTitle("~==Mute==~")
+       .setColor('#FF0000')
+       .setThumbnail(mutedmember.user)
+       .addField('User:', mutedmember.user)  
+       .addField('Muted By:', message.author)
+       .addField('Reason:', mutereason)
+       
+       return message.channel.send(muteembed);; // sends a message saying he was kicked
+  
+       let mutedchannel = message.guild.channels.find(`name`, "muted");
+       if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
+       message.delete().catch(O_o=>{}); 
+       message.channel.send(sayMessage);
 
-  try{
-    await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-  }catch(e){
-    message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
   }
-}
-
- if(command === "tempmute") {
-  let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-  if(!tomute) return message.reply("Couldn't find user.");
-  if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have MANAGE_MESSAGES permission to use this commands");
-  let muterole = message.guild.roles.find(`name`, "KE-Muted");
-  //start of create role
-  if(!muterole){
-    try{
-      muterole = await message.guild.createRole({
-        name: "KE-TempMute",
-        color: "#FF0000",
-        permissions:[]
-      })
-      message.guild.channels.forEach(async (channel, id) => {
-        await channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        });
-      });
-    }catch(e){
-      console.log(e.stack);
-    }
-  }
-  let mutetime = args[1];
-  if(!mutetime) return message.reply("You didn't specify a time!");
-
-  await(tomute.addRole(muterole.id));
-  message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-
-  setTimeout(function(){
-    tomute.removeRole(muterole.id);
-    message.channel.send(`<@${tomute.id}> has been unmuted!`);
-  }, ms(mutetime));
-
- }
-
-
-
 
   if(command === "serverinfo") {
      
