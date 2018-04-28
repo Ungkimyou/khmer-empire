@@ -238,7 +238,7 @@ client.on("message", async message => {
    if(command == "tochat") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("```md #Plesae Create a Channel #chat Frist ,For Bot Can Reply Chat To - #chat")
+    message.reply("``` #Plesae Create a Channel #chat Frist ,For Bot Can Reply Chat To - #chat```")
     return;
  }
     let reportEmbed = new Discord.RichEmbed()
