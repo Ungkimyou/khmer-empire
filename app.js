@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const snekfetch = require('snekfetch');
 
 const fs = require("fs")
 
@@ -201,6 +202,12 @@ client.on("message", async message => {
  });
 
 }
+
+   if (command === 'cat') {
+	const cat = await snekfetch.get('https://aws.random.cat/meow');
+
+	message.channel.send(cat);
+  }
 
 	if (command === 'sayr') {
               const sayMessage = args.join(" ");
