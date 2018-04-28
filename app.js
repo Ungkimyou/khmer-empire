@@ -465,7 +465,7 @@ client.on("message", async message => {
             .setThumbnail(message.author.avatarURL)
             .addField(" - report", "report player from server k!report [user] [reason]")
             .addField(" - help", "Displays this message (Correct usage: k!help)") // sets the first field to explain the command *help
-            .addField(" - info", "Tells info about myself :grin:") // sets the field information about the command *info
+            .addField(" - info", "Tells info about myself | k!info help :grin:") // sets the field information about the command *info
             .addField(" - ping", "Tests your ping (Correct usage: k!ping)") // sets the second field to explain the command *ping
             .addField(" - cookie", "Sends a cookie to the desired player! :cookie: (Correct usage: k!cookie @username @munber)") // sets the third field to explain the command *cookie
             .addField(" - gay", "bot is tell your gay or not") 
@@ -506,9 +506,9 @@ client.on("message", async message => {
     }
 
 
-  if (command === "selfinfo") {
+  if (command === "info") {
        if(args[0] == "help"){
-      message.reply("Type Selfinfo : Name | YearOld | Gander | LikeColor | Location | Like | DisLike | LikeGame|");
+      message.reply("Type Your info :```| Name | YearOld | Gander | LikeColor | Location | Like | DisLike | LikeGame | SleepTime |```");
       return;
     }
     let name = args[0]; // Remember arrays are 0-based!.
@@ -519,9 +519,24 @@ client.on("message", async message => {
     let Like = args[5];
     let Dislike = args[6];
     let LikeGame = args[7];
-    message.reply(` My Name Is ${name} \n${yearold} Year Old, \nGender :${Gender} \nLikeColor : ${LikeColor} \nLocation : ${Location} \nLike : ${Like} \nDislike : ${Dislike} \nLikeGame : ${LikeGame}`);
+    let SleepTime = args[8];
+
+    let infoembed = new Discord.RichEmbed()
+    .setAuthor("Info By :", message.author.tag)
+    .setThumbnail(message.author.avatarURL)
+    .addField("Name :", name)
+    .addField("Year Old :", yearold)
+    .addField("Gender :", Gender)
+    .addField("Like Color :", LikeColor)
+    .addField("Location :", Location)
+    .addField("Like :", Like)
+    .addField("DisLike :", Dislike)
+    .addField("LikeGame", LikeGame)
+    .addField("SleepTime :", SleepTime)
+
+    
     message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
+    message.channel.send(infoembed);
  }  
 
 
