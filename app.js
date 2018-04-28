@@ -407,7 +407,7 @@ client.on("message", async message => {
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
-     .setImage(message.author.avatarURL)
+     .setImage(user.displayAvatarURL)
      .setColor('RANDOM')
             
      message.channel.send(avatarembed);
