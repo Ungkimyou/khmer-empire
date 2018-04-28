@@ -236,10 +236,10 @@ client.on("message", async message => {
     
   } 
     
-   if(command == "tochat") {
+   if(command == "chatembed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("```md #Plesae Create a Channel #chat Frist , For Bot Can Reply Chat To - #chat```")
+    message.reply("```Plesae Create a Channel #chat Frist , For Bot Can Reply Chat To - #chat```")
     return;
  }
     let reportEmbed = new Discord.RichEmbed()
@@ -462,6 +462,7 @@ client.on("message", async message => {
     if (command == "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
+            .setThumbnail(message.author.avatarURL)
             .addField(" - report", "report player from server k!report [user] [reason]")
             .addField(" - help", "Displays this message (Correct usage: k!help)") // sets the first field to explain the command *help
             .addField(" - info", "Tells info about myself :grin:") // sets the field information about the command *info
@@ -471,16 +472,19 @@ client.on("message", async message => {
             .addField(" - dick", "bot is tell your dick size")
             .addField(" - Invite", "Invite KhmerEmpire to the server !")
             .addField(" - serverinfo ", "tell info about server ")
-            .addField(" - helpadmin ", "list of admin commands ")
+            .addField(" - helpadmin ", "list of admin commands - this cmd allow for have perms ADMINISTRATOR")
             .setColor('RANDOM') // sets the color of the embed box to orange
-            .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer to "You need help, do you?"
+            .setFooter("[Click Here To Copy Link Support Server](https://discord/7mS9GEY)") // sets the footer to "You need help, do you?"
              message.channel.send(embedhelpmember);
 
      }
 
     if (command == "helpadmin") {
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
             .setTitle("**List of Admin Commands**\n") // sets the title
+            .setThumbnail(message.author.avatarURL)
+            .addField(" - chatembed", "this is a cool commands for admin say to channel #chat more k!chatembed help")
             .addField(" - say", "Makes the bot say whatever you want (Correct usage: k!say [message])")
             .addField(" - mute", "Mutes a desired member with a reason (Coorect usage: k!mute @username [reason])") // sets a field
             .addField(" - unmute", "Unmutes a muted player (Correct usage: k!unmute @username)")
@@ -489,15 +493,15 @@ client.on("message", async message => {
             .setColor('RANDOM') // sets a color
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
-            .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer
+            .setFooter("[Click Here To Copy Link Support Server](https://discord/7mS9GEY)") // sets the footer
            message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
     }
 
 
 
-  if (command == "cookie") { // creates the command cookie
-        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1] .toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
-        message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
+    if (command == "cookie") { // creates the command cookie
+        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
+        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username)") // sends the error message if no-one is mentioned
     }
 
 
