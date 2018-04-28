@@ -410,7 +410,7 @@ client.on("message", async message => {
      .setColor('RANDOM')
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
-     message.reply(avatarembed);
+     message.channel.sand(avatarembed);
 
   }
 
