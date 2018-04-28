@@ -418,7 +418,7 @@ client.on("message", async message => {
 
      let sicon = message.mentions.iconURL;
      let dogembed = new Discord.RichEmbed()
-     .setDescripton("Dog")
+     .setDescription("Dog")
      .setImage("https://random.dog/")
      .setColor('RANDOM')
             
