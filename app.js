@@ -198,10 +198,33 @@ client.on("message", async message => {
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
     message.channel.send(`Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
-    message.react('😄');
  });
 
 }
+
+	if (command === 'react-await') {
+		message.react('👍').then(() => message.react('👎'));
+
+		const filter = (reaction, user) => {
+			return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+		};
+
+		message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+			.then(collected => {
+				const reaction = collected.first();
+
+				if (reaction.emoji.name === '👍') {
+					message.reply('you reacted with a thumbs up.');
+				}
+				else {
+					message.reply('you reacted with a thumbs down.');
+				}
+			})
+			.catch(collected => {
+				console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
+				message.reply('you didn\'t react with neither a thumbs up, nor a thumbs down.');
+			});
+	}
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
