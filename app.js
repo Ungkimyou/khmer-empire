@@ -18,42 +18,6 @@ let cdseconds = 5;
 
 const talkedRecently = new Set();
 
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome-leave');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField(':bust_in_silhouette: | name : ', `${member}`)
-        .addField(':microphone2: | Welcome!', `Welcome , ${member} To Server ${member.guild.name}`)
-        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
-        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
-        .addField("Name", `<@` + `${member.id}` + `>`, true)
-        .addField('Server', `${member.guild.name}`, true )
-        .setFooter(`**${member.guild.name}**`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
-});
-
-client.on('guildMemberRemove', member => {
-    let channel = member.guild.channels.find('name', 'welcome-leave');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField('Name:', `${member}`)
-        .addField('Has Left The Server ', ';(')
-        .addField('Bye Bye :(', 'We Will All Miss You!')
-        .addField('The Server Now As :', `${member.guild.memberCount}` + " members")
-        .setFooter(`**${member.guild.name}`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
-});
-
 client.commands = new Discord.Collection();
 
 client.on("serverNewMember", function (server, user) {
@@ -62,11 +26,31 @@ client.on("serverNewMember", function (server, user) {
 })
 
 
+client.on('messageDelete', async (message) => {
+  const logs = message.guild.channels.find('name', "k-empire-logs");
+  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
+    message.guild.createChannel('name', 'k-empire-logs');
+  }
+  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
+    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
+  }  
+  let user = ""
+    if (entry.extra.channel.id === message.channel.id
+      && (entry.target.id === message.author.id)
+      && (entry.createdTimestamp > (Date.now() - 5000))
+      && (entry.extra.count >= 1)) {
+    user = entry.executor.username
+  } else { 
+    user = message.author.username
+  }
+  logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
+})
 
-client.on("guildMemberAdd", member => {
-  console.log('User' + member.user.username + 'has join to server')
-  let role = member.guild.roles.find(`name`, "MEMBER");
-  member.addRole(role)
+
+client.on("guildMemberAdd", (member) => {
+  let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
+    welcomechannel.send(`:speaking_head:  ${member} Has Join The Server!`);
+    member.send(`Welcome To Server, **${member.user.username}**!`);  
 });
 
 client.on("message", (message) => {
@@ -82,7 +66,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity("Index.js", {type: "Wacthing"});
+  client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
 });
 
 client.on("chaanelCreate", async member => {
@@ -98,7 +82,12 @@ client.on("chaanelDelete", async member => {
   sChannel.sand(`${channel.name} has been delete !`);
 
 });
- 
+  
+client.on("guildMemberAdd", guild => {
+  // This event triggers when the bot joins a guild.
+  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  client.user.setActivity(` ${client.guilds.size} servers | k!help`);
+});
 
 
 client.on("presenceUpdate", (oldMember, newMember) => {
@@ -211,6 +200,7 @@ client.on("message", async message => {
 
 }
 
+
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
    message.delete()
@@ -261,6 +251,7 @@ client.on("message", async message => {
 
    }
        
+
 
     if(command == "report") {
        if(args[0] == "help"){
@@ -313,60 +304,36 @@ client.on("message", async message => {
 
 
   if(command === "kick") {
-       if(args[0] == "help"){
-      message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]` kick channel logs set name #k-empire-logs");
-      return;
-    }
     if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
-    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!kUser) return message.channel.send("Can't find user!");
-    let kReason = args.join(" ").slice(22);
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No can do pal!");
-    if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    if(!member)
+      return message.reply("```md Please mention one user in order to kick them! - k!kick [@user] [reason]```");
+    if(!member.kickable) 
+      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    await member.kick(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
-    let kickEmbed = new Discord.RichEmbed()
-    .setDescription("~Kick~")
-    .setColor("#e56b00")
-    .addField("Kicked User", `${kUser} with ID ${kUser.id}`)
-    .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField("Kicked In", message.channel)
-    .addField("Tiime", message.createdAt)
-    .addField("Reason", kReason);
-
-    let kickChannel = message.guild.channels.find(`name`, "k-empire-logs");
-    if(!kickChannel) return message.channel.send("Can't find incidents channel.");
-
-    message.guild.member(kUser).kick(kReason);
-    kickChannel.send(kickEmbed);
-}
+  }
   
   if(command === "ban") {
-       if(args[0] == "help"){
-      message.reply("Please mention one user in order to report them! - `k!ban [@user] [reason]` ban channel logs set name #k-empire-logs");
-      return;
-    }
   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
-    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!bUser) return message.channel.send("Can't find user!");
-    let bReason = args.join(" ").slice(22);
-    if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send("No can do pal!");
-    if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
+    
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("```md Please mention one user in order to ban them! - k!ban [@user] [reason]```");
+    if(!member.bannable) 
+      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-    let banEmbed = new Discord.RichEmbed()
-    .setDescription("~Ban~")
-    .setColor("#bc0000")
-    .addField("Banned User", `${bUser} with ID ${bUser.id}`)
-    .addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField("Banned In", message.channel)
-    .addField("Time", message.createdAt)
-    .addField("Reason", bReason);
-
-    let incidentchannel = message.guild.channels.find(`name`, "k-empire-logs");
-    if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-
-    message.guild.member(bUser).ban(bReason);
-    incidentchannel.send(banEmbed);
-}
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }
 
 
   if(command === "serverinfo") {
@@ -440,7 +407,7 @@ else if (command === 'avatar') {
     });
 
 
-    if (command === "help") { // creates a command *help
+    if (command == "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
             .setThumbnail(message.author.avatarURL)
@@ -460,7 +427,7 @@ else if (command === 'avatar') {
 
      }
 
-    if (command === "helpadmin") {
+    if (command == "helpadmin") {
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
             .setTitle("**List of Admin Commands**\n") // sets the title
@@ -469,8 +436,8 @@ else if (command === 'avatar') {
             .addField(" - say", "Makes the bot say whatever you want (Correct usage: k!say [message])")
             .addField(" - mute", "Mutes a desired member with a reason (Coorect usage: k!mute @username [reason])") // sets a field
             .addField(" - unmute", "Unmutes a muted player (Correct usage: k!unmute @username)")
-            .addField(" - kick", "Kicks a desired member with a reason (Correct usage: k!kick @username [reason]) k!kick help") //sets a field
-            .addField(" - ban" , "ban a player u want to ban k!ban @username [reason] - k!ban help")
+            .addField(" - kick", "Kicks a desired member with a reason (Correct usage: k!kick @username [reason])") //sets a field
+            .addField(" - ban" , "ban a player u want to ban k!ban @username [reason]")
             .setColor('RANDOM') // sets a color
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
@@ -487,7 +454,7 @@ else if (command === 'avatar') {
     }
 
 
-  if (command === "userinfo") {
+  if (command === "info") {
     let name = args[0]; // Remember arrays are 0-based!.
     let yearold = args[1];
     let Gender = args[2];
