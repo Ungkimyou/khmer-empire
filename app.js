@@ -202,7 +202,8 @@ client.on("message", async message => {
 
 }
 
-	if (command === 'react-await') {
+	if (command === 'sayr') {
+              const sayMessage = args.join(" ");
 		message.react('👍').then(() => message.react('👎'));
 
 		const filter = (reaction, user) => {
