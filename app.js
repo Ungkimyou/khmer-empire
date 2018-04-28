@@ -14,6 +14,10 @@ const responses = [
    'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', '50%'
 ]
 
+const responses2 = [
+   'https://random.dog/'
+]
+
 let cooldown = new Set();
 let cdseconds = 5;
 
@@ -212,6 +216,10 @@ client.on("message", async message => {
    message.delete()
 }  
 
+  if(command === "dog") {
+   message.reply(`${responses2[Math.floor(Math.random() * responses.length)]}`);
+   message.delete()
+} 
 
   if(command === "say") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
@@ -411,17 +419,6 @@ client.on("message", async message => {
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
      message.channel.send(avatarembed);
-
-  }
-
-  if(command === "dog") {
-
-     let sicon = message.mentions.iconURL;
-     let dogembed = new Discord.RichEmbed()
-     .setDescription("https://random.dog/")
-     .setColor('RANDOM')
-            
-     message.channel.send(dogembed);
 
   }
 
