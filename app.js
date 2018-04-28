@@ -102,7 +102,10 @@ client.on("chaanelDelete", async member => {
 client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(` ${client.guilds.size} servers | k!help`);
+  client.user.setStatus('Online')
+  client.user.setGame('Hello')
+  client.user.setGame('Hello', 'https://www.twitch.tv/dotatv247');
+
 });
 
 
