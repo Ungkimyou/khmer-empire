@@ -192,7 +192,9 @@ client.on("message", async message => {
   }
 }
 
-
+if (command === 'react') {
+    message.react('😄');
+}
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
@@ -346,7 +348,7 @@ client.on("message", async message => {
      let serverembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
     .setColor("#bb90ff")
-    .setTitle("Server-Info :¨")
+    .setTitle("Server-Info :")
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
@@ -357,19 +359,6 @@ client.on("message", async message => {
  
   }
 
-  if(command === "helpimage") {
-     
-     let sicon = message.guild.iconURL;
-     let testembed = new Discord.RichEmbed()
-    .setColor("#67ffbd")
-    .setAuthor("KhmerEmpire Help Commands", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .setDescription("[Click Here](https://tamotoji533.wixsite.com/healong) View To Website :globe_with_meridians:")
-    .setImage("https://cdn.discordapp.com/attachments/438367679724781579/438751636811415564/BotCommand.JPG")
-    .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
-
-     message.author.send(testembed);
- 
-  }
 
 
   if(command === "rsetup") {
