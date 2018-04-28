@@ -200,7 +200,6 @@ client.on("message", async message => {
 
 }
 
-
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
    message.delete()
@@ -251,7 +250,6 @@ client.on("message", async message => {
 
    }
        
-
 
     if(command == "report") {
        if(args[0] == "help"){
