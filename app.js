@@ -500,6 +500,7 @@ client.on("message", async message => {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
       message.delete().catch(O_o=>{}); 
       message.channel.send(sayMessage);
+      message.delete()
     
   }
 
