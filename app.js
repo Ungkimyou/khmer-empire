@@ -394,7 +394,7 @@ client.on("message", async message => {
   let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   if(!tomute) return message.reply("Couldn't find user.");
   if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have MANAGE_MESSAGES permission to use this commands");
-  let muterole = message.guild.roles.find(`name`, "muted");
+  let muterole = message.guild.roles.find(`name`, "KE-Muted");
   //start of create role
   if(!muterole){
     try{
@@ -425,7 +425,7 @@ client.on("message", async message => {
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
 
-}
+
 
 
   if(command === "serverinfo") {
