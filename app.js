@@ -474,7 +474,9 @@ client.on("message", async message => {
             .addField(" - helpadmin ", "list of admin commands ")
             .setColor('RANDOM') // sets the color of the embed box to orange
             .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer to "You need help, do you?"
-        message.channel.send(embedhelpmember);
+             message.channel.send(embedhelpmember);
+
+     }
 
     if (command == "helpadmin") {
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
@@ -488,21 +490,8 @@ client.on("message", async message => {
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
             .setFooter("Support Server : https://discord/7mS9GEY") // sets the footer
-        message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
+           message.channel.send(embedhelpadmin); // sends the embed box "embedhelpmember" to the chatif
     }
-
-
-  if(command === "botinfo") {
-
-     let botembed = new Discord.RichEmbed()
-     .setTitle("Bot Information")
-     .setColor("#ae67fc")
-     .setThumbnail(bicon)
-     .addField("Bot Name", bot.user.username)
-     .addField("Created On", bot.user.createdAt);
-
-     message.channel.send(botembed);
-  }
 
 
 
@@ -511,13 +500,6 @@ client.on("message", async message => {
         message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: *cookie @username)") // sends the error message if no-one is mentioned
     }
 
-  if (command == "purg") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-     message.channel.send('Message Clean Sccessful.......:wastebasket:');
-     message.channel.bulkDelete(10);
-     var cleanarr = [2];
- 
-  }
 
   if (command === "info") {
     let age = args[0]; // Remember arrays are 0-based!.
@@ -532,14 +514,6 @@ client.on("message", async message => {
   if (command === "listemojis") {
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
   message.channel.send(emojiList);
-
- }
-
-  if(command === "ayy") {
-   const ayy = client.emojis.find("name", "ayy", "dab",);
-   message.reply(`${ayy} LMAO`);
-   message.delete().catch(O_o=>{}); 
-   message.channel.send(sayMessage);
 
  }
 
