@@ -18,6 +18,25 @@ let cdseconds = 5;
 
 const talkedRecently = new Set();
 
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'welcome-leave');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField(':bust_in_silhouette: | name : ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome , ${member} To Server ${member.guild.name}`)
+        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
+        .addField("Name", `<@` + `${member.id}` + `>`, true)
+        .addField('Server', `${member.guild.name}`, true )
+        .setFooter(`**${member.guild.name}**`)
+        .setTimestamp()
+
+        channel.sendEmbed(embed);
+});
+
 client.commands = new Discord.Collection();
 
 client.on("serverNewMember", function (server, user) {
