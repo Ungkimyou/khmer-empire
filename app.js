@@ -192,15 +192,13 @@ client.on("message", async message => {
   }
 }
 
-if (command === 'react') {
-    message.react('😄');
-}
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
     message.channel.send(`Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
+    message.react('😄');
  });
 
 }
