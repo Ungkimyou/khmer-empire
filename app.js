@@ -192,13 +192,6 @@ client.on("message", async message => {
   }
 }
 
-  if(command === "avatar") {
-   let avatarembed = new Discord.RichEmbed()
-   .setDescription("Your Avatar !")
-   .setImage(message.author.avatarURL)
- 
-   message.reply(avatarembed);  
-}
 
 
   if(command === "clear") {
@@ -231,7 +224,18 @@ client.on("message", async message => {
     return message.author.sand("Prefix for ${bot.user.username} is ${prefix}")
  }
 
-   
+  if(command === "avatar") {
+
+   let avatarembed = new Discord.RichEmbed()
+
+   .setDescription("Your Avatar !")
+   .setImage(message.author.avatarURL)
+ 
+   message.author.sand(avatarembed);  
+ 
+}
+
+
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
