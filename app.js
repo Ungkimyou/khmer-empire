@@ -243,6 +243,9 @@ client.on("message", async message => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const sayMessage = args.join(" ");
     message.react('👍').then(() => message.react('👎'));
+      const filter = (reaction, user) => {
+	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+  };
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
   }
