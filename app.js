@@ -439,7 +439,7 @@ client.on("message", async message => {
 
        
        return message.channel.send(muteembed);
-       message.delete().catch(O_o=>{});
+       message.delete()
        
   }
 
@@ -459,8 +459,7 @@ client.on("message", async message => {
        .addField('UnMuted By:', message.author)
 
        return message.channel.send(unmuteembed);
-       message.delete().catch(O_o=>{});
-       
+       message.delete()      
   }
 
 
@@ -471,8 +470,8 @@ client.on("message", async message => {
      .setTitle("Bot Information")
      .setColor("#ae67fc")
      .setThumbnail(bicon)
-     .addField("Bot Name", bot.user.username)
-     .addField("Created On", bot.user.createdAt);
+     .addField("Bot Name", client.user.username)
+     .addField("Created On", client.user.createdAt);
 
      message.channel.send(botembed);
   }
