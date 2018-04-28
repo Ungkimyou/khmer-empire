@@ -352,7 +352,7 @@ client.on("message", async message => {
   
   if(command === "ban") {
        if(args[0] == "help"){
-      message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]` ban channel logs set name #k-empire-logs");
+      message.reply("Please mention one user in order to report them! - `k!ban [@user] [reason]` ban channel logs set name #k-empire-logs");
       return;
     }
   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
@@ -479,8 +479,8 @@ else if (command === 'avatar') {
             .addField(" - say", "Makes the bot say whatever you want (Correct usage: k!say [message])")
             .addField(" - mute", "Mutes a desired member with a reason (Coorect usage: k!mute @username [reason])") // sets a field
             .addField(" - unmute", "Unmutes a muted player (Correct usage: k!unmute @username)")
-            .addField(" - kick", "Kicks a desired member with a reason (Correct usage: k!kick @username [reason])") //sets a field
-            .addField(" - ban" , "ban a player u want to ban k!ban @username [reason]")
+            .addField(" - kick", "Kicks a desired member with a reason (Correct usage: k!kick @username [reason]) k!kick help") //sets a field
+            .addField(" - ban" , "ban a player u want to ban k!ban @username [reason] - k!ban help")
             .setColor('RANDOM') // sets a color
             .addField(" - clear" , "clear message from channel k!clear [am] ") 
             .addField(" - rsetup", "rsetup is report setup channel ")
@@ -497,7 +497,7 @@ else if (command === 'avatar') {
     }
 
 
-  if (command === "info") {
+  if (command === "userinfo") {
     let name = args[0]; // Remember arrays are 0-based!.
     let yearold = args[1];
     let Gender = args[2];
