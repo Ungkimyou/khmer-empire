@@ -436,9 +436,10 @@ client.on("message", async message => {
        .addField('User:', mutedmember.user)  
        .addField('Muted By:', message.author)
        .addField('Reason:', mutereason)
-       
-       return message.channel.send(muteembed);
+
        message.delete()
+       return message.channel.send(muteembed);
+       
 
 
   }
@@ -449,18 +450,18 @@ client.on("message", async message => {
         if (!unmutedmember) return message.reply("```md Please mention one user in order to unmute them! - k!unmute [@user] [reason]```") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
    
        let unmuteembed = new Discord.RichEmbed()
         
        .setTitle("~==UnMute==~")
        .setColor('#FF0000')
-       .setThumbnail(mutedmember.user)
-       .addField('User:', mutedmember.user)  
+       .setThumbnail(unmutedmember.user)
+       .addField('User:', unmutedmember.user)  
        .addField('UnMuted By:', message.author)
-       
-       return message.channel.send(unmuteembed);
+
        message.delete()
+       return message.channel.send(unmuteembed);
+       
 
   }
 
