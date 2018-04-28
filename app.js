@@ -378,7 +378,7 @@ client.on("message", async message => {
       let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
       if(!rMember) return message.reply("Couldn't find that user, nope.");
       let role = args.join(" ").slice(22);
-      if(!role) return message.reply("OWNER");
+      if(!role) return message.reply("ADMIN");
       let gRole = message.guild.roles.find(`name`, role);
       if(!gRole) return message.reply("Couldn't find that role.");
 
