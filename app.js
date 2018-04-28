@@ -28,6 +28,11 @@ client.on("serverNewMember", function (server, user) {
 
 })
 
+client.on('messageReactionAdd', (reaction, user) => {
+    if(reaction.emoji.name === "✅") {
+        console.log(reaction.users);
+    }
+});
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
