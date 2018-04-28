@@ -68,7 +68,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`${client.users.size} user | k!help`);
+  client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
 });
 
 client.on("chaanelCreate", async member => {
@@ -437,11 +437,10 @@ client.on("message", async message => {
        .addField('Muted By:', message.author)
        .addField('Reason:', mutereason)
 
-       message.delete()
-       return message.channel.send(muteembed);
        
-
-
+       return message.channel.send(muteembed);
+       message.delete().catch(O_o=>{});
+       
   }
 
   if (command == "unmute") {
@@ -459,8 +458,8 @@ client.on("message", async message => {
        .addField('User:', unmutedmember.user)  
        .addField('UnMuted By:', message.author)
 
-       message.delete()
        return message.channel.send(unmuteembed);
+       message.delete().catch(O_o=>{});
        
   }
 
