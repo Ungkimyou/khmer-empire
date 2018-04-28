@@ -352,7 +352,6 @@ client.on("message", async message => {
     .addField("You Joined", message.member.joinedAt)
     .addField("Total Members", message.guild.memberCount)
     .setThumbnail(sicon)
-    .setFooter("Bot Create By ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881", "https://cdn.discordapp.com/avatars/438160518293880832/0301fdd6dffcaf6751d33a809a32941d.png?size=2048")
 
      message.channel.send(serverembed);
  
@@ -402,9 +401,9 @@ client.on("message", async message => {
     }
 
 
-else if (command === 'avatar', 'av') {
+else if (command === 'avatar') {
     if (!message.mentions.users.size) {
-        return message.channel.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
+        return message.author.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
     }
 
     const avatarList = message.mentions.users.map(user => {
