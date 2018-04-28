@@ -26,6 +26,12 @@ client.on("serverNewMember", function (server, user) {
 
 })
 
+client.addMemberToRole(member, role, function(err){
+    if(err){
+        console.log(err);
+    }
+});
+
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
@@ -141,9 +147,6 @@ client.on("message", async message => {
   }
   
   if(command === "clear") {
-      if(args[0] == "help"){
-      message.reply("do **k!clear [limit] to clear**");
-      return;
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
      message.channel.bulkDelete(args[0]).then(() => {
