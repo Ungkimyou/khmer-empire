@@ -176,7 +176,6 @@ client.on("message", async message => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", message.author.avatarURL)
-    .setTitle(args.join(" "))
     .setDescription(args.join(" "))
     .setColor('RANDOM')
      message.delete().catch(O_o=>{});
