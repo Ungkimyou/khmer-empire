@@ -393,7 +393,7 @@ client.on("message", async message => {
     .addField("BOT-Website :", "  [Check Here](https://tamotoji533.wixsite.com/healong)")
     .setColor("#437afb")
     .setThumbnail(message.author.avatarURL)
-    .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881#5881")
+    .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
 
     message.channel.send(inviteembed);
     message.delete().catch(O_o=>{}); 
@@ -403,14 +403,14 @@ client.on("message", async message => {
 
   if(command === "avatar") {
 
+     let sicon = message.mentions.iconURL;
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
      .setImage(message.author.avatarURL)
      .setColor('RANDOM')
-     .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
-     message.channel.sand(avatarembed);
+     message.channel.send(avatarembed);
 
   }
 
