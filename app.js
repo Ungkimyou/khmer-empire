@@ -246,16 +246,6 @@ client.on("message", async message => {
     message.channel.send(sayMessage);
   }
 
- if(command === "sr") {
-    message.channel.send(":apple:***SONDAGE :apple:\n "+choix1+" ou "+""+choix2+"***")
-    .then(function (message) {
-     message.react("👍")
-     message.react("👎")
-      message.pin()
-       message.delete()
- });
-}
-
 
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
