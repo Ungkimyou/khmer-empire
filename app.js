@@ -526,9 +526,9 @@ client.on("message", async message => {
   }
 
   if(command === "addrole") {
-   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
+   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if(!rMember) return message.reply("```md Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
+    if(!rMember) return message.reply("``` Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
     let role = args.join(" ").slice(22);
     if(!role) return message.reply("Specify a role!");
     let gRole = message.guild.roles.find(`name`, role);
