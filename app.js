@@ -236,13 +236,14 @@ client.on("message", async message => {
   } 
     
    if(command == "tochat") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("Plesae Create a Channel #chat For Bot Can Reply Chat To #chat")
+    message.reply("```md #Plesae Create a Channel #chat Frist ,For Bot Can Reply Chat To - #chat")
     return;
  }
     let reportEmbed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
     .setDescription(args.join(" "))
-    .setThumbnail(message.author.avatarURL)
     .setColor('RANDOM')
 
     let chatchannel = message.guild.channels.find(`name`, "chat");
@@ -342,7 +343,7 @@ client.on("message", async message => {
      
      let sicon = message.guild.iconURL;
      let serverembed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
+    .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
     .setColor("#bb90ff")
     .setTitle("Server-Info :¨")
     .addField("Server Name", message.guild.name)
