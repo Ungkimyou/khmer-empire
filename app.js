@@ -37,6 +37,23 @@ client.on('guildMemberAdd', member => {
         channel.sendEmbed(embed);
 });
 
+client.on('guildMemberRemove', member => {
+    let channel = member.guild.channels.find('name', 'welcome-leave');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('Name:', `${member}`)
+        .addField('Has Left The Server ', ';(')
+        .addField('Bye Bye :(', 'We Will All Miss You!')
+        .addField('The Server Now As :', `${member.guild.memberCount}` + " members")
+        .setFooter(`**${member.guild.name}`)
+        .setTimestamp()
+
+        channel.sendEmbed(embed);
+});
+
 client.commands = new Discord.Collection();
 
 client.on("serverNewMember", function (server, user) {
