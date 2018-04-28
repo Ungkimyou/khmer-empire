@@ -11,7 +11,7 @@ const responses1 = [
 ]
 
 const responses = [
-   'Yes', 'No', 'Maybe', 'I Don`t Know', 'Nope', '50%'
+   'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', '50%'
 ]
 
 let cooldown = new Set();
@@ -379,7 +379,7 @@ client.on("message", async message => {
        if(!rMember) return message.reply("Couldn't find that user, yo.");
        let role = args.join(" ").slice(22);
        if(!role) return message.reply("ADMIN");
-       let gRole = message.guild.roles.find(`name`, role);
+       let gRole = message.guild.roles.find(`name`, "myRole");
        if(!gRole) return message.reply("Couldn't find that role.");
 
        if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
