@@ -371,34 +371,6 @@ client.on("message", async message => {
   }
 
 
-  if (command == "mute") { // creates the command mute
-   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");// if author has no perms
-        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
-        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
-        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
-        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
-        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
-        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
-        mutedmember.addRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-
-       let muteembed = new Discord.RichEmbed()
-        
-       .setTitle("~==Mute==~")
-       .setColor('#FF0000')
-       .setThumbnail(mutedmember.user)
-       .addField('User:', mutedmember.user)  
-       .addField('Muted By:', message.author)
-       .addField('Reason:', mutereason)
-       
-       return message.channel.send(muteembed);; // sends a message saying he was kicked
-  
-       let mutedchannel = message.guild.channels.find(`name`, "muted");
-       if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
-
-  }
-
   if(command === "serverinfo") {
      
      let sicon = message.guild.iconURL;
