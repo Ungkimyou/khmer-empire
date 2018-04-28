@@ -5,7 +5,7 @@ const config = require("./config.json");
 const snekfetch = require('snekfetch');
 const ms = require("ms");
 
-const fs = require("fs")
+const fs = require("fs");
 
 
 const responses1 = [
@@ -396,8 +396,6 @@ client.on("message", async message => {
   
        let mutedchannel = message.guild.channels.find(`name`, "muted");
        if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
-       message.delete().catch(O_o=>{}); 
-       message.channel.send(sayMessage);
 
   }
 
