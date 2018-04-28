@@ -82,8 +82,8 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setStatus('Online')
-  client.user.setGame('k!help')
-  client.user.setGame('k!help', 'https://www.twitch.tv/dotatv247');
+  client.user.setGame('Config Fill')
+  client.user.setGame('Config Fill', 'https://www.twitch.tv/dotatv247');
 });
 
 client.on("chaanelCreate", async member => {
@@ -104,8 +104,8 @@ client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
   client.user.setStatus('Online')
-  client.user.setGame('k!help')
-  client.user.setGame('k!help', 'https://youtube.com/c/LONGYT');
+  client.user.setGame('Config Fill')
+  client.user.setGame('Config Fill', 'https://youtube.com/c/LONGYT');
 
 });
 
