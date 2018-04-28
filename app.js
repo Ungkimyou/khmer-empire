@@ -5,6 +5,11 @@ const config = require("./config.json");
 
 const fs = require("fs")
 
+const swearWords = ["fuck", "dick", "pussy", "asshole"]
+    if (swearWords.some(word => message.content.toLowerCase().includes(word)) ) {
+      Message.delete()
+     message.reply("Do not swear!");
+   }
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
