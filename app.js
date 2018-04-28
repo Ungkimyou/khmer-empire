@@ -2,10 +2,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const snekfetch = require('snekfetch');
-const ms = require("ms");
-
-const fs = require("fs");
 
 
 const responses1 = [
@@ -204,37 +200,6 @@ client.on("message", async message => {
 
 }
 
-   if (command === 'cat') {
-	const cat = await snekfetch.get('https://aws.random.cat/meow');
-
-	message.channel.send(cat);
-  }
-
-	if (command === 'sayr') {
-              const sayMessage = args.join(" ");
-		message.react('👍').then(() => message.react('👎'));
-
-		const filter = (reaction, user) => {
-			return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
-		};
-
-		message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-			.then(collected => {
-				const reaction = collected.first();
-
-				if (reaction.emoji.name === '👍') {
-					message.reply('you reacted with a thumbs up.');
-				}
-				else {
-					message.reply('you reacted with a thumbs down.');
-				}
-			})
-			.catch(collected => {
-				console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
-				message.reply('you didn\'t react with neither a thumbs up, nor a thumbs down.');
-                                message.delete()
-			});
-	}
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
