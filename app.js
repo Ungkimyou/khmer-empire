@@ -420,15 +420,26 @@ client.on("message", async message => {
    if(!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this ");
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
-        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
+        if (mutedmember.hasPermission("MUTE_MEMBERS")) return message.reply("I cannot mute this member!") // if memebr is an admin
         var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
         var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
         var mutereason = mutereason.join(" "); // joins the list kickreason into one line
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
-  
+        message.reply(`${mutedmember.user} Has Been Mute By ${message.author} Because : ${mutereason}`); 
+
+        let bicon = bot.user.displayAvatarURL;
+        let muteembed = new Discord.RichEmbed()
+        
+       .setTitle("~Mute~")
+       .setColor('#A9B5FD')
+       .addField('User:', mutedmember.user)  
+       .addField('Muted By:', message.author)
+       .addField('Reason:', mutereason)
+
+       return message.channel.send(muteembed);
+
        let mutedchannel = message.guild.channels.find(`name`, "muted");
        if(!mutedchannel) return message.channel.send("Couldn't find muted channel."); 
        message.delete().catch(O_o=>{}); 
