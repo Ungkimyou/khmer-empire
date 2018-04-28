@@ -407,12 +407,21 @@ client.on("message", async message => {
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
-     .setImage(message.displayAvatarURL)
+     .setImage(message.username.displayAvatarURL)
      .setColor('RANDOM')
             
-     message.channel.send(avatarembed);
+     message.mentions.users.map(avatarembed);
 
   }
+
+else if (command === 'av') {
+    if (!message.mentions.users.size) {
+        return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+    }
+
+    const avatarList = message.mentions.users.map(user => {
+        return `${user.username}'s avatar: ${user.displayAvatarURL}`;
+    });
 
 
   if (command == "mute") { // creates the command mute
@@ -608,14 +617,6 @@ client.on("message", async message => {
     }
   }    
 
-else if (command === 'av') {
-    if (!message.mentions.users.size) {
-        return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
-    }
-
-    const avatarList = message.mentions.users.map(user => {
-        return `${user.username}'s avatar: ${user.displayAvatarURL}`;
-    });
 
     message.channel.send(avatarList);
 }
