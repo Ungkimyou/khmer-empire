@@ -427,7 +427,6 @@ client.on("message", async message => {
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`${mutedmember.user} Has Been Mute By ${message.author} Because : ${mutereason}`); 
 
         let bicon = bot.user.displayAvatarURL;
         let muteembed = new Discord.RichEmbed()
