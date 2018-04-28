@@ -26,11 +26,6 @@ client.on("serverNewMember", function (server, user) {
 
 })
 
-client.addMemberToRole(member, role, function(err){
-    if(err){
-        console.log(err);
-    }
-});
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
