@@ -83,7 +83,7 @@ client.on("ready", () => {
   // docs refer to as the "ClientUser".
   client.user.setStatus('Online')
   client.user.setGame('Config Fill')
-  client.user.setGame('Config Fill', 'https://www.twitch.tv/dotatv247');
+  client.user.setGame('Config Fill', 'https://youtube.com/c/LONGYT');
 });
 
 client.on("chaanelCreate", async member => {
@@ -99,15 +99,7 @@ client.on("chaanelDelete", async member => {
   sChannel.sand(`${channel.name} has been delete !`);
 
 });
-  
-client.on("guildMemberAdd", guild => {
-  // This event triggers when the bot joins a guild.
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setStatus('Online')
-  client.user.setGame('Config Fill')
-  client.user.setGame('Config Fill', 'https://youtube.com/c/LONGYT');
-
-});
+ 
 
 
 client.on("presenceUpdate", (oldMember, newMember) => {
@@ -449,7 +441,7 @@ else if (command === 'avatar') {
     });
 
 
-    if (command == "help") { // creates a command *help
+    if (command === "help") { // creates a command *help
         let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
             .setTitle("**List of Commands**\n") // sets the title to List of Commands
             .setThumbnail(message.author.avatarURL)
@@ -469,7 +461,7 @@ else if (command === 'avatar') {
 
      }
 
-    if (command == "helpadmin") {
+    if (command === "helpadmin") {
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
         let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
             .setTitle("**List of Admin Commands**\n") // sets the title
