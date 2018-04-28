@@ -86,7 +86,7 @@ client.on('messageDelete', async (message) => {
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
     welcomechannel.send(`:speaking_head:  ${member} Has Join The Server!`);
-    member.send(`Welcome To Server, **${member.user.username}**!`);  
+    member.send(`Welcome **${member.user.username}** To Server, ${member.guild.name}!`);  
 });
 
 client.on("message", (message) => {
@@ -338,6 +338,10 @@ client.on("message", async message => {
 
 
   if(command === "kick") {
+       if(args[0] == "help"){
+      message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]` kick channel logs set name #k-empire-logs");
+      return;
+    }
     if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!kUser) return message.channel.send("Can't find user!");
@@ -362,6 +366,10 @@ client.on("message", async message => {
 }
   
   if(command === "ban") {
+       if(args[0] == "help"){
+      message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]` ban channel logs set name #k-empire-logs");
+      return;
+    }
   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
     let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!bUser) return message.channel.send("Can't find user!");
