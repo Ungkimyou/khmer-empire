@@ -436,10 +436,8 @@ client.on("message", async message => {
        .addField('User:', mutedmember.user)  
        .addField('Muted By:', message.author)
        .addField('Reason:', mutereason)
-
        
        return message.channel.send(muteembed);
-       message.delete()
        
   }
 
@@ -458,20 +456,18 @@ client.on("message", async message => {
        .addField('User:', unmutedmember.user)  
        .addField('UnMuted By:', message.author)
 
-       return message.channel.send(unmuteembed);
-       message.delete()      
+       return message.channel.send(unmuteembed); 
   }
 
 
   if(command === "botinfo") {
 
-     let bicon = bot.user.displayAvatarURL;
      let botembed = new Discord.RichEmbed()
      .setTitle("Bot Information")
      .setColor("#ae67fc")
      .setThumbnail(bicon)
-     .addField("Bot Name", client.user.username)
-     .addField("Created On", client.user.createdAt);
+     .addField("Bot Name", bot.user.username)
+     .addField("Created On", bot.user.createdAt);
 
      message.channel.send(botembed);
   }
