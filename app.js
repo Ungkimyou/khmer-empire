@@ -192,6 +192,13 @@ client.on("message", async message => {
   }
 }
 
+  if(command === "avatar") {
+   let avatarembed = new Discord.RichEmbed()
+   .setDescription("Your Avatar !")
+   .setImage(message.author.avatarURL)
+ 
+   message.reply(avatarembed);  
+}
 
 
   if(command === "clear") {
