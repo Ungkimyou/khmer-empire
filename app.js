@@ -407,7 +407,7 @@ client.on("message", async message => {
      let avatarembed = new Discord.RichEmbed()
      .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
      .setDescription("Avatar !")
-     .setImage(message.author.avatarURL)
+     .setImage(message.user.avatarURL)
      .setColor('RANDOM')
      .setFooter("Bot Create By : ᴛᴀᴍᴏᴛᴏᴊɪ✓ᵛᵉʳᶦᶠᶦᵉᵈ#5881")
             
@@ -417,7 +417,7 @@ client.on("message", async message => {
 
 
   if (command == "mute") { // creates the command mute
-         if (!message.member.roles.some(r=>["ADMIN"].includes(r.name)) ) return message.reply("Sorry, you do not have the permission to do this!"); // if author has no perms
+   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this ");
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
@@ -437,7 +437,7 @@ client.on("message", async message => {
   }
 
   if (command == "unmute") {
-        if(!message.member.hasPermission("administrator")) return message.channel.send("You Need To have Permissions to this !"); // if author has no perms
+   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this ");
         var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!unmutedmember) return message.reply("```md Please mention one user in order to unmute them! - k!unmute [@user] [reason]```") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
@@ -526,7 +526,27 @@ client.on("message", async message => {
   }
 
   if(command === "addrole") {
-   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
+   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have MANAGE_ROLES permission to do this ");
+    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if(!rMember) return message.reply("``` Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
+    let role = args.join(" ").slice(22);
+    if(!role) return message.reply("Specify a role!");
+    let gRole = message.guild.roles.find(`name`, role);
+    if(!gRole) return message.reply("Couldn't find that role.");
+
+    if(rMember.roles.has(gRole.id)) return message.reply("User In The Role !");
+    await(rMember.addRole(gRole.id));
+
+    try{
+      await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
+    }catch(e){
+      console.log(e.stack);
+      message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+    }
+  }
+
+  if(command === "removerole") {
+   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have MANAGE_ROLES permission to do this ");
     let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if(!rMember) return message.reply("``` Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
     let role = args.join(" ").slice(22);
