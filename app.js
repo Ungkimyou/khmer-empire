@@ -31,7 +31,7 @@ client.on("serverNewMember", function (server, user) {
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "k-empire-logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('k-empire-logs', 'logs');
+    message.guild.createChannel('name', 'k-empire-logs');
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
@@ -231,7 +231,7 @@ client.on("message", async message => {
    .setDescription("Your Avatar !")
    .setImage(message.author.avatarURL)
  
-   message.author.sand(avatarembed);  
+   message.channel.sand(avatarembed);  
  
 }
 
