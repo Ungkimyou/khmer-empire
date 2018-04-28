@@ -5,11 +5,6 @@ const config = require("./config.json");
 
 const fs = require("fs")
 
-const swearWords = ["fuck", "dick", "pussy", "asshole"]
-    if (swearWords.some(word => message.content.toLowerCase().includes(word)) ) {
-      Message.delete()
-     message.reply("Do not swear!");
-   }
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -19,9 +14,6 @@ const responses = [
    'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', '50%'
 ]
 
-const responses2 = [
-   'https://random.dog/'
-]
 
 let cooldown = new Set();
 let cdseconds = 5;
@@ -221,10 +213,6 @@ client.on("message", async message => {
    message.delete()
 }  
 
-  if(command === "dog") {
-   message.reply(`${responses2[Math.floor(Math.random() * responses.length)]}`);
-   message.delete()
-} 
 
   if(command === "say") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
