@@ -27,9 +27,9 @@ client.on("serverNewMember", function (server, user) {
 
 
 client.on('messageDelete', async (message) => {
-  const logs = message.guild.channels.find('name', "k-empire-logs");
+  const logs = message.guild.channels.find('name', "ke-logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('name', 'k-empire-logs');
+    message.guild.createChannel('name', 'ke-logs');
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
@@ -72,7 +72,7 @@ client.on("message", (message) => {
     message.delete()
   }
 });
-
+ 
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -84,7 +84,7 @@ client.on("ready", () => {
 
 client.on("chaanelCreate", async member => {
   console.log(`${channel.name} has been create ! `);
-  let sChaanel = channel.guild.find('name', "k-empire-logs");
+  let sChaanel = channel.guild.find('name', "ke-logs");
   sChannel.sand(`${channel.name} has been create !`);
 
 });
@@ -266,7 +266,28 @@ if (command === "userinfo") {
     message.channel.send(sayMessage);
 }
 
- 
+ if(command === "member") {
+    let servers = client.guilds.size; // Server Count
+    let users = 0; // Start of user count
+    let channels = client.channels.size; // Channel Count
+    
+    // This goes through every guild to grab an accurate memberCount;
+    client.guilds.map(g => users += g.memberCount);
+    
+    // Form Embed
+    const embed = new Discord.MessageEmbed()
+        .setTitle('Community Channels')
+        .addField('Servers', servers, true)
+        .addField('Users', users, true)
+        .addField('Channels', channels, true);
+
+    // Send Embed
+    message.channel.send(embed);
+    
+} 
+
+
+
    if(command == "chatembed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
