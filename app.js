@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const fs = require("fs");
 
 
 const responses1 = [
@@ -522,9 +523,10 @@ else if (command === 'avatar') {
     message.channel.send(avatarList);
 }
 
-   if(command === "help") { // creates a command *help
-        let embedhelpmember = new Discord.RichEmbed() // sets a embed box to the variable embedhelpmember
-            .setTitle("**List of Commands**\n") // sets the title to List of Commands
+   if(command === "help") { 
+
+        let embedhelpmember = new Discord.RichEmbed() 
+            .setTitle("**List of Commands**\n") 
             .setThumbnail(message.author.avatarURL)
             .addField(" - report", "report player from server k!report [user] [reason]")
             .addField(" - help", "Displays this message (Correct usage: k!help)") // sets the first field to explain the command *help
@@ -536,7 +538,7 @@ else if (command === 'avatar') {
             .addField(" - Invite", "Invite KhmerEmpire to the server !")
             .addField(" - serverinfo ", "tell info about server ")
             .addField(" - helpadmin ", "list of admin commands - this cmd allow for have perms ADMINISTRATOR")
-            .setColor('RANDOM') // sets the color of the embed box to orange
+            .setColor('RANDOM') 
             .setFIeld("Join The Support Server :", "[Click Here](https://discord/7mS9GEY)") // sets the footer to "You need help, do you?"
              message.author.send(embedhelpmember);
 
@@ -544,8 +546,8 @@ else if (command === 'avatar') {
 
    if(command === "helpadmin") {
      if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to see admin commands ");
-        let embedhelpadmin = new Discord.RichEmbed() // sets a embed box to the var embedhelpadmin
-            .setTitle("**List of Admin Commands**\n") // sets the title
+        const embedhelpadmin = new Discord.RichEmbed() 
+            .setTitle("**List of Admin Commands**\n") 
             .setThumbnail(message.author.avatarURL)
             .addField(" - chatembed", "this is a cool commands for admin say to channel #chat more k!chatembed help")
             .addField(" - say", "Makes the bot say whatever you want (Correct usage: k!say [message])")
