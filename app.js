@@ -47,7 +47,7 @@ client.on('messageDelete', async (message) => {
 })
 
   client.on('guildCreate', guild => {
-    let channel = guild.channels.get('name', "ke-logs")
+    let channel = guild.channels.get("439688346571112458")
      const embed = new Discord.RichEmbed()
      .setColor("#cde246")
      .setAuthor(`Joined ${guild.name}`)
