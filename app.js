@@ -108,10 +108,10 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
-  let playRole = guild.roles.find("name", "Playing Counter-Strike: Global Offensive");
+  let playRole = guild.roles.find("name", "Playing Counter-Strike Global Offensive");
   if(!playRole) return;  
 
-  if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike: Global Offensive") {
+  if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike Global Offensive") {
     newMember.addRole(playRole);
   } else if(!newMember.user.game && newMember.roles.has(playRole.id)) {
     newMember.removeRole(playRole);
@@ -158,10 +158,11 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
+  let args = messageArray.slice(1);
 
   var mutedrole = message.guild.roles.find("name", "Muted");
   
-
+  const sander = message.author;
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
