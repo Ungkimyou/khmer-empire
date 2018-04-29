@@ -556,6 +556,24 @@ else if (command === 'avatar') {
 }
 
 
+if(command === "test") {
+
+message.channel.send('this is the test oppai')
+.then(() => {
+  message.channel.awaitMessages(response => response.content === 'test', {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then((collected) => {
+      message.channel.send(`The collected message was: ${collected.first().content}`);
+    })
+    .catch(() => {
+      message.channel.send('There was no collected message that passed the filter within the time limit!');
+    });
+});
+
+
 });
 
 function clean(text) {
