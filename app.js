@@ -157,7 +157,7 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
-   let mutedrole = message.guild.roles.find("name", "Muted");
+   let mutedrole = message.guild.roles.find("name", "KE-Muted");
 
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
