@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+const like = client.emojis.find("name", "thumbsup");
+const dislike = client.emojis.find("name", "thumbsdown");
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -297,6 +299,7 @@ if (command === "userinfo") {
     .setThumbnail(useravatar)
 
      message.channel.send(helpembed);
+     message.react(like)
  
   }
 
