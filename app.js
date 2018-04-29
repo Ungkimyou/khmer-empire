@@ -193,13 +193,6 @@ client.on("message", async message => {
   }
 }
 
- try{
-     let CommandFile = reqire('.commands/${command}.js');
-    } catch(e) {
-    } finally {
-       console.log(`${message.author.username} run the commands : ${command}`);
-    }
-
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
