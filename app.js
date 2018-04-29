@@ -451,45 +451,28 @@ else if (command === 'avatar') {
     
   }
 
-  if(command === "addrole") {
-   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have MANAGE_ROLES permission to do this ");
-    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if(!rMember) return message.reply("``` Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
-    let role = args.join(" ").slice(22);
-    if(!role) return message.reply("Specify a role!");
-    let gRole = message.guild.roles.find(`name`, role);
-    if(!gRole) return message.reply("Couldn't find that role.");
-
-    if(rMember.roles.has(gRole.id)) return message.reply("User In The Role !");
-    await(rMember.addRole(gRole.id));
-
-    try{
-      await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-    }catch(e){
-      console.log(e.stack);
-      message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+    if (command == "mute") { // creates the command mute
+    if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no perms
+        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
+        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
+        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
+        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
+        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
+        mutedmember.addRole('Muted') //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
     }
-  }
 
-  if(command === "removerole") {
-   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("Sorry : you don't have MANAGE_ROLES permission to do this ");
-    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if(!rMember) return message.reply("``` Please mention user you want to addrole \n- k!addrole [@user] [Roles]```");
-    let role = args.join(" ").slice(22);
-    if(!role) return message.reply("Specify a role!");
-    let gRole = message.guild.roles.find(`name`, role);
-    if(!gRole) return message.reply("Couldn't find that role.");
-
-    if(rMember.roles.has(gRole.id)) return message.reply("User In The Role !");
-    await(rMember.addRole(gRole.id));
-
-    try{
-      await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-    }catch(e){
-      console.log(e.stack);
-      message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
-    }
-  }    
+    if (command == "unmute") { // creates the command unmute
+    if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no permsf author has no perms
+        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        unmutedmember.removeRole('Muted') //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
+    }  
 
 
     message.channel.send(avatarList);
