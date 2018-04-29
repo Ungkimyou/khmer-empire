@@ -233,19 +233,19 @@ client.on("message", async message => {
   
 if (command === "userinfo") {
   let [name, yearold, Gander, home, like] = args;
-  let userinfo = new Discord.RichEmbed()
+  let infoembed = new Discord.RichEmbed()
 
-  .addField("Name", name)
-  .addField("Year Old", yearold)
-  .addField("Gander", Gander)
-  .addField("Home From", home)
-  .addField("Like ", like)
-  .setColor('RANDOM')
-  .setThumbanil(message.author.avatarURL)
+   .addField("Name", name)
+   .addField("Year Old", yearold)
+   .addField("Gander", Gander)
+   .addField("Home From", home)
+   .addField("Like ", like)
+   .setColor('RANDOM')
+   .setThumbanil(message.author.avatarURL)
 
-  message.delete().catch(O_o=>{});
-  message.channel.sand(userinfo);
-
+    message.channel.send(infoembed);
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
 }
 
  
