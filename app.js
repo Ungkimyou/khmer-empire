@@ -168,6 +168,14 @@ client.on("message", async message => {
 
   if(message.author.bot) return;
   
+    let servers = client.guilds.size; // Server Count
+    let users = 0; // Start of user count
+    let channels = client.channels.size; // Channel Count
+    
+    // This goes through every guild to grab an accurate memberCount;
+    client.guilds.map(g => users += g.memberCount);
+
+
 
   if(message.content.indexOf(config.prefix) !== 0) return;
    let mutedrole = message.guild.roles.find("name", "KE-Muted");
@@ -267,13 +275,6 @@ if (command === "userinfo") {
 }
 
  if(command === "member") {
-    let servers = client.guilds.size; // Server Count
-    let users = 0; // Start of user count
-    let channels = client.channels.size; // Channel Count
-    
-    // This goes through every guild to grab an accurate memberCount;
-    client.guilds.map(g => users += g.memberCount);
-    
     // Form Embed
     const embed = new Discord.MessageEmbed()
         .setTitle('Community Channels')
