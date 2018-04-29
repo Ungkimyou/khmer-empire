@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const fs = require("fs");
 
+claient.commands = new Discord.Collection();
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -151,6 +152,9 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
+client.on("message", async message => {
+  if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
 
 client.on("message", async message => {
 
@@ -190,6 +194,13 @@ client.on("message", async message => {
     message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
   }
 }
+
+ try{
+     let CommandFile = reqire('.commands/${command}.js');
+    } catch(e) {
+    } finally {
+       console.log(`${message.author.username} run the commands : ${command}`);
+    }
 
 
   if(command === "clear") {
