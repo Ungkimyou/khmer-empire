@@ -571,7 +571,6 @@ message.channel.send('this is the test oppai')
     .catch(() => {
       message.channel.send('There was no collected message that passed the filter within the time limit!');
     });
-});
 
 
 });
