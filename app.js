@@ -157,9 +157,15 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
+    var args = message.content.substring(PREFIX.length).split(" "); // removes the prefix from the message
+    var command = args[0].toLowerCase(); // sets the command to lowercase (making it incase sensitive)
+    var mutedrole = message.guild.roles.find("name", "Muted");
 
-  var mutedrole = message.guild.roles.find("name", "Muted");
-  
+client.on("message", function(message) { // when a message is sent
+    if (message.author.equals(bot.user)) return; // if the message is sent by a bot, ignore
+
+    if (!message.content.startsWith(PREFIX)) return;
+
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
