@@ -232,14 +232,19 @@ client.on("message", async message => {
   } 
   
 if (command === "userinfo") {
-  let [name, yearold, Gander, home, like] = args;
+    if(args[0] == "help"){
+    message.reply("```k!userinfo [NAME] [YearOld] [Gander] [Home,] [Like,Playgame,more] [Dislike]:```");
+    return;
+  }
+  let [name, yearold, Gander, home, like, dislike] = args;
   let infoembed = new Discord.RichEmbed()
 
-   .addField("Name", name)
-   .addField("Year Old", yearold)
-   .addField("Gander", Gander)
-   .addField("Home From", home)
-   .addField("Like ", like)
+   .addField(":bust_in_silhouette: Name", name)
+   .addField(":levitate: Year Old", yearold)
+   .addField(":busts_in_silhouette: Gander", Gander)
+   .addField(":homes: Home From", home)
+   .addField(":thumbsup: Like ", like)
+   .addField(":thumbsdown: DisLike", dislike)
    .setColor('RANDOM')
    .setThumbnail(message.author.avatarURL)
 
