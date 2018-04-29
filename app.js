@@ -230,7 +230,25 @@ client.on("message", async message => {
      message.channel.send(embed1);
     
   } 
-    
+  
+if (command === "userinfo") {
+  let [name, yearold, Gander, home, like] = args;
+  let userinfo = new Discord.RichEmbed()
+
+  .addField("Name", name)
+  .addField("Year Old", yearold)
+  .addField("Gander", Gander)
+  .addField("Home From", home)
+  .addField("Like ", like)
+  .setColor('RANDOM')
+  .setThumbanil(message.author.avatarURL)
+
+  message.delete().catch(O_o=>{});
+  message.channel.sand(userinfo);
+
+}
+
+ 
    if(command == "chatembed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
