@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+const swearWords = ["fuck", "shit", "frak", "shite"];
+
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -200,6 +202,11 @@ client.on("message", async message => {
 }
 
 
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  message.delete();
+}
+
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
      if(!args[0]) return message.channel.send("no");
@@ -231,8 +238,6 @@ client.on("message", async message => {
 
 
   if(command === "embed") {
-if (talkedRecently.has(message.author.id))
-  return;
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", message.author.avatarURL)
@@ -240,12 +245,6 @@ if (talkedRecently.has(message.author.id))
     .setColor('RANDOM')
      message.delete().catch(O_o=>{});
      message.channel.send(embed1);
-
-     talkedRecently.add(message.author.id);
-     setTimeout(() => {
-  // Removes the user from the set after 2.5 seconds
-     talkedRecently.delete(message.author.id);
-    },  2500);
     
   } 
   
