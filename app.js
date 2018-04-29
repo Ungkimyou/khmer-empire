@@ -13,9 +13,6 @@ const responses = [
 ]
 
 
-let cooldown = new Set();
-let cdseconds = 5;
-
 const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
@@ -234,6 +231,8 @@ client.on("message", async message => {
 
 
   if(command === "embed") {
+if (talkedRecently.has(message.author.id))
+  return;
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", message.author.avatarURL)
@@ -241,6 +240,12 @@ client.on("message", async message => {
     .setColor('RANDOM')
      message.delete().catch(O_o=>{});
      message.channel.send(embed1);
+
+     talkedRecently.add(message.author.id);
+     setTimeout(() => {
+  // Removes the user from the set after 2.5 seconds
+     talkedRecently.delete(message.author.id);
+    },  2500);
     
   } 
   
