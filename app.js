@@ -234,9 +234,9 @@ client.on("message", async message => {
    if(command == "chatembed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("```Plesae Create a Channel #chat Frist , For Bot Can Reply Chat To - #chat```")
+    message.reply("Create #chat first and do k!chatembed on the channel you want message sand to #chat ");
     return;
- }
+  }
     let reportEmbed = new Discord.RichEmbed()
     .setAuthor(message.author.tag)
     .setDescription(args.join(" "))
