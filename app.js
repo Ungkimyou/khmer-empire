@@ -314,7 +314,16 @@ client.on("message", async message => {
     if(!reason) reason = "No reason provided";
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
-    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
+
+   let kickembed = new Discord.RichEmbed()
+     
+       .setColor('#FF0000')
+       .setThumbnail(message.author.avatarURL)
+       .addField('User:', member.user.tag)  
+       .addField('Muted By:', message.author.tag)
+       .addField('Reason:', reason);
+    
+      message.channel.sand(kickembed);
 
   }
   
