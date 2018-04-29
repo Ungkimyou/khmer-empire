@@ -46,6 +46,19 @@ client.on('messageDelete', async (message) => {
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
 })
 
+  client.on('guildCreate', guild => {
+    let channel = guild.channels.get('name', "ke-logs")
+     const embed = new Discord.RichEmbed()
+     .setColor("#cde246")
+     .setAuthor(`Joined ${guild.name}`)
+     .setThumbnail(guild.iconURL)
+     .addField("Owner", guild.owner)
+     .addField("ID", guild.id, true)
+     .addField("Users", guild.memberCount, true)
+     .addField("Channels", guild.channels.size, true)
+     channel.send(embed);
+
+    });
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
