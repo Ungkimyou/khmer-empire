@@ -81,6 +81,26 @@ client.on("ready", () => {
   client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
 });
 
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'welcome-leave');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField(':bust_in_silhouette: | name : ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome To The Server, ${member}`)
+        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
+        .addField("Name", `<@` + `${member.id}` + `>`, true)
+        .addField('Server', `${member.guild.name}`, true )
+        .setFooter(`**${member.guild.name}**`)
+        .setTimestamp()
+
+        channel.sendEmbed(embed);
+});
+
+
 client.on("chaanelCreate", async member => {
   console.log(`${channel.name} has been create ! `);
   let sChaanel = channel.guild.find('name', "ke-logs");
@@ -200,6 +220,7 @@ client.on("message", async message => {
     message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
   }
 }
+
 
 
 if( swearWords.some(word => message.content.includes(word)) ) {
