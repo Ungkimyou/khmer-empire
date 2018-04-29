@@ -419,7 +419,7 @@ else if (command === 'avatar') {
      .addFiel('dick:', "bot is tell you your dick size")
      .addFiel('invite:', "invite bot to your server .more")
 
-      message.channel.send(infoembed);
+      message.channel.send(helpembed);
                                          
   }
 
