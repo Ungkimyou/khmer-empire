@@ -302,7 +302,7 @@ if (command === "userinfo") {
     }
 
     if (command == "unmute") { // creates the command unmute
-        if (!message.member.roles.some(r=>["bot-admin"].includes(r.name)) ) return message.reply("Sorry, you do not have the permission to do this!"); // if author has no perms
+     if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
         var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
