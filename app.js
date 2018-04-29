@@ -255,9 +255,9 @@ client.on("message", async message => {
      let useravatar = message.author.avatarURL;
      let helpembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
-    .setColor("#bb90ff")
+    .setColor('RANDOM')
     .setTitle("Bot-Commands :")
-    .setDescription('Commands List', "[Clike Here](https://github.com/TaMoToJi/KhmerEmpire-BOT)")
+    .addField('Commands List', "[Clike Here](https://github.com/TaMoToJi/KhmerEmpire-BOT)")
     .setThumbnail(useravatar)
 
      message.channel.send(helpembed);
