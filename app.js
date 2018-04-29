@@ -241,7 +241,7 @@ if (command === "userinfo") {
    .addField("Home From", home)
    .addField("Like ", like)
    .setColor('RANDOM')
-   .setThumbanil(message.author.avatarURL)
+   .setThumbnail(message.author.avatarURL)
 
     message.channel.send(infoembed);
     message.delete().catch(O_o=>{}); 
