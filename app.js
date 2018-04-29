@@ -158,7 +158,6 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
-  let args = messageArray.slice(1);
 
   var mutedrole = message.guild.roles.find("name", "Muted");
   
