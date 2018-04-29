@@ -159,11 +159,6 @@ client.on("message", async message => {
   if(message.content.indexOf(config.prefix) !== 0) return;
     var mutedrole = message.guild.roles.find("name", "Muted");
 
-client.on("message", function(message) { // when a message is sent
-    if (message.author.equals(bot.user)) return; // if the message is sent by a bot, ignore
-
-    if (!message.content.startsWith(PREFIX)) return;
-
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
@@ -473,7 +468,7 @@ else if (command === 'avatar') {
         var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
         var mutereason = mutereason.join(" "); // joins the list kickreason into one line
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
-        mutedmember.addRole('Muted') //if reason, kick
+        mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
     }
