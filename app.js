@@ -160,7 +160,6 @@ client.on("message", async message => {
 
   if(message.author.bot) return;
   
-  let message = message.content.toUpperCase();
   if(message.content.indexOf(config.prefix) !== 0) return;
   
   var mutedrole = message.guild.roles.find("name", "Muted");
