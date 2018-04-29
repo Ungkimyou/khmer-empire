@@ -304,27 +304,17 @@ client.on("message", async message => {
 
   if(command === "kick") {
     if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if(!member)
-      return message.reply("```md Please mention one user in order to kick them! - k!kick [@user] [reason]```");
-    if(!member.kickable) 
-      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "No reason provided";
-    await member.kick(reason)
-      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
-
-   const embed = new Discord.RichEmbed()
-     
-       .setColor('#FF0000')
-       .setThumbnail(message.author.avatarURL)
-       .addField('User:', member.user.tag)  
-       .addField('Kick By:', message.author.tag)
-       .addField('Reason:', reason);
-    
-      message.channel.sand("embed");
-
-  }
+        var kickedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!kickedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        if (!kickedmember.kickable) return message.reply("I cannot kick this member!") // if the member is unkickable
+        var kickreasondelete = 10 + kickedmember.user.id.length //sets the length of the kickreasondelete
+        var kickreason = message.content.substring(kickreasondelete).split(" "); // deletes the first letters until it reaches the reason
+        var kickreason = kickreason.join(" "); // joins the list kickreason into one line
+        if (!kickreason) return message.reply("Please indicate a reason for the kick!") // if no reason
+        kickedmember.kick(kickreason) //if reason, kick
+            .catch(error => message.reply(`Sorry @${message.author} I couldn't kick because of : ${error}`)); //if error, display error
+        message.reply(`${kickedmember.user.username}\nHas Kick By : ${message.author.username} \nBecause: ${kickreason}`); // sends a message saying he was kicked
+    }
   
   if(command === "ban") {
   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
