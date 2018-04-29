@@ -315,15 +315,15 @@ client.on("message", async message => {
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
 
-   let kickembed = new Discord.RichEmbed()
+   const embed = new Discord.RichEmbed()
      
        .setColor('#FF0000')
        .setThumbnail(message.author.avatarURL)
        .addField('User:', member.user.tag)  
-       .addField('Muted By:', message.author.tag)
+       .addField('Kick By:', message.author.tag)
        .addField('Reason:', reason);
     
-      message.channel.sand(kickembed);
+      message.channel.sand("embed");
 
   }
   
