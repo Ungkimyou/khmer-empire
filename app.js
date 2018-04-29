@@ -234,7 +234,7 @@ client.on("message", async message => {
    if(command == "chatembed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("Create #chat first and do k!chatembed on the channel you want message sand to #chat ");
+    message.reply("```Create #chat first and do k!chatembed on the channel you want message sand to #chat```");
     return;
   }
     let reportEmbed = new Discord.RichEmbed()
@@ -250,7 +250,19 @@ client.on("message", async message => {
 
    }
        
+  if(command === "help") {
+     
+     let useravatar = message.author.avatarURL;
+     let helpembed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
+    .setColor("#bb90ff")
+    .setTitle("Bot-Commands :")
+    .setDescription('Commands List', "[Clike Here](https://github.com/TaMoToJi/KhmerEmpire-BOT)")
+    .setThumbnail(useravatar)
 
+     message.channel.send(helpembed);
+ 
+  }
 
     if(command == "report") {
        if(args[0] == "help"){
