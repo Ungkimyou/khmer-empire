@@ -157,7 +157,7 @@ client.on("message", async message => {
   
 
   if(message.content.indexOf(config.prefix) !== 0) return;
-    var mutedrole = message.guild.roles.find("name", "Muted");
+   let mutedrole = message.guild.roles.find("name", "Muted");
 
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -287,6 +287,32 @@ if (command === "userinfo") {
  
   }
 
+    if (command == "mute") { // creates the command mute
+    if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
+        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
+        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
+        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
+        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
+        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
+        mutedmember.addRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
+    }
+
+    if (command == "unmute") { // creates the command unmute
+        if (!message.member.roles.some(r=>["bot-admin"].includes(r.name)) ) return message.reply("Sorry, you do not have the permission to do this!"); // if author has no perms
+        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        unmutedmember.removeRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
+    }
+
+
+
+
     if(command == "report") {
        if(args[0] == "help"){
       message.reply("Please mention one user in order to report them! - `k!report [@user] [reason]`");
@@ -348,7 +374,7 @@ if (command === "userinfo") {
         if (!kickreason) return message.reply("Please indicate a reason for the kick!") // if no reason
         kickedmember.kick(kickreason) //if reason, kick
             .catch(error => message.reply(`Sorry @${message.author} I couldn't kick because of : ${error}`)); //if error, display error
-        message.reply(`${kickedmember.user.username}\nHas Kick By : ${message.author.username} \nBecause: ${kickreason}`); // sends a message saying he was kicked
+        message.reply(`\n${kickedmember.user.username} Has Kick By : ${message.author.username} \nBecause: ${kickreason}`); // sends a message saying he was kicked
     }
   
   if(command === "ban") {
@@ -498,11 +524,11 @@ else if (command === 'avatar') {
         message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
     }
 
-    if (command == "unmute") { // creates the command unmute
+    if (command == "unmute") { 
     if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no permsf author has no perms
         var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
-        unmutedmember.removeRole('Muted') //if reason, kick
+        unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
     }  
