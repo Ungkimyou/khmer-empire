@@ -298,7 +298,7 @@ if (command === "userinfo") {
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`${mutedmember.user} has been muted by ${message.author} because: ${mutereason}`); // sends a message saying he was kicked
+        message.reply(` Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
     }
 
     if (command == "unmute") { // creates the command unmute
@@ -307,7 +307,7 @@ if (command === "userinfo") {
         if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`${unmutedmember.user} has been unmuted by ${message.author}!`); // sends a message saying he was kicked
+        message.reply(`Has Been Unmute : ${message.author} :white_check_mark: `); // sends a message saying he was kicked
     }
 
 
