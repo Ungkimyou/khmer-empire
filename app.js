@@ -406,22 +406,6 @@ else if (command === 'avatar') {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
 
-   if(command === "help") {
-     let helpembed = new Discord.RichEmbed()
-     .setColor('RANDOM')
-     .setThumbanail(message.author.avatarURL)
-     .addFiel('report :', "report player from server more : k!report help - k!rsetup")
-     .addFiel('serverinfo :', "tell you about info server")
-     .addFiel('botinfo :', "tell you about bot info")
-     .addFiel('ping :', "test your ping k!ping")
-     .addFiel('cookie :', "sand a cookie to player k!cookie @user @munber")
-     .addFiel('gay :', "bot is tell you gay or not ")
-     .addFiel('dick:', "bot is tell you your dick size")
-     .addFiel('invite:', "invite bot to your server .more")
-
-      message.channel.send(helpembed);
-                                         
-  }
 
 
 
@@ -432,34 +416,6 @@ else if (command === 'avatar') {
     }
 
 
-  if (command === "info") {
-    let name = args[0]; // Remember arrays are 0-based!.
-    let yearold = args[1];
-    let Gender = args[2];
-    let LikeColor = args[3]
-    let Location = args[4];
-    let Like = args[5];
-    let Dislike = args[6];
-    let LikeGame = args[7];
-    let SleepTime = args[8];
-
-    let infoembed = new Discord.RichEmbed()
-    .addField("User Info By :", message.author.tag)
-    .setThumbnail(message.author.avatarURL)
-    .setColor('RANDOM')
-    .addField("Name :", name)
-    .addField("Year Old :", yearold)
-    .addField("Gender :", Gender)
-    .addField("Like Color :", LikeColor)
-    .addField("Location :", Location)
-    .addField("Like :", Like)
-    .addField("DisLike :", Dislike)
-    .addField("LikeGame", LikeGame)
-    .addField("SleepTime :", SleepTime);
-
-    
-    message.channel.send(infoembed);
- }  
 
 
   if (command === "listemojis") {
