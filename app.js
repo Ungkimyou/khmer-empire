@@ -602,22 +602,6 @@ else if (command === 'avatar') {
      message.channel.send(usernameembed);
   } 
   
-  if(command === "eval") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-      const code = args.join(" ");
-      let evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.send(clean(evaled), {code:"xl"});
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-      message.delete().catch(O_o=>{}); 
-      message.channel.send(sayMessage);
-      message.delete()
-    
-  }
-
     if (command == "mute") { // creates the command mute
     if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no perms
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
@@ -646,15 +630,8 @@ else if (command === 'avatar') {
 }
 
 
-
 });
 
-function clean(text) {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-      return text;
-}
 
 client.login(config.token);
            
