@@ -357,7 +357,10 @@ if (command === "userinfo") {
    .setTimestamp()
    .setThumbnail(message.author.avatarURL)
 
-    message.channel.send(infoembed);
+    let userinfochannel = message.guild.channels.find(`name`, "userinfo");
+    if(!userinfochannel) return message.channel.send("usege commands to #userinfo!");
+
+    userinfochannel.send(infoembed);
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
 }
