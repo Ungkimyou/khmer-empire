@@ -546,28 +546,13 @@ if (command === "userinfo") {
 
 else if (command === 'avatar') {
     if (!message.mentions.users.size) {
-        let avatarembed = new Discord.RichEmbed()
-        .setTitle(" Avatar")
-        .setImage(message.author.displayAvatarURL)
-        
-        message.channel.sand(avatarembed);
 
+     return message.author.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
     }
 
     const avatarList = message.mentions.users.map(user => {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
-
- if (command === "av") {
-   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
-
-   let embed = new Discord.RichEmbed() 
-	.setTitle(member.tag + '\' avatar')
-	.setImage(member.avatarURL);
-
-    message.channel.send({embed})
-
-}
 
 
     if (command == "cookie") { // creates the command cookie
