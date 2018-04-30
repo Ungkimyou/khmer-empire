@@ -171,6 +171,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
 
+  }
 }
 
   if(command === "ping") {
