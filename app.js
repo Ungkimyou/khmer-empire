@@ -264,6 +264,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     .setAuthor("KhmerEmpire :", message.author.avatarURL)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
+    .setTimestamp()
      message.delete().catch(O_o=>{});
      message.channel.send(embed1);
     
