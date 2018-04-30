@@ -277,7 +277,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   const errEmbed = new Discord.RichEmbed()
   .setColor(0xFF0000)
   .setAuthor('ERROR')
-  .setTitle(':exclamation: Usage: **ks!8ball (question)**');
+  .setTitle(':exclamation: Usage: **k!8ball (question)**');
   message.channel.send({embed: errEmbed})
   return;
 }
@@ -305,7 +305,7 @@ var sayings = ["It is certain",
 			var result = Math.floor((Math.random() * sayings.length) + 0);
       const ballEmb = new Discord.RichEmbed()
       .setColor(0x00FFFF)
-      .setAuthor('8ball', 'https://findicons.com/files/icons/1700/2d/512/8_ball.png')
+      .setAuthor('8Ball', 'https://findicons.com/files/icons/1700/2d/512/8_ball.png')
       .addField(args, sayings[result]);
 			message.channel.send({embed: ballEmb})
 }
