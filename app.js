@@ -1,6 +1,7 @@
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const moment = require("moment");
 const config = require("./config.json");
 
 
@@ -352,7 +353,6 @@ if (command === "serverinfo") {
     } else {
         user = message.author;
     }
-    const moment = require("moment");
     const member = message.guild.member(user);
     const embed = new Discord.RichEmbed()
 		.setColor('RANDOM')
