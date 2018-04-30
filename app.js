@@ -502,9 +502,6 @@ else if (command === 'avatar') {
         message.delete() // sends the error message if no-one is mentioned
     }
 
-
-
-
   if (command === "listemojis") {
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
   message.channel.send(emojiList);
