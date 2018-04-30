@@ -36,13 +36,6 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get('440419456641138689').setName(`Total Users: ${member.guild.memberCount}`)
-    let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('440419409966923776').setName(`Member Count: ${humans}`)
-    let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('440419356929949696').setName(`Bot Count: ${bots}`)
-});
 
 
 client.on('messageDelete', async (message) => {
@@ -97,9 +90,7 @@ client.on("message", (message) => {
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  // Example of changing the bot's playing game to something useful. `client.user` is what the
-  // docs refer to as the "ClientUser".
-  client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
+
 });
 
 client.on("guildMemberAdd", function(member) {
@@ -131,7 +122,6 @@ client.on('guildMemberAdd', member => {
 client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(` ${client.guilds.size} servers | k!help`);
 });
 
 
@@ -210,9 +200,12 @@ client.on("message", async message => {
   
   // Let's go with a few common example commands! Feel free to delete or change those.
   if(command === "ping") {
-    const m = await message.channel.send(":mag: Starting ...?");
-    m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
-  }
+    const newemb = new Discord.RichEmbed()
+    .setTitle(message.author.tag, true)
+    .setColor(0xFFBF00)
+    .addField('```Ping : ```', new Date().getTime() - message.createdTimestamp + " ms ", true)
+    message.channel.send({embed: newemb})
+}
   
   if(command === "roleadd") {
  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
