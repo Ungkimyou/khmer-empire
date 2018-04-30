@@ -11,7 +11,7 @@ const responses1 = [
 ]
 
 const responses = [
-   'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', '50%'
+   'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', 'Gay . 50%'
 ]
 
 
