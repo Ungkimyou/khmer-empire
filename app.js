@@ -15,7 +15,7 @@ const responses = [
 
 function setActivity() {
     //Variable Array for what the setGame can be set to
-    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Running Commands`, `Try ${config.prefix}help`, `${config.prefix}help`,
+    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Try ${config.prefix}help`,
         `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `user ${client.users.size}` // Change these to what you want, add as many or as few as you want to
     ]
 
