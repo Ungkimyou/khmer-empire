@@ -172,7 +172,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   }, ms(mutetime));
 
   }
-}
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
