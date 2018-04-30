@@ -1,8 +1,8 @@
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const moment = require("moment");
 const config = require("./config.json");
+const superagent = require('superagent');
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
@@ -252,6 +252,18 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 }
 
+ if(command === "test")
+    let color = ''
+      const { body } = await superagent
+    .get('https://yesno.wtf/api/');
+    if(body.answer === 'yes') color = '0x01DF01';
+    if(body.answer === 'no') color = '0xFF0000';
+    const embed = new Discord.RichEmbed()
+    .setColor(color)
+    .setImage(`${body.image}`)
+    message.channel.send(`The magic API says: **${body.answer}**`, {embed});
+
+}
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
@@ -346,29 +358,7 @@ if (command === "serverinfo") {
    message.channel.send(serverembed);
 
 }
-   if(command === "info") {
-   let user;
-    if (message.mentions.users.first()) {
-      user = message.mentions.users.first();
-    } else {
-        user = message.author;
-    }
-    const member = message.guild.member(user);
-    const embed = new Discord.RichEmbed()
-		.setColor('RANDOM')
-		.setThumbnail(user.avatarURL)
-		.setTitle(`${user.username}#${user.discriminator}`)
-		.addField("ID:", `${user.id}`, true)
-		.addField("Nickname:", `${member.nickname !== null ? `${member.nickname}` : 'None'}`, true)
-		.addField("Created At:", `${moment.utc(user.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
-		.addField("Joined Server:", `${moment.utc(member.joinedAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
-		.addField("Bot:", `${user.bot}`, true)
-		.addField("Status:", `${user.presence.status}`, true)
-		.addField("Game:", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
-		.addField("Roles:", member.roles.map(roles => `${roles.name}`).join(', '), true)
-		.setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
-     message.channel.send({embed});
-    }
+
 
 if (command === "userinfo") {
     if(args[0] == "help"){
