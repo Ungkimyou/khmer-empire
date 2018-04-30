@@ -1,11 +1,6 @@
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const moment = require("moment");
-require("moment-duration-format");
-let os = require('os')
-let cpuStat = require("cpu-stat")
-
 const config = require("./config.json");
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
@@ -140,11 +135,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   const command = args.shift().toLowerCase();
   
 
-  let cpuLol;
-  cpuStat.usagePercent(function(err, percent, seconds) {
-    if (err) {
-      return console.log(err);
-   }
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
@@ -152,26 +142,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     .addField('```Ping : ```', new Date().getTime() - message.createdTimestamp + " ms ")
     message.channel.send({embed: newemb})
 }
-
- if(command === "stats") {
-
-  const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-  const embedStats = new Discord.MessageEmbed()
-    .setTitle("*** Stats ***")
-    .setColor("RANDOM")
-    .addField("• Mem Usage", `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, true)
-    .addField("• Uptime ", `${duration}`, true)
-    .addField("• Users", `${client.users.size.toLocaleString()}`, true)
-    .addField("• Servers", `${client.guilds.size.toLocaleString()}`, true)
-    .addField("• Channels ", `${client.channels.size.toLocaleString()}`, true)
-    .addField("• Discord.js", `v${version}`, true)
-    .addField("• Node", `${process.version}`, true)
-    .addField("• CPU", `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``)
-    .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
-    .addField("• Arch", `\`${os.arch()}\``,true)
-    .addField("• Platform", `\`\`${os.platform()}\`\``,true)
-    message.channel.send(embedStats);
-  }
 
 
   if(command === "clear") {
