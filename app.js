@@ -159,8 +159,11 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.
   if(command === "ping") {
     const m = await message.channel.send(":mag: Starting ...?");
-    m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
-  }
+    const newemb = new Discord.RichEmbed()
+    .setColor(0xFFBF00)
+    .addField('```Latency: ```', new Date().getTime() - message.createdTimestamp + " ms ")
+    message.channel.send({embed: newemb})
+}
   
   if(command === "roleadd") {
  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
