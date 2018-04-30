@@ -5,7 +5,7 @@ const config = require("./config.json");
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
-const ms = require("ms");
+var ms = require("ms");
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
