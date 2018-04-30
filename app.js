@@ -48,6 +48,7 @@ client.on('messageDelete', async (message) => {
   logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
 })
 
+
   client.on('guildCreate', guild => {
     let channel = guild.channels.get("ke-logs")
      const embed = new Discord.RichEmbed()
