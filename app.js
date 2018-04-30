@@ -270,6 +270,17 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
   }
 
+ if (command === "av") {
+   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
+
+   let embed = new Discord.RichEmbed() 
+	.setTitle(member.tag + '\' avatar')
+	.setImage(member.avatarURL);
+
+    message.channel.send({embed})
+
+}
+
 
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
