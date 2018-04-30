@@ -34,14 +34,6 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get('440419456641138689').setName(`Total Users: ${member.guild.memberCount}`)
-    let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('440419409966923776').setName(`Member Count: ${humans}`)
-    let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('440419356929949696').setName(`Bot Count: ${bots}`)
-});
-
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "ke-logs");
