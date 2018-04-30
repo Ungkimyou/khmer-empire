@@ -190,6 +190,7 @@ var sayings = ["It is certain",
 										"Most likely",
 										"Outlook good",
 										"Yes",
+                                                                                "i don't know",
 										"Signs point to yes",
 										"Reply hazy try again",
 										"Ask again later",
@@ -235,6 +236,7 @@ if (command === "serverinfo") {
    .addField("ID", message.guild.id, true)
    .addField("Name", message.guild.name, true)
    .addField("OWNER", message.guild.owner.user.tag, true)
+   .addField("You Join", message.member.joinedAt, true)
    .addField("Region", message.guild.region, true)
    .addField("Channels", message.guild.channels.size, true)
    .addField("MEMBER", message.guild.memberCount, true)
