@@ -1,6 +1,11 @@
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const moment = require("moment");
+require("moment-duration-format");
+let os = require('os')
+let cpuStat = require("cpu-stat")
+
 const config = require("./config.json");
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
@@ -134,7 +139,13 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
-  // Let's go with a few common example commands! Feel free to delete or change those.
+
+  let cpuLol;
+  cpuStat.usagePercent(function(err, percent, seconds) {
+    if (err) {
+      return console.log(err);
+   }
+
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
     .setColor(0xFFBF00)
@@ -162,18 +173,26 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   }
 }
 
- if(command === "dab") {
-    let sa = require ("superagent");
+ if(command === "stats") {
 
-    let {body} = await sa
-    .get(`https://icanhazdadjoke.com/slack`);
-
-    let o = new discord.RichEmbed()
-        .setColor(0xFFFFFF)
-        .setDescription("**" + body.attachments.map(a => a.text) + "**")
-    message.channel.send(o)
-	
-}
+  const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+  const embedStats = new Discord.MessageEmbed()
+    .setTitle("*** Stats ***")
+    .setColor("RANDOM")
+    .addField("• Mem Usage", `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, true)
+    .addField("• Uptime ", `${duration}`, true)
+    .addField("• Users", `${client.users.size.toLocaleString()}`, true)
+    .addField("• Servers", `${client.guilds.size.toLocaleString()}`, true)
+    .addField("• Channels ", `${client.channels.size.toLocaleString()}`, true)
+    .addField("• Discord.js", `v${version}`, true)
+    .addField("• Node", `${process.version}`, true)
+    .addField("• CPU", `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``)
+    .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
+    .addField("• Arch", `\`${os.arch()}\``,true)
+    .addField("• Platform", `\`\`${os.platform()}\`\``,true)
+    message.channel.send(embedStats)
+  });
+};
 
 
   if(command === "clear") {
@@ -190,6 +209,8 @@ if( swearWords.some(word => message.content.includes(word)) ) {
    message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
    message.delete()
 }  
+
+
 
 
   if(command === "say") {
