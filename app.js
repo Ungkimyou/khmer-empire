@@ -2,7 +2,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const superagent = require("superagent");
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
 
@@ -172,7 +171,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     let o = new discord.RichEmbed()
         .setColor(0xFFFFFF)
         .setDescription("**" + body.attachments.map(a => a.text) + "**")
-    msg.channel.send(o)
+    message.channel.send(o)
 	
 }
 
