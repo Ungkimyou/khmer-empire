@@ -264,7 +264,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     .setAuthor("KhmerEmpire :", message.author.avatarURL)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
-    .setTimestamp()
      message.delete().catch(O_o=>{});
      message.channel.send(embed1);
     
@@ -285,6 +284,7 @@ if (command === "userinfo") {
    .addField(":thumbsup: Like ", like)
    .addField(":thumbsdown: DisLike", dislike)
    .setColor('RANDOM')
+   .setTimestamp()
    .setThumbnail(message.author.avatarURL)
 
     message.channel.send(infoembed);
@@ -312,6 +312,25 @@ if (command === "userinfo") {
 
    }
        
+   if(command == "annembed") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
+    if(args[0] == "help"){
+    message.reply("```Create #annoucements first and do k!chatembed on the channel you want message sand to #annoucements```");
+    return;
+  }
+    let annEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.tag)
+    .setDescription(args.join(" "))
+    .setColor('RANDOM')
+
+    let chatchannel = message.guild.channels.find(`name`, "annoucements");
+    if(!chatchannel) return message.channel.send("you need create channel #annoucements to chat !");
+
+    message.delete().catch(O_o=>{});
+    chatchannel.send(annEmbed);
+
+   }
+
   if(command === "help") {
      
      let useravatar = message.author.avatarURL;
