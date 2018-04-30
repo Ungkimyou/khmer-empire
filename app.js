@@ -38,12 +38,6 @@ client.commands = new Discord.Collection();
 
 
 
-client.on("guildMemberAdd", (member) => {
-  let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
-    welcomechannel.send(`:speaking_head:  ${member} Has Join The Server!`);
-    member.send(`Welcome To Server, **${member.user.username}**!`);  
-});
-
 client.on("message", (message) => {
   if(message.content === "k!") {
     message.channel.send(" do k!help for help !");
