@@ -488,6 +488,8 @@ if (command === "userinfo") {
     .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881")
     .setThumbnail(bicon)
     .addField("Bot Name", client.user.username)
+    .addField("TotalUser", client.users.size)
+    .addField("On Servers", client.guilds.size)
     .addField("Created On", client.user.createdAt);
 
     return message.channel.send(botembed);
