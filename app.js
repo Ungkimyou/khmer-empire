@@ -101,19 +101,6 @@ client.on('guildMemberAdd', member => {
 });
 
 
-client.on("chaanelCreate", async member => {
-  console.log(`${channel.name} has been create ! `);
-  let sChaanel = channel.guild.find('name', "ke-logs");
-  sChannel.sand(`${channel.name} has been create !`);
-
-});
-
-client.on("chaanelDelete", async member => {
-  console.log(`${channel.name} has been delete ! `);
-  let sChaanel = channel.guild.find('name', "k-empire-logs");
-  sChannel.sand(`${channel.name} has been delete !`);
-
-});
   
 client.on("guildMemberAdd", guild => {
   // This event triggers when the bot joins a guild.
@@ -180,13 +167,6 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   if(!playRole) return;
     
   }  
-});
-
-client.on("guildCreate", async guild => {
-  const invite = await guild.channels.first().createInvite({
-    maxAge: 0
-  });
-  console.log(`Joined a new guild named: ${guild.name} with invite: https://discord.gg/${invite.code}`)
 });
 
 
@@ -464,13 +444,6 @@ if (command === "userinfo") {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
-
- if(command === "nick") {
-    if (message.guild.members.get(bot.user.id).hasPermission("MANAGE_NICKNAMES") && message.guild.members.get(bot.user.id).hasPermission("CHANGE_NICKNAME")) {
-        message.guild.members.get(bot.user.id).setNickname("Nickname Here");
-    } else {
-        message.channel.sendMessage("I dont have the permissons to change my nickname in this server.");
-   }
 
 
   if(command === "serverinfo") {
