@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
-const superagent = require("superagent");
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
 
@@ -272,18 +271,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
   }
 
- if(command === "cat") {
-  let{body} = await superagent
-  .get(`http://aws.random.cat/meow`)
-
-  let catembed = new Discord.RichEmbed()
-  .setColor("#7289DA")
-  .setTitle("Cat 🐱")
-  .setImage(body.file);
-
-  message.channel.send(catembed);
-
-}
 
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
