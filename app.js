@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const ms = require("ms");
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
@@ -29,13 +30,12 @@ function setActivity() {
 
 }
 
-setInterval(setActivity, 800 * 60 * 2)
+setInterval(setActivity, 900 * 60 * 2)
 
 const talkedRecently = new Set();
-const ms = require("ms");
+
 
 client.commands = new Discord.Collection();
-
 
 
 client.on("message", (message) => {
@@ -141,24 +141,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   if(!tomute) return message.reply("Couldn't find user.");
   if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
   let muterole = message.guild.roles.find(`name`, "TempMuted");
-  //start of create role
-  if(!muterole){
-    try{
-      muterole = await message.guild.createRole({
-        name: "TempMuted",
-        color: "#000000",
-        permissions:[]
-      })
-      message.guild.channels.forEach(async (channel, id) => {
-        await channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        });
-      });
-    }catch(e){
-      console.log(e.stack);
-    }
-  }
   //end of create role
   let mutetime = args[1];
   if(!mutetime) return message.reply("You didn't specify a time!");
@@ -171,7 +153,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
 
-  }
+ }
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
