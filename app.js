@@ -242,7 +242,7 @@ if (command === "serverinfo") {
    .addField("BOT", message.guild.members.filter(m => m.user.bot).size, true)
    .addField("Online", online.size, true)
    .addField("Roles", message.guild.roles.size, true)
-   .addField("You Join", message.member.joinedAt, true);
+   .addField("You Join", message.member.joinedAt, true)
    message.channel.send(serverembed);
 
 }
