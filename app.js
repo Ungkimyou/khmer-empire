@@ -2,7 +2,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const superagent = require('superagent');
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
@@ -251,24 +250,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
  });
 
 }
-
- if(command === "test")
-
-      const { body } = await superagent
-    .get('https://yesno.wtf/api/');
-    if(body.answer === 'yes');
-    if(body.answer === 'no');
-    const embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setImage(`${body.image}`)
-    message.channel.send(`The magic API says: **${body.answer}**`, {embed});
-
-}
-
-  if(command === "gay") {
-   message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
-   message.delete()
-}  
 
   if(command === "dick") {
    message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
