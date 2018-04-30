@@ -16,7 +16,7 @@ const responses = [
 function setActivity() {
     //Variable Array for what the setGame can be set to
     var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Running Commands`, `Try ${config.prefix}help`, `${config.prefix}help`,
-        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
+        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `PLAYERUNKNOWN'S BATTLEGROUNDS` // Change these to what you want, add as many or as few as you want to
     ]
 
     var info = Gameinfo[Math.floor(Math.random() * Gameinfo.length)]; //Random Math to set the setGame to something in the GameInfo array
