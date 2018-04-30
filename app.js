@@ -46,7 +46,7 @@ client.on('messageDelete', async (message) => {
 })
 
   client.on('guildCreate', guild => {
-    let channel = guild.channels.get("439688346571112458")
+    let channel = guild.channels.get("ke-logs")
      const embed = new Discord.RichEmbed()
      .setColor("#cde246")
      .setAuthor(`Joined ${guild.name}`)
@@ -182,6 +182,13 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
+client.on("guildCreate", async guild => {
+  const invite = await guild.channels.first().createInvite({
+    maxAge: 0
+  });
+  console.log(`Joined a new guild named: ${guild.name} with invite: https://discord.gg/${invite.code}`)
+});
+
 
 client.on("message", async message => {
 
@@ -236,7 +243,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
  });
 
 }
-
 
 
   if(command === "gay") {
@@ -458,6 +464,13 @@ if (command === "userinfo") {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
+
+ if(command === "nick") {
+    if (message.guild.members.get(bot.user.id).hasPermission("MANAGE_NICKNAMES") && message.guild.members.get(bot.user.id).hasPermission("CHANGE_NICKNAME")) {
+        message.guild.members.get(bot.user.id).setNickname("Nickname Here");
+    } else {
+        message.channel.sendMessage("I dont have the permissons to change my nickname in this server.");
+   }
 
 
   if(command === "serverinfo") {
