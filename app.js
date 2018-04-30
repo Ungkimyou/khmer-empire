@@ -152,7 +152,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     tomute.removeRole(muterole.id);
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
-
+}
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
