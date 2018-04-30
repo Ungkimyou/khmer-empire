@@ -17,7 +17,7 @@ const responses = [
 function setActivity() {
     //Variable Array for what the setGame can be set to
     var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Running Commands`, `Try ${config.prefix}help`, `${config.prefix}help`,
-        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping to API: ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
+        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
     ]
 
     var info = Gameinfo[Math.floor(Math.random() * Gameinfo.length)]; //Random Math to set the setGame to something in the GameInfo array
@@ -270,16 +270,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
   }
 
- if (command === "av") {
-   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
-
-   let embed = new Discord.RichEmbed() 
-	.setTitle(member.tag + '\' avatar')
-	.setImage(member.avatarURL);
-
-    message.channel.send({embed})
-
-}
 
 
   if(command === "embed") {
@@ -556,14 +546,28 @@ if (command === "userinfo") {
 
 else if (command === 'avatar') {
     if (!message.mentions.users.size) {
-        return message.author.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
+        let avatarembed = new Discord.RichEmbed()
+        .setTitle(" Avatar")
+        .setImage(message.author.displayAvatarURL)
+        
+        message.channel.sand(avatarembed);
+
     }
 
     const avatarList = message.mentions.users.map(user => {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
 
+ if (command === "av") {
+   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
 
+   let embed = new Discord.RichEmbed() 
+	.setTitle(member.tag + '\' avatar')
+	.setImage(member.avatarURL);
+
+    message.channel.send({embed})
+
+}
 
 
     if (command == "cookie") { // creates the command cookie
