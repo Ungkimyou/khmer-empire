@@ -256,7 +256,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     
   } 
 
-if (command === "server") {
+if (command === "serverinfo") {
   let online = message.guild.members.filter(member => member.user.presence.status !== 'offline');
   let day = message.guild.createdAt.getDate()
   let month = 1 + message.guild.createdAt.getMonth()
@@ -264,17 +264,17 @@ if (command === "server") {
    let sicon = message.guild.iconURL;
    let serverembed = new Discord.RichEmbed()
    .setAuthor(message.guild.name, sicon)
-   .setFooter(`Server Created • ${day}.${month}.${year}`)
-   .setColor("#7289DA")
+   .setFooter(`Server Created • Day:${day} Month:${month} Year:${year}`)
+   .setColor('RANDOM')
    .setThumbnail(sicon)
    .addField("ID", message.guild.id, true)
    .addField("Name", message.guild.name, true)
    .addField("Owner", message.guild.owner.user.tag, true)
    .addField("Region", message.guild.region, true)
    .addField("Channels", message.guild.channels.size, true)
-   .addField("Members", message.guild.memberCount, true)
+   .addField("MEMBER", message.guild.memberCount, true)
    .addField("Humans", message.guild.memberCount - message.guild.members.filter(m => m.user.bot).size, true)
-   .addField("Bots", message.guild.members.filter(m => m.user.bot).size, true)
+   .addField("BOT", message.guild.members.filter(m => m.user.bot).size, true)
    .addField("Online", online.size, true)
    .addField("Roles", message.guild.roles.size, true);
    message.channel.send(serverembed);
@@ -472,22 +472,6 @@ if (command === "userinfo") {
   }
 
 
-  if(command === "serverinfo") {
-     
-     let sicon = message.guild.iconURL;
-     let serverembed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire'say !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
-    .setColor("#bb90ff")
-    .setTitle("Server-Info :")
-    .addField("Server Name", message.guild.name)
-    .addField("Created On", message.guild.createdAt)
-    .addField("You Joined", message.member.joinedAt)
-    .addField("Total Members", message.guild.memberCount)
-    .setThumbnail(sicon)
-
-     message.channel.send(serverembed);
- 
-  }
 
   if(command === 'botinfo') {
     let bicon = client.user.displayAvatarURL;
