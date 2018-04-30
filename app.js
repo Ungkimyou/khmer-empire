@@ -56,19 +56,6 @@ client.on('messageDelete', async (message) => {
 })
 
 
-  client.on('guildCreate', guild => {
-    let channel = guild.channels.get("ke-logs")
-     const embed = new Discord.RichEmbed()
-     .setColor("#cde246")
-     .setAuthor(`Joined ${guild.name}`)
-     .setThumbnail(guild.iconURL)
-     .addField("Owner", guild.owner)
-     .addField("ID", guild.id, true)
-     .addField("Users", guild.memberCount, true)
-     .addField("Channels", guild.channels.size, true)
-     channel.send(embed);
-
-    });
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
@@ -93,25 +80,6 @@ client.on("ready", () => {
 client.on("guildMemberAdd", function(member) {
     let role = member.guild.roles.find("name", "MEMBER");
     member.addRole(role).catch(console.error);
-});
-
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome-leave');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField(':bust_in_silhouette: | name : ', `${member}`)
-        .addField(':microphone2: | Welcome!', `Welcome To The Server, ${member}`)
-        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
-        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
-        .addField("Name", `<@` + `${member.id}` + `>`, true)
-        .addField('Server', `${member.guild.name}`, true )
-        .setFooter(`**${member.guild.name}**`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
 });
 
 
