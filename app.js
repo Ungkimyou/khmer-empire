@@ -5,7 +5,6 @@ const config = require("./config.json");
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
-var ms = require("ms");
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -33,6 +32,7 @@ function setActivity() {
 setInterval(setActivity, 800 * 60 * 2)
 
 const talkedRecently = new Set();
+const ms = require("ms");
 
 client.commands = new Discord.Collection();
 
