@@ -170,9 +170,8 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
     .addField("• Arch", `\`${os.arch()}\``,true)
     .addField("• Platform", `\`\`${os.platform()}\`\``,true)
-    message.channel.send(embedStats)
-  });
-};
+    message.channel.send(embedStats);
+  }
 
 
   if(command === "clear") {
