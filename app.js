@@ -162,6 +162,19 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   }
 }
 
+ if(command === "dab") {
+    let sa = require ("superagent");
+
+    let {body} = await sa
+    .get(`https://icanhazdadjoke.com/slack`);
+
+    let o = new discord.RichEmbed()
+        .setColor(0xFFFFFF)
+        .setDescription("**" + body.attachments.map(a => a.text) + "**")
+    msg.channel.send(o)
+	
+}
+
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
