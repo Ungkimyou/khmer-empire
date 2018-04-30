@@ -274,7 +274,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
  if(command === "cat") {
   let{body} = await superagent
-  .get(`http://aws.random.cat/meow`);
+  .get(`http://aws.random.cat/meow`)
 
   let catembed = new Discord.RichEmbed()
   .setColor("#7289DA")
