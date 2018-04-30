@@ -19,11 +19,6 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.on("serverNewMember", function (server, user) {
-     mybot.addMemberToRole(user, server.roles.get("name", "MEMBER"), function (err) { if (err) console.log(err) })
-
-})
-
 
 client.on('messageDelete', async (message) => {
   const logs = message.guild.channels.find('name', "ke-logs");
@@ -79,6 +74,11 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
+});
+
+client.on("guildMemberAdd", function(member) {
+    let role = member.guild.roles.find("name", "MEMBER");
+    member.addRole(role).catch(console.error);
 });
 
 client.on('guildMemberAdd', member => {
@@ -264,12 +264,12 @@ if (command === "serverinfo") {
    let sicon = message.guild.iconURL;
    let serverembed = new Discord.RichEmbed()
    .setAuthor(message.guild.name, sicon)
-   .setFooter(`Server Created • Day:${day} Month:${month} Year:${year}`)
+   .setFooter(`Server Created • Day:${day} | Month:${month} | Year:${year}`)
    .setColor('RANDOM')
    .setThumbnail(sicon)
    .addField("ID", message.guild.id, true)
    .addField("Name", message.guild.name, true)
-   .addField("Owner", message.guild.owner.user.tag, true)
+   .addField("OWNER", message.guild.owner.user.tag, true)
    .addField("Region", message.guild.region, true)
    .addField("Channels", message.guild.channels.size, true)
    .addField("MEMBER", message.guild.memberCount, true)
