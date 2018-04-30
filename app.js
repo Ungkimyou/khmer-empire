@@ -237,12 +237,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 }
 
-  if(command === "code") {
-   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("you don't have permssion ADMINISTRATOR to use this !");  
-   if(!args[0]) return message.channel.sand("0");
-   message.channel.sand(`${args[0]} Code Has Been Upload To Hosting :white_check_mark:`).then(msg => msg.delete(2000));
-   message.delete()
-}
 
 
   if(command === "gay") {
