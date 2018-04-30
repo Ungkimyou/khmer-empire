@@ -369,8 +369,6 @@ if (command === "serverinfo") {
 		.setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
      message.channel.send({embed});
     }
-};
-
 
 if (command === "userinfo") {
     if(args[0] == "help"){
