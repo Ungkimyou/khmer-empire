@@ -368,7 +368,7 @@ if (command === "userinfo") {
 
        let unmuteembed = new Discord.RichEmbed()
        .setColor("#FF0000")
-       .setImgae(message.author.avatarURL)
+       .setImage(message.author.avatarURL)
        .setAuthor("▬▬UmMuted▬▬", "unmutedmember.user")
        .addField("Unmute", unmutedmember.user)
        .addField("By ", message.author.tag)
