@@ -202,7 +202,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   	.setNickname(nickname);
   await message.channel.send({
   	embed: new Discord.RichEmbed()
-  	.setTitle(`Changed BOT Nickname to ${nickname}`)
+  	.setTitle(`Changed BOT Nickname To : ${nickname}`)
   })
  }
 
