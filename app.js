@@ -153,23 +153,22 @@ client.on("message", async message => {
     message.channel.send({embed: newemb})
 }
   
-  if(command === "roleadd") {
- if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
-  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!rMember) return message.reply("Couldn't find that user, yo.");
-  let role = args.join(" ").slice(22);
-  if(!role) return message.reply("Specify a role!");
-  let gRole = message.guild.roles.find(`name`, role);
-  if(!gRole) return message.reply("Couldn't find that role.");
+  if(command === "addrole") {
+   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+   if(!rMember) return message.reply("Couldn't find that user, yo.");
+   let role = args.join(" ").slice(22);
+   if(!role) return message.reply("Specify a role!");
+   let gRole = message.guild.roles.find(`name`, role);
+   if(!gRole) return message.reply("Couldn't find that role.");
 
-  if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
-  await(rMember.addRole(gRole.id));
+   if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
+   await(rMember.addRole(gRole.id));
 
-  try{
-    await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-  }catch(e){
-    console.log(e.stack);
-    message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+   try{
+     await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
+   }catch(e){
+     console.log(e.stack);
+     message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
   }
 }
 
@@ -233,7 +232,6 @@ if (command === "serverinfo") {
    .setFooter(`Server Created • Day:${day} | Month:${month} | Year:${year}`)
    .setColor('RANDOM')
    .setThumbnail(sicon)
-   .addField("ID", message.guild.id, true)
    .addField("Name", message.guild.name, true)
    .addField("OWNER", message.guild.owner.user.tag, true)
    .addField("Region", message.guild.region, true)
@@ -242,7 +240,8 @@ if (command === "serverinfo") {
    .addField("Humans", message.guild.memberCount - message.guild.members.filter(m => m.user.bot).size, true)
    .addField("BOT", message.guild.members.filter(m => m.user.bot).size, true)
    .addField("Online", online.size, true)
-   .addField("Roles", message.guild.roles.size, true);
+   .addField("Roles", message.guild.roles.size, true)
+   .addField("You Join", message.member.joinedAt, true);
    message.channel.send(serverembed);
 
 }
@@ -341,7 +340,7 @@ if (command === "userinfo") {
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(` Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
+        message.reply(`Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
     }
 
     if (command == "unmute") { // creates the command unmute
@@ -350,7 +349,7 @@ if (command === "userinfo") {
         if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
-        message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark: `); // sends a message saying he was kicked
+        message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark:`); // sends a message saying he was kicked
     }
 
 
