@@ -52,7 +52,7 @@ client.on("ready", () => {
 
 client.on('guildMemberAdd', member => {
   let role = member.guild.roles.find("name", "MEMBER");
-  member.guild.channels.find("name", "chat").sand(`:confetti_ball: ${member.user.username} » join to server !`)
+  member.guild.channel.find("name", "chat").sand(`:confetti_ball: ${member.user.username} » join to server !`)
   member.addRole(role)
 });
 
