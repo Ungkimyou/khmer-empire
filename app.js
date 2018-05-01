@@ -50,19 +50,6 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 });
 
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'chat');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .setDescription(':confetti_ball: ${member} » Your Are The Member ${member.guild.memberCount}')
-        .setFooter(`**${member.guild.name}**`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
-});
 
 
 client.on("presenceUpdate", (oldMember, newMember) => {
@@ -125,7 +112,23 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
+client.on('guildMemberAdd', member => {
+    let role = member.guild.roles.find(`name`, "MEMBER");
+    let channel = member.guild.channels.find('name', 'chat');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('User »', member)
+        .addField('Welcome', "Welcome To Server ! ")
+        .addField('Your Are The Member', member.guild.memberCount)
+        .setFooter(`||${member.guild.name}||`)
+        .setTimestamp()
 
+        channel.sendEmbed(embed);
+        member.addRole(role);
+});
 client.on("message", async message => {
 
   if(message.author.bot) return;
