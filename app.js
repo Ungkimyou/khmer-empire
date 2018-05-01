@@ -355,7 +355,7 @@ if (command === "userinfo") {
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); 
         message.delete();
-        message.reply(` Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
+        message.reply(` Has Been Muted ➣ ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
     }
 
     if (command == "unmute") { // creates the command unmute
@@ -365,7 +365,17 @@ if (command === "userinfo") {
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); 
         message.delete();
-        message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark: `); // sends a message saying he was kicked
+
+       let unmuteembed = new Discord.RichEmbed()
+       .setColor("#FF0000")
+       .setImgae(message.author.avatarURL)
+       .setAuthor("▬▬UmMuted▬▬", "unmutedmember.user")
+       .addField("Unmute", unmutedmember.user)
+       .addField("By ", message.author.tag)
+       .setTimestamp();
+
+        message.channel(unmuteembed);
+
     }
 
 
