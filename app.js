@@ -131,7 +131,7 @@ client.on('guildMemberAdd', member => {
         member.addRole(role);
 });
 
-client.on('guildMemberAdd', member => {
+client.on('guildMemberRemove', member => {
     let channel = member.guild.channels.find('name', 'welcome-leave');
     let memberavatar = member.user.avatarURL
         if (!channel) return;
@@ -473,29 +473,29 @@ if (command === "userinfo") {
     .setAuthor("KhmerEmpire' !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
     .setColor('RANDOM')
     .setTitle("Bot-Commands :")
-    .addField('» Ping ', "Check You Ms", true,)
-    .addField('» 8ball', "Question 8ball", true)
-    .addField('» Pat ', "Pat a Play", true)
-    .addField('» Luckymunber', "Tell Your LuckyMunber", true)
-    .addField('» Gay', "Tell You Gay or Not", true)
-    .addField('» Dick', "Show Your Dick Size", true)
-    .addField('» Serverinfo', "Show Info About in Server", true)
-    .addField('» Botinfo', "Show Into About on BOT", true)
-    .addField('» Avatar', "Check User Avatar | k!avatar @user", true)
-    .addField('» Userinfo ', "Show info About Yourself to #userinfo", true)
-    .addField('» Say', "Bot is say", true)
-    .addField('» Embed', "Bot is say Embed TEXT", true)
-    .addField('» ChatEmbed', "Chat To #chat | k!chatembed help", true)
-    .addField('» AnnEmbed', "Chat To #announcements | k!annembed help", true)
-    .addField('» BotSpec', "Check Bot Spec", true)
-    .addField('» Addrole', "Addrole For Player ", true)
-    .addField('» Removerole', "Remove Role From Player", true)
-    .addField('» Mute', "Mute Player | k!mute help", true)
-    .addField('» Unmute', "Unmute For Player | k!unmute help", true)
-    .addField('» Kick', "Kick Player From a Server", true)
-    .addField('» Ban', "Ban Player From a Server", true)
-    .addField('» AutoRoleJoin » NewUpdate', "Create Roles » MEMBER » Bot is AutoRole For New Member", true)
-    .addField('» Welcome-leave » NewUpdate', "New Member Message » Create Channel » SetName: #welcome-leave", true)
+    .addField('» Ping ', "Check You Ms")
+    .addField('» 8ball', "Question 8ball")
+    .addField('» Pat ', "Pat a Play")
+    .addField('» Luckymunber', "Tell Your LuckyMunber")
+    .addField('» Gay', "Tell You Gay or Not")
+    .addField('» Dick', "Show Your Dick Size")
+    .addField('» Serverinfo', "Show Info About in Server")
+    .addField('» Botinfo', "Show Into About on BOT")
+    .addField('» Avatar', "Check User Avatar | k!avatar @user")
+    .addField('» Userinfo ', "Show info About Yourself to #userinfo")
+    .addField('» Say', "Bot is say")
+    .addField('» Embed', "Bot is say Embed TEXT")
+    .addField('» ChatEmbed', "Chat To #chat | k!chatembed help")
+    .addField('» AnnEmbed', "Chat To #announcements | k!annembed help")
+    .addField('» BotSpec', "Check Bot Spec")
+    .addField('» Addrole', "Addrole For Player ")
+    .addField('» Removerole', "Remove Role From Player")
+    .addField('» Mute', "Mute Player | k!mute help")
+    .addField('» Unmute', "Unmute For Player | k!unmute help")
+    .addField('» Kick', "Kick Player From a Server")
+    .addField('» Ban', "Ban Player From a Server")
+    .addField('» AutoRoleJoin » NewUpdate', "Create Roles » MEMBER » Bot is AutoRole For New Member")
+    .addField('» Welcome-leave » NewUpdate', "New Member Message » Create Channel » SetName: #welcome-leave » DONE")
     .setThumbnail(useravatar)
 
      message.channel.send(helpembed);
