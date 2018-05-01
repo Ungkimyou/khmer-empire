@@ -50,9 +50,10 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 });
 
-client.on("guildMemberAdd", function(member) {
-    let role = member.guild.roles.find("name", "MEMBER");
-    member.addRole(role).catch(console.error);
+client.on('guildMemberAdd', member => {
+  let role = member.guild.roles.find("name", "MEMBER");
+  member.guild.channels.find("name", "chat").sand(`:confetti_ball: ${member.user.username} » join to server !`)
+  member.addRole(role)
 });
 
 
