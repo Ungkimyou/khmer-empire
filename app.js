@@ -240,12 +240,36 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     let mins = Math.floor((totalSeconds / 60) % 60);
 
     var ping = client.ping
+    message.delete();
     message.channel.send(`\n= Memory usage: ${Math.round(used * 100) / 100}MB\n= Ping: ${ping}\n= Uptime: Days: ${days} | Hours: ${hours} | Minutes: ${mins} | Seconds: ${realTotalSecs}\n= Node: ${process.version}\n= Library: discord.js\n= ARCH: ${arch}\n= Plataform: ${os.platform}\n= Servers: ${client.guilds.size}\n= Users: ${client.users.size}`, {
         code: 'AsciiDoc'
     })
 
 }
  
+  if(command === "rcmd") {
+  if(!args[0]) return message.channel.send('Correct usage: **ks!reverse (text to reverse)**');
+
+  function reverseString(str) {
+      return str.split("").reverse().join("");
+  }
+
+  let sreverse = reverseString(args.join(' '))
+   
+  if(args[0] === sreverse) {
+  
+  sreverse = `${args.join(' ')}..Wait... You broke it!`
+  
+  }
+  const reverseEmbed = new Discord.RichEmbed()
+  .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+  .setColor(0xFFF000)
+  .addField('Input: ', '```' + `${args.join(' ')}` + '```')
+  .addField('Output: ', '```' + `${sreverse}` + '```')
+  message.channel.send({embed: reverseEmbed})
+    
+}
+
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
