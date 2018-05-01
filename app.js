@@ -120,8 +120,7 @@ client.on('guildMemberAdd', member => {
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(memberavatar)
-        .setAuthor('Welcome user »', member)
-        .addField('▬▬▬▬▬▬▬▬▬', ":confetti_ball: Welcome To Server ${message.guild.name} Discord Server !")
+        .addField('New Member  »', member)
         .setFooter(`||${member.guild.name}||`)
         .setTimestamp()
 
