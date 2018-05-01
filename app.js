@@ -114,14 +114,17 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 client.on('guildMemberAdd', member => {
     let role = member.guild.roles.find(`name`, "MEMBER");
-    let channel = member.guild.channels.find('name', 'chat');
+    let channel = member.guild.channels.find('name', 'welcome-leavee');
     let memberavatar = member.user.avatarURL
         if (!channel) return;
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(memberavatar)
-        .addField('New Member  »', member)
-        .setFooter(`||${member.guild.name}||`)
+        .addField(':bust_in_silhouette: | Name » ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome to the server, ${member}`)
+        .addField(':id: | User »', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | You Are The Member »', `${member.guild.memberCount}`)
+        .setFooter(`${member.guild.name}`)
         .setTimestamp()
 
         channel.sendEmbed(embed);
@@ -470,6 +473,7 @@ if (command === "userinfo") {
     .addField('» AnnEmbed', "Chat To #announcements | k!annembed help")
     .addField('» BotSpec', "Check Bot Spec")
     .addField('» Addrole', "Addrole For Player ")
+    .addField('» Welcome-leave', "New Member Message » Create Channel » SetName: #welcome-leave")
     .addField('» Removerole', "Remove Role From Player")
     .addField('» AutoRoleJoin', "Create Roles » MEMBER » Bot is AutoRole For New Member")
     .addField('» Mute', "Mute Player | k!mute help")
