@@ -451,7 +451,8 @@ if (command === "userinfo") {
     .addField('» Dick', "Show Your Dick Size")
     .addField('» Serverinfo', "Show Info About in Server")
     .addField('» Botinfo', "Show Into About on BOT")
-    .addField('» Usereinfo ', "Show info About Yourself to #userinfo")
+    .addField('» Avatar', "Check User Avatar | k!avatar @user")
+    .addField('» Userinfo ', "Show info About Yourself to #userinfo")
     .addField('» Say', "Bot is say")
     .addField('» Embed', "Bot is say Embed TEXT")
     .addField('» ChatEmbed', "Chat To #chat | k!chatembed help")
@@ -486,7 +487,7 @@ if (command === "userinfo") {
         mutedmember.addRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
         message.delete();
-        message.reply(`Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
+        message.reply(`Has Been Muted » ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
     }
 
     if (command == "unmute") { // creates the command unmute
@@ -496,7 +497,7 @@ if (command === "userinfo") {
         unmutedmember.removeRole(mutedrole) //if reason, kick
             .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`));
         message.delete();
-        message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark:`); // sends a message saying he was kicked
+        message.reply(`Has Been Unmute » ${unmutedmember.user} :white_check_mark:`); // sends a message saying he was kicked
     }
 
 
