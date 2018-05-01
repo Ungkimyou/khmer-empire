@@ -374,7 +374,7 @@ if (command === "userinfo") {
        .addField("By ", message.author.tag)
        .setTimestamp();
 
-        message.channel.sand(unmuteembed);
+        message.reply(unmuteembed);
 
     }
 
