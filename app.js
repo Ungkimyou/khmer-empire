@@ -32,7 +32,6 @@ function setActivity() {
 
 setInterval(setActivity, 1200 * 60 * 2)
 
-const ms = require("ms");
 const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
@@ -131,6 +130,7 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
+  var ms = require("ms");
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
