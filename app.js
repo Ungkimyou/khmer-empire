@@ -203,6 +203,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   	embed: new Discord.RichEmbed()
   	.setTitle(`Changed Server Nickname to ${nickname}`)
   })
+ }
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
