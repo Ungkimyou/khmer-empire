@@ -342,7 +342,7 @@ if (command === "userinfo") {
 
     if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
     if(args[0] == "help"){
-    message.reply("```Create Role [KE-Muted] first and add KE-Muted off Perms : ViewChannel-ReadChannel-ChatMessage to Channel```");
+    message.reply("```Create Role [KE-Muted] first and add KE-Muted off Perms : ViewChannel-ReadChannel-ChatMessage to Channel : k!mute @user @reason```");
     return;
   }
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
@@ -353,7 +353,8 @@ if (command === "userinfo") {
         var mutereason = mutereason.join(" "); // joins the list kickreason into one line
         if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
         mutedmember.addRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); 
+        message.delete();
         message.reply(` Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
     }
 
@@ -362,7 +363,8 @@ if (command === "userinfo") {
         var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
         unmutedmember.removeRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); 
+        message.delete();
         message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark: `); // sends a message saying he was kicked
     }
 
