@@ -16,8 +16,8 @@ const responses = [
 
 function setActivity() {
     //Variable Array for what the setGame can be set to
-    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Running Commands`, `Try ${config.prefix}help`, `${config.prefix}help`,
-        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
+    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Try ${config.prefix}help`, `${config.prefix}help`,
+        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `KhmerBOT | Cambodia`
     ]
 
     var info = Gameinfo[Math.floor(Math.random() * Gameinfo.length)]; //Random Math to set the setGame to something in the GameInfo array
@@ -29,7 +29,7 @@ function setActivity() {
 
 }
 
-setInterval(setActivity, 1000 * 60 * 2)
+setInterval(setActivity, 1200 * 60 * 2)
 
 
 const talkedRecently = new Set();
@@ -172,7 +172,28 @@ client.on("message", async message => {
   }
 }
 
+  if(command "remvoerole") {
+   if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
+   if(args[0] == "help"){
+     message.reply("Usage: !removerole <user> <role>");
+     return;
+   }
+   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+   if(!rMember) return message.reply("Couldn't find that user, yo.");
+   let role = args.join(" ").slice(22);
+   if(!role) return message.reply("Specify a role!");
+   let gRole = message.guild.roles.find(`name`, role);
+   if(!gRole) return message.reply("Couldn't find that role.");
 
+   if(!rMember.roles.has(gRole.id)) return message.reply("They don't have that role.");
+   await(rMember.removeRole(gRole.id));
+
+   try{
+     await rMember.send(`RIP, you lost the ${gRole.name} role.`)
+   }catch(e){
+     message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
+   }
+ }
 
 if( swearWords.some(word => message.content.includes(word)) ) {
   message.reply("Oh no you said a bad word!!!");
