@@ -570,16 +570,17 @@ if (command === "userinfo") {
   }
 
 
-
   if(command === 'botinfo') {
     let bicon = client.user.displayAvatarURL;
     let botembed = new Discord.RichEmbed()
     .setDescription("Bot Information")
-    .setColor("#15f153")
-    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881")
+    .setColor('RANDOM')
     .setThumbnail(bicon)
-    .addField("Bot Name", client.user.username)
-    .addField("Created On", client.user.createdAt);
+    .addField("Bot Name", client.user.username, true)
+    .addField("TotalUser", client.users.size, true)
+    .addField("On Servers", client.guilds.size, true)
+    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881", true)
+    .addField("Created On", client.user.createdAt, true);
 
     return message.channel.send(botembed);
 }
