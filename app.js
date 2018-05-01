@@ -182,6 +182,7 @@ client.on("message", async message => {
    }catch(e){
      console.log(e.stack);
      message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+     message.delete()
   }
 }
 
@@ -205,6 +206,7 @@ client.on("message", async message => {
      await rMember.send(`RIP, you lost the ${gRole.name} role.`)
    }catch(e){
      message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
+     message.delete()
    }
  }
 
