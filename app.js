@@ -544,6 +544,8 @@ else if (command === 'avatar') {
 
    }  
 
+    message.channel.send(avatarList);
+}
 
 
 });
