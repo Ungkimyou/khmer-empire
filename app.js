@@ -4,10 +4,6 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 
-const swearWords = ["fuck", "shit", "fk", "shite"];
-if( swearWords.some(word => message.content.toLowerCase().includes(word)) ) {
- message.reply("Oh no you said a bad word!!!");
-}
 
 
 const responses1 = [
