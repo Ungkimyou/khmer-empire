@@ -1,6 +1,5 @@
 
 const Discord = require("discord.js");
-const ms = require("ms");
 const client = new Discord.Client();
 const config = require("./config.json");
 
@@ -33,7 +32,7 @@ function setActivity() {
 
 setInterval(setActivity, 1200 * 60 * 2)
 
-
+const ms = require("ms");
 const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
