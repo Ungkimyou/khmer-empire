@@ -196,12 +196,13 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 }
  
  if(command === "nick") {
+  if(message.author.id !== config.ownerID) return;
   let nickname = args.join(' ')
   message.guild.members.get('438304216893620240')
   	.setNickname(nickname);
   await message.channel.send({
   	embed: new Discord.RichEmbed()
-  	.setTitle(`Changed Server Nickname to ${nickname}`)
+  	.setTitle(`Changed BOT Nickname to ${nickname}`)
   })
  }
 
