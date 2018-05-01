@@ -241,7 +241,7 @@ client.on("message", async message => {
 
 }
  
- if(command === "luckymember") {
+ if(command === "luckymunber") {
   var LuckNumber = Math.floor((Math.random() * 12000) + 0.120);
   const numEmb = new Discord.RichEmbed()
   .setColor(0xFFFF00)
@@ -251,8 +251,8 @@ client.on("message", async message => {
 
 }
 
-  if(command === "rcmd") {
-  if(!args[0]) return message.channel.send('Correct usage: **ks!reverse (text to reverse)**');
+  if(command === "reverse") {
+  if(!args[0]) return message.channel.send('Correct usage: **k!reverse (text to reverse)**');
 
   function reverseString(str) {
       return str.split("").reverse().join("");
