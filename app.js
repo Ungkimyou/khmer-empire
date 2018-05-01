@@ -247,7 +247,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 }
    
-  if(command "tmute") {
+  if(command === "tmute") {
     if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Sorry, but you do not have valid permissions! If you beleive this is a error, contact an owner.");
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if (!tomute) return message.reply("Couldn't find user.");
