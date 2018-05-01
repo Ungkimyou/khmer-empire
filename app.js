@@ -542,11 +542,8 @@ else if (command === 'avatar') {
         message.delete();
         message.reply(`Has Been Unmuted ➣ ${unmutedmember.user} :white_check_mark: `)
 
-    }  
+   }  
 
-
-    message.channel.send(avatarList);
-}
 
 
 });
