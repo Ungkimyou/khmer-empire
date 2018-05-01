@@ -37,48 +37,14 @@ const talkedRecently = new Set();
 client.commands = new Discord.Collection();
 
 client.on('guildMemberAdd', member => {
-    member.guild.channels.get('440419456641138689').setName(`Total Users: ${member.guild.memberCount}`)
+    member.guild.channels.get('430642476534202369').setName(`Total Users: ${member.guild.memberCount}`)
     let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('440419409966923776').setName(`Member Count: ${humans}`)
+    member.guild.channels.get('430642476534202369').setName(`Member Count: ${humans}`)
     let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('440419356929949696').setName(`Bot Count: ${bots}`)
+    member.guild.channels.get('430642557282942976').setName(`Bot Count: ${bots}`)
 });
 
 
-client.on('messageDelete', async (message) => {
-  const logs = message.guild.channels.find('name', "ke-logs");
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('name', 'ke-logs');
-  }
-  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
-    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
-  }  
-  let user = ""
-    if (entry.extra.channel.id === message.channel.id
-      && (entry.target.id === message.author.id)
-      && (entry.createdTimestamp > (Date.now() - 5000))
-      && (entry.extra.count >= 1)) {
-    user = entry.executor.username
-  } else { 
-    user = message.author.username
-  }
-  logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
-})
-
-
-  client.on('guildCreate', guild => {
-    let channel = guild.channels.get("ke-logs")
-     const embed = new Discord.RichEmbed()
-     .setColor("#cde246")
-     .setAuthor(`Joined ${guild.name}`)
-     .setThumbnail(guild.iconURL)
-     .addField("Owner", guild.owner)
-     .addField("ID", guild.id, true)
-     .addField("Users", guild.memberCount, true)
-     .addField("Channels", guild.channels.size, true)
-     channel.send(embed);
-
-    });
 
 client.on("guildMemberAdd", (member) => {
   let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
@@ -95,11 +61,7 @@ client.on("message", (message) => {
  
 
 client.on("ready", () => {
-  // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  // Example of changing the bot's playing game to something useful. `client.user` is what the
-  // docs refer to as the "ClientUser".
-  client.user.setActivity(`${client.users.size} user ${client.guilds.size} svr | k!help`);
 });
 
 client.on("guildMemberAdd", function(member) {
@@ -107,32 +69,6 @@ client.on("guildMemberAdd", function(member) {
     member.addRole(role).catch(console.error);
 });
 
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome-leave');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField(':bust_in_silhouette: | name : ', `${member}`)
-        .addField(':microphone2: | Welcome!', `Welcome To The Server, ${member}`)
-        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
-        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
-        .addField("Name", `<@` + `${member.id}` + `>`, true)
-        .addField('Server', `${member.guild.name}`, true )
-        .setFooter(`**${member.guild.name}**`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
-});
-
-
-  
-client.on("guildMemberAdd", guild => {
-  // This event triggers when the bot joins a guild.
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(` ${client.guilds.size} servers | k!help`);
-});
 
 
 client.on("presenceUpdate", (oldMember, newMember) => {
@@ -208,11 +144,14 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
-  // Let's go with a few common example commands! Feel free to delete or change those.
+
   if(command === "ping") {
-    const m = await message.channel.send(":mag: Starting ...?");
-    m.edit(`Your Ping is ${m.createdTimestamp - message.createdTimestamp}ms :satellite: `);
-  }
+    const newemb = new Discord.RichEmbed()
+    .setTitle(message.author.tag, true)
+    .setColor(0xFFBF00)
+    .addField('```Ping : ```', new Date().getTime() - message.createdTimestamp + " ms ", true)
+    message.channel.send({embed: newemb})
+}
   
   if(command === "roleadd") {
  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
