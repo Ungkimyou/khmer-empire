@@ -125,7 +125,6 @@ client.on("message", async message => {
   if(message.content.indexOf(config.prefix) !== 0) return;
    let mutedrole = message.guild.roles.find("name", "KE-Muted");
 
-  const sm = require("string-similarity");
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
@@ -201,7 +200,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
   	.setNickname(nickname);
   await message.channel.send({
   	embed: new Discord.RichEmbed()
-  	.setTitle(`Changed BOT Nickname To : ${nickname}`)
+  	.setTitle(`Changed Bot Nickname To : ${nickname}`)
   })
  }
 
@@ -239,13 +238,23 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     let mins = Math.floor((totalSeconds / 60) % 60);
 
     var ping = client.ping
-    message.delete();
+    message.delete()
     message.channel.send(`\n= Memory usage: ${Math.round(used * 100) / 100}MB\n= Ping: ${ping}\n= Uptime: Days: ${days} | Hours: ${hours} | Minutes: ${mins} | Seconds: ${realTotalSecs}\n= Node: ${process.version}\n= Library: discord.js\n= ARCH: ${arch}\n= Plataform: ${os.platform}\n= Servers: ${client.guilds.size}\n= Users: ${client.users.size}`, {
         code: 'AsciiDoc'
     })
 
 }
  
+ if(command === "luckymember") {
+  var LuckNumber = Math.floor((Math.random() * 12000) + 0.120);
+  const numEmb = new Discord.RichEmbed()
+  .setColor(0xFFFF00)
+  .setAuthor('LUCKY NUMBER', 'https://vignette.wikia.nocookie.net/nintendo/images/0/02/Question_Block_NSMB.png/revision/latest?cb=20151206055532&path-prefix=en')
+  .addField('And your lucky number is...', `${LuckNumber}!`);
+  message.channel.send({embed: numEmb})
+
+}
+
   if(command === "rcmd") {
   if(!args[0]) return message.channel.send('Correct usage: **ks!reverse (text to reverse)**');
 
@@ -269,34 +278,6 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     
 }
 
-  if(command === "avt") {
-  let members = [];
-  let indexes = [];
-  
-  message.guild.members.forEach(function(member){
-    members.push(member.user.username);
-    indexes.push(member.id);
-  })
-  let match = sm.findBestMatch(args.join(' '), members);
-  let username = match.bestMatch.target;
-  let member = message.guild.members.get(indexes[members.indexOf(username)])
-  let usernameUser = '';
-  let UserMention = '';
-  
-  if(!args[0]) {
-    usernameUser = message.author
-    UserMention = message.member
-  } else {
-  let mention = message.mentions.users.first()
-    usernameUser = mention || member.user
-    UserMention = message.mentions.members.first() || message.guild.members.get(args[0]) || member
-  }
-  message.channel.send({embed: new Discord.MessageEmbed()
-                        .setAuthor(`${usernameUser.tag}'s avatar`)
-                        .setColor('RANDOM')
-                        .setImage(usernameUser.displayAvatarURL({size: 2048}))
-  })
-};
 
 
   if(command === "gay") {
