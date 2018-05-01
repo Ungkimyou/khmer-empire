@@ -36,21 +36,7 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get('430642476534202369').setName(`Total Users: ${member.guild.memberCount}`)
-    let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('430642476534202369').setName(`Member Count: ${humans}`)
-    let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('430642557282942976').setName(`Bot Count: ${bots}`)
-});
 
-
-
-client.on("guildMemberAdd", (member) => {
-  let welcomechannel = member.guild.channels.find(`name`, "k-empire-logs");
-    welcomechannel.send(`:speaking_head:  ${member} Has Join The Server!`);
-    member.send(`Welcome To Server, **${member.user.username}**!`);  
-});
 
 client.on("message", (message) => {
   if(message.content === "k!") {
@@ -172,7 +158,7 @@ client.on("message", async message => {
   }
 }
 
-  if(command "remvoerole") {
+  if(command === "remvoerole") {
    if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
    if(args[0] == "help"){
      message.reply("Usage: !removerole <user> <role>");
