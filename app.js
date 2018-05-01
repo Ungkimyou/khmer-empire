@@ -195,7 +195,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 }
  
- if(command === "nick" {
+ if(command === "nick") {
   let nickname = args.join(' ')
   message.guild.members.get('438304216893620240')
   	.setNickname(nickname);
