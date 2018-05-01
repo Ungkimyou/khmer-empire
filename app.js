@@ -205,10 +205,10 @@ client.on("message", async message => {
    await(rMember.removeRole(gRole.id));
 
    try{
+     message.delete()
      await rMember.send(`RIP, you lost the ${gRole.name} role.`)
    }catch(e){
      message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
-     message.delete()
    }
  }
 
@@ -600,7 +600,7 @@ if (command === "userinfo") {
         if (!kickreason) return message.reply("Please indicate a reason for the kick!") // if no reason
         kickedmember.kick(kickreason) //if reason, kick
             .catch(error => message.reply(`Sorry @${message.author} I couldn't kick because of : ${error}`)); //if error, display error
-        message.reply(`\n${kickedmember.user.username} Has Kick By : ${message.author.username} \nBecause: ${kickreason}`); // sends a message saying he was kicked
+        message.reply(` Has Kick » ${kickedmember.user.username} Because: ${kickreason}`); // sends a message saying he was kicked
     }
   
   if(command === "ban") {
