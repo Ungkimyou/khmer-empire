@@ -452,7 +452,7 @@ if (command === "userinfo") {
     .addField('» Serverinfo', "Show Info About in Server")
     .addField('» Botinfo', "Show Into About on BOT")
     .addField('» Usereinfo ', "Show info About Yourself to #userinfo")
-    .setTitle('Admin-Commands')
+    .setDescription('Admin-Commands')
     .addField('» Say', "Bot is say")
     .addField('» Embed', "Bot is say Embed TEXT")
     .addField('» ChatEmbed', "Chat To #chat | k!chatembed help")
