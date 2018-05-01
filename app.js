@@ -472,7 +472,7 @@ if (command === "userinfo") {
     if(args[0] == "help"){
     message.reply("```Create Role [KE-Muted] first and add KE-Muted off Perms : ViewChannel-ReadChannel-ChatMessage to Channel : k!mute @user @reason```");
     return;
-  }
+   }
         var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
         if (!mutedmember) return message.reply("Please Mention a Member You Want To Mute :x: !") // if there is no kickedmmeber var
         if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I Cannot Mute This Member!") // if memebr is an admin
@@ -494,8 +494,7 @@ if (command === "userinfo") {
             .catch(error => message.reply(`Sorry ${message.author} I Couldn't Mute Because of : ${error} :x: `)); 
         message.delete();
         message.reply(`Has Been Unmuted ➣ ${unmutedmember.user} :white_check_mark: `)
-
-    }
+ }
 
  if (command === "avatar") {
    let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
