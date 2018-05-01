@@ -194,7 +194,15 @@ if( swearWords.some(word => message.content.includes(word)) ) {
  });
 
 }
-
+ 
+ if(command === "nick" {
+  let nickname = args.join(' ')
+  message.guild.members.get('438304216893620240')
+  	.setNickname(nickname);
+  await message.channel.send({
+  	embed: new Discord.RichEmbed()
+  	.setTitle(`Changed Server Nickname to ${nickname}`)
+  })
 
   if(command === "gay") {
    message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
