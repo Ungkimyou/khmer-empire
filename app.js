@@ -131,19 +131,20 @@ client.on('guildMemberAdd', member => {
         member.addRole(role);
 });
 
-client.on('guildMemberRemove', member => {
+bot.on('guildMemberRemove', member => {
     let channel = member.guild.channels.find('name', 'welcome-leave');
     let memberavatar = member.user.avatarURL
         if (!channel) return;
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(memberavatar)
-        .addField('Name:', `${member}`, true)
-        .addField('Has Let the Server', ';(', true)
-        .addField('Bye Bye :(', 'We will all miss you!', true)
-        .addField('The server now as', `${member.guild.memberCount}` + " members", true)
-        .setFooter(`**${member.guild.name}`, true)
+        .addField('Name:', `${member}`)
+        .addField('Has Let the Server', ';(')
+        .addField('The server now as', `${member.guild.memberCount}` + " members")
+        .setFooter(`${member.guild.name}`)
         .setTimestamp()
+
+        channel.sendEmbed(embed);
 });
 
 client.on("message", async message => {
@@ -178,15 +179,16 @@ client.on("message", async message => {
    await(rMember.addRole(gRole.id));
 
    try{
+     message.delete()
      await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
    }catch(e){
      console.log(e.stack);
      message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
-     message.delete()
+
   }
 }
 
-  if(command === "remvoerole") {
+  if(command === "removerole") {
    if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
    if(args[0] == "help"){
      message.reply("Usage: !removerole <user> <role>");
