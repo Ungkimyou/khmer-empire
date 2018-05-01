@@ -1,4 +1,4 @@
-const sm = require('string-similarity');
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
@@ -125,7 +125,7 @@ client.on("message", async message => {
   if(message.content.indexOf(config.prefix) !== 0) return;
    let mutedrole = message.guild.roles.find("name", "KE-Muted");
 
-
+  const sm = require("string-similarity");
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
