@@ -1,4 +1,4 @@
-
+const sm = require('string-similarity');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
@@ -36,7 +36,6 @@ const talkedRecently = new Set();
 
 client.commands = new Discord.Collection();
 
-const sm = require('string-similarity');
 
 client.on("message", (message) => {
   if(message.content === "k!") {
