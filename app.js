@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const ms = require("ms");
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
 
@@ -243,6 +244,44 @@ if( swearWords.some(word => message.content.includes(word)) ) {
     message.channel.send(`\n= Memory usage: ${Math.round(used * 100) / 100}MB\n= Ping: ${ping}\n= Uptime: Days: ${days} | Hours: ${hours} | Minutes: ${mins} | Seconds: ${realTotalSecs}\n= Node: ${process.version}\n= Library: discord.js\n= ARCH: ${arch}\n= Plataform: ${os.platform}\n= Servers: ${client.guilds.size}\n= Users: ${client.users.size}`, {
         code: 'AsciiDoc'
     })
+
+}
+   
+  if(command "tmute") {
+    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Sorry, but you do not have valid permissions! If you beleive this is a error, contact an owner.");
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if (!tomute) return message.reply("Couldn't find user.");
+    if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("The user you are trying to mute is either the same, or higher role than you.");
+    let muterole = message.guild.roles.find(`name`, "Muted");
+
+    if (!muterole) {
+        try {
+            muterole = await message.guild.createRole({
+                name: "Muted",
+                color: "#000000",
+                permissions: []
+            })
+            message.guild.channels.forEach(async (channel, id) => {
+                await channel.overwritePermissions(muterole, {
+                    SEND_MESSAGES: false,
+                    ADD_REACTIONS: false
+                });
+            });
+        } catch (e) {
+            console.log(e.stack);
+        }
+    }
+
+    let mutetime = args[1];
+    if (!mutetime) return message.reply("You didn't specify a time!");
+
+    await (tomute.addRole(muterole.id));
+    message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
+
+    setTimeout(function() {
+        tomute.removeRole(muterole.id);
+        message.channel.send(`<@${tomute.id}> has been unmuted!`);
+    }, ms(mutetime));
 
 }
 
