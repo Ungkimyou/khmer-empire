@@ -5,6 +5,10 @@ const config = require("./config.json");
 
 
 const swearWords = ["fuck", "shit", "frak", "shite"];
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  message.delete();
+}
 
 
 const responses1 = [
@@ -179,10 +183,6 @@ client.on("message", async message => {
    }
  }
 
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.reply("Oh no you said a bad word!!!");
-  message.delete();
-}
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
