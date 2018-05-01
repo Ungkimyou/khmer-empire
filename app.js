@@ -114,14 +114,14 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 client.on('guildMemberAdd', member => {
     let role = member.guild.roles.find(`name`, "MEMBER");
-    let channel = member.guild.channels.find('name', 'welcome-leavee');
+    let channel = member.guild.channels.find('name', 'welcome-leave');
     let memberavatar = member.user.avatarURL
         if (!channel) return;
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(memberavatar)
         .addField(':bust_in_silhouette: | Name » ', `${member}`)
-        .addField(':microphone2: | Welcome!', `Welcome to the server, ${member}`)
+        .addField(':confetti_ball: | Welcome!', `Welcome to the server, ${member}`)
         .addField(':id: | User »', "**[" + `${member.id}` + "]**")
         .addField(':family_mwgb: | You Are The Member »', `${member.guild.memberCount}`)
         .setFooter(`${member.guild.name}`)
