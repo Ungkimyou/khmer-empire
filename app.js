@@ -3,8 +3,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
-const swearWords = ["fuck", "shit", "frak", "shite"];
 
+const swearWords = ["fuck", "shit", "frak", "shite"];
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
@@ -16,8 +16,8 @@ const responses = [
 
 function setActivity() {
     //Variable Array for what the setGame can be set to
-    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Running Commands`, `Try ${config.prefix}help`, `${config.prefix}help`,
-        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
+    var Gameinfo = [ `Running on ${client.guilds.size} Servers`, `Try ${config.prefix}help`,
+        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `user ${client.users.size}`
     ]
 
     var info = Gameinfo[Math.floor(Math.random() * Gameinfo.length)]; //Random Math to set the setGame to something in the GameInfo array
@@ -29,13 +29,12 @@ function setActivity() {
 
 }
 
-setInterval(setActivity, 1000 * 60 * 2)
-
+setInterval(setActivity, 900 * 60 * 2)
 
 const talkedRecently = new Set();
 
-client.commands = new Discord.Collection();
 
+client.commands = new Discord.Collection();
 
 
 client.on("message", (message) => {
@@ -55,32 +54,6 @@ client.on("ready", () => {
 client.on("guildMemberAdd", function(member) {
     let role = member.guild.roles.find("name", "MEMBER");
     member.addRole(role).catch(console.error);
-});
-
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome-leave');
-    let memberavatar = member.user.avatarURL
-        if (!channel) return;
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField(':bust_in_silhouette: | name : ', `${member}`)
-        .addField(':microphone2: | Welcome!', `Welcome To The Server, ${member}`)
-        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
-        .addField(':family_mwgb: | Yor Are The Member', `${member.guild.memberCount}`)
-        .addField("Name", `<@` + `${member.id}` + `>`, true)
-        .addField('Server', `${member.guild.name}`, true )
-        .setFooter(`**${member.guild.name}**`)
-        .setTimestamp()
-
-        channel.sendEmbed(embed);
-});
-
-
-  
-client.on("guildMemberAdd", guild => {
-  // This event triggers when the bot joins a guild.
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
 });
 
 
@@ -154,10 +127,14 @@ client.on("message", async message => {
    let mutedrole = message.guild.roles.find("name", "KE-Muted");
 
 
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  message.delete();
+}
+
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
-  // Let's go with a few common example commands! Feel free to delete or change those.
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
     .setTitle(message.author.tag, true)
@@ -165,33 +142,7 @@ client.on("message", async message => {
     .addField('```Ping : ```', new Date().getTime() - message.createdTimestamp + " ms ", true)
     message.channel.send({embed: newemb})
 }
-  
-  if(command === "roleadd") {
- if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
-  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!rMember) return message.reply("Couldn't find that user, yo.");
-  let role = args.join(" ").slice(22);
-  if(!role) return message.reply("Specify a role!");
-  let gRole = message.guild.roles.find(`name`, role);
-  if(!gRole) return message.reply("Couldn't find that role.");
 
-  if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
-  await(rMember.addRole(gRole.id));
-
-  try{
-    await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-  }catch(e){
-    console.log(e.stack);
-    message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
-  }
-}
-
-
-
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.reply("Oh no you said a bad word!!!");
-  message.delete();
-}
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
@@ -203,15 +154,12 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 }
 
 
-  if(command === "gay") {
-   message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
-   message.delete()
-}  
-
   if(command === "dick") {
    message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
    message.delete()
 }  
+
+
 
 
   if(command === "say") {
@@ -222,7 +170,45 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
   }
 
+ if(command === "8ball") {
+ 
+ if(!args[0]) {
+  const errEmbed = new Discord.RichEmbed()
+  .setColor(0xFF0000)
+  .setAuthor('ERROR')
+  .setTitle(':exclamation: Usage: **k!8ball (question)**');
+  message.channel.send({embed: errEmbed})
+  return;
+}
+var sayings = ["It is certain",
+										"It is decidedly so",
+										"Without a doubt",
+										"Yes, definitely",
+										"You may rely on it",
+										"As I see it, yes",
+										"Most likely",
+										"Outlook good",
+										"Yes",
+                                                                                "i don't know",
+										"Signs point to yes",
+										"Reply hazy try again",
+										"Ask again later",
+										"Better not tell you now",
+										"Cannot predict now",
+										"Concentrate and ask again",
+										"Don't count on it",
+										"My reply is no",
+										"My sources say no",
+										"Outlook not so good",
+										"Very doubtful"];
 
+			var result = Math.floor((Math.random() * sayings.length) + 0);
+      const ballEmb = new Discord.RichEmbed()
+      .setColor(0x00FFFF)
+      .setAuthor('8Ball', 'https://findicons.com/files/icons/1700/2d/512/8_ball.png')
+      .addField(args, sayings[result]);
+			message.channel.send({embed: ballEmb})
+}
 
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
@@ -255,7 +241,8 @@ if (command === "serverinfo") {
    .addField("Humans", message.guild.memberCount - message.guild.members.filter(m => m.user.bot).size, true)
    .addField("BOT", message.guild.members.filter(m => m.user.bot).size, true)
    .addField("Online", online.size, true)
-   .addField("Roles", message.guild.roles.size, true);
+   .addField("Roles", message.guild.roles.size, true)
+   .addField("You Join", message.member.joinedAt, true)
    message.channel.send(serverembed);
 
 }
@@ -337,6 +324,36 @@ if (command === "userinfo") {
      message.channel.send(helpembed);
  
   }
+
+    if (command == "mute") { // creates the command mute
+
+    if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
+    if(args[0] == "help"){
+    message.reply("```Create Role [KE-Muted] first and add KE-Muted off Perms : ViewChannel-ReadChannel-ChatMessage to Channel```");
+    return;
+  }
+        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!mutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I cannot mute this member!") // if memebr is an admin
+        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
+        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
+        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
+        if (!mutereason) return message.reply("Please indicate a reason for the mute!") // if no reason
+        mutedmember.addRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(` Has Been Muted => ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
+    }
+
+    if (command == "unmute") { // creates the command unmute
+     if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
+        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
+        if (!unmutedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
+        unmutedmember.removeRole(mutedrole) //if reason, kick
+            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error}`)); //if error, display error
+        message.reply(`Has Been Unmute : ${unmutedmember.user} :white_check_mark: `); // sends a message saying he was kicked
+    }
+
+
 
 
     if(command == "report") {
@@ -426,11 +443,13 @@ if (command === "userinfo") {
     let bicon = client.user.displayAvatarURL;
     let botembed = new Discord.RichEmbed()
     .setDescription("Bot Information")
-    .setColor("#15f153")
-    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881")
+    .setColor('RANDOM')
     .setThumbnail(bicon)
-    .addField("Bot Name", client.user.username)
-    .addField("Created On", client.user.createdAt);
+    .addField("Bot Name", client.user.username, true)
+    .addField("TotalUser", client.users.size, true)
+    .addField("On Servers", client.guilds.size, true)
+    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881", true)
+    .addField("Created On", client.user.createdAt, true);
 
     return message.channel.send(botembed);
 }
@@ -466,17 +485,22 @@ if (command === "userinfo") {
     }
 
 
- if (command === "avatar") {
-   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
+else if (command === 'avatar') {
+    if (!message.mentions.users.size) {
 
-   let embed = new Discord.RichEmbed() 
-	.setTitle(member.tag + '\' avatar')
-	.setImage(member.avatarURL);
+     return message.author.send(`Your Avatar is: ${message.author.displayAvatarURL}`);
+    }
 
-    message.channel.send({embed})
+    const avatarList = message.mentions.users.map(user => {
+        return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
+    });
 
-}
 
+    if (command == "cookie") { // creates the command cookie
+        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
+        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username @munber)")
+        message.delete() // sends the error message if no-one is mentioned
+    }
 
   if (command === "listemojis") {
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
@@ -485,63 +509,20 @@ if (command === "userinfo") {
  }
 
   
-  if(command === "eval") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-      const code = args.join(" ");
-      let evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.send(clean(evaled), {code:"xl"});
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-      message.delete().catch(O_o=>{}); 
-      message.channel.send(sayMessage);
-      message.delete()
-    
-  }
-
-    if (command == "mute") { // creates the command mute    if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
-    if(args[0] == "help"){
-    message.reply("```Create Role [KE-Muted] first and add KE-Muted off Perms : ViewChannel-ReadChannel-ChatMessage to Channel : k!mute @user @reason```");
-    return;
-    }
-        var mutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!mutedmember) return message.reply("Please Mention a Member You Want To Mute :x: !") // if there is no kickedmmeber var
-        if (mutedmember.hasPermission("ADMINISTRATOR")) return message.reply("I Cannot Mute This Member!") // if memebr is an admin
-        var mutereasondelete = 10 + mutedmember.user.id.length //sets the length of the kickreasondelete
-        var mutereason = message.content.substring(mutereasondelete).split(" "); // deletes the first letters until it reaches the reason
-        var mutereason = mutereason.join(" "); // joins the list kickreason into one line
-        if (!mutereason) return message.reply("Please Indicate a Reason For The Mute ! :x:") // if no reason
-        mutedmember.addRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't mute because of : ${error} :x: `)); 
-        message.delete();
-        message.reply(` Has Been Muted ➣ ${mutedmember.user} Because: ${mutereason} :white_check_mark:`); // sends a message saying he was kicked
-    }
-
-    if (command == "unmute") { // creates the command unmute
-     if(!message.member.permissions.has('MUTE_MEMBERS')) return message.reply("Sorry : you don't have MUTE_MEMBERS permission to do this "); 
-        var unmutedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!unmutedmember) return message.reply("Please Mention a Member You Want To Unmute :x: !") // if there is no kickedmmeber var
-        unmutedmember.removeRole(mutedrole) //if reason, kick
-            .catch(error => message.reply(`Sorry ${message.author} I Couldn't Mute Because of : ${error} :x: `)); 
-        message.delete();
-        message.reply(`Has Been Unmuted ➣ ${unmutedmember.user} :white_check_mark: `)
-
-   }  
-
-    message.channel.send(avatarList);
-}
+  if(command === "username") {
+     let sicon = message.guild.iconURL;
+     let usernameembed = new Discord.RichEmbed()
+     .setColor("#ae67fc")
+     .setThumbnail(sicon)
+     .addField("Your Username :", message.author.username);
+   
+     message.channel.send(usernameembed);
+  } 
+  
 
 
 });
 
-function clean(text) {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-      return text;
-}
 
 client.login(config.token);
            
