@@ -693,19 +693,26 @@ else if (command === 'avatar') {
 
 
     if (command == "cookie") { // creates the command cookie
-        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") // sends the message saying someone has given someone else a cookie if someone mentions someone else
+        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") 
         else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username @munber)")
         message.delete() // sends the error message if no-one is mentioned
     }
 
 
 
+  if(command === "emojilist") {
 
-  if (command === "listemojis") {
-  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
-  message.channel.send(emojiList);
-
- }
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
+        const EmojiList = new Discord.MessageEmbed() 
+            .setTitle('➠ Emoji\'s') 
+            .setAuthor(message.guild.name, message.guild.iconURL `https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=2048`) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setTimestamp() 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
+        message.channel.send(List); 
+    }
 
   
   if(command === "username") {
