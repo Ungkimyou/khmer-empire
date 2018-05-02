@@ -1,11 +1,8 @@
-
 const Discord = require("discord.js");
 const config = require("./config.json");
 
 
 const client = new Discord.Client();
-
-
 
 
 
@@ -50,7 +47,6 @@ client.on("message", (message) => {
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 });
-
 
 
 client.on("presenceUpdate", (oldMember, newMember) => {
