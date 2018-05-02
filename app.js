@@ -703,8 +703,8 @@ else if (command === 'avatar') {
   if(command === "emojilist") {
 
         const List = message.guild.emojis.map(e => e.toString()).join(" ");
-        const EmojiList = new Discord.MessageEmbed() 
-            .setTitle('➠ Emoji\'s') 
+        const EmojiList = new Discord.RichEmbed() 
+            .setTitle("» EmojiList :") 
             .setAuthor(message.guild.name, message.guild.iconURL `https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=2048`) 
             .setColor('RANDOM') 
             .setDescription(List) 
