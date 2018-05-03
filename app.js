@@ -676,41 +676,6 @@ else if (command === 'avatar') {
     const avatarList = message.mentions.users.map(user => {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
-
- if (command === "av") {
-   let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
-
-   let embed = new Discord.RichEmbed() 
-	.setTitle(member.tag + '\' avatar')
-	.setImage(member.avatarURL);
-
-    message.channel.send({embed})
-
-}
-
-
-    if (command == "cookie") { // creates the command cookie
-        if (args[1]) message.channel.send(message.author.toString() + " has given " + args[1].toString() + " a cookie! to  :cookie:") 
-        else message.channel.send("Who do you want to send a cookie to? :cookie: (Correct usage: k!cookie @username @munber)")
-        message.delete() // sends the error message if no-one is mentioned
-    }
-
-
-
-  if(command === "emojilist") {
-
-        const List = message.guild.emojis.map(e => e.toString()).join(" ");
-        const EmojiList = new Discord.RichEmbed() 
-            .setTitle("» EmojiList :") 
-            .setAuthor(message.guild.name, message.guild.iconURL `https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=2048`) 
-            .setColor('RANDOM') 
-            .setDescription(List) 
-            .setTimestamp() 
-            .setFooter(message.guild.name) 
-        message.channel.send(EmojiList) 
-        message.channel.send(List); 
-    }
-
   
   if(command === "username") {
      let sicon = message.guild.iconURL;
@@ -722,21 +687,6 @@ else if (command === 'avatar') {
      message.channel.send(usernameembed);
   } 
   
-  if(command === "eval") {
-    if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("you don't have permissions to use this !");
-      const code = args.join(" ");
-      let evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.send(clean(evaled), {code:"xl"});
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-      message.delete().catch(O_o=>{}); 
-      message.channel.send(sayMessage);
-      message.delete()
-    
-  }
 
     if (command == "mute") { // creates the command mute
     if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no perms
