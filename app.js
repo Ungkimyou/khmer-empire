@@ -202,11 +202,11 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
  
-if (message.content === '@everyone') {
-    message.delete()
-    message.channel.send(args.join(" "))
-        .then(message => message.react("✅"))
-        .then(message.react("❌"));
+const swearWords = ["FUCK", "fuck", "fk", "SHIT", "shit", "sht", "PORN", "porn", "XNXX", "xnxx","DICK"];
+message.delete('4500');
+message.react('❌');
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
 }
 
   if(command === "reminder") {
