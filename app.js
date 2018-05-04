@@ -93,11 +93,11 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-const swearWords = ["fuck", "FUCK", "SHIT", "shit", "PORN", "porn", "xnxx", "XNXX"];
-message.delete(4500)
+const swearWords = ["fuck", "FUCK", "SHIT", "shit", "PORN", "porn", "xnxx", "XNXX", "sh**"];
 if( swearWords.some(word => message.content.includes(word)) ) {
   message.reply("Oh no you said a bad word!!!");
   message.react('❌');
+  message.delete(4500);
  }
 });
 
