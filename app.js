@@ -55,6 +55,14 @@ const responses1 = [
 
 client.commands = new Discord.Collection();
 
+client.on("message", (message) => {
+const swearWords = ["fuck", "FUCK", "SHIT", "shit", "PORN", "porn", "xnxx", "XNXX", "sh**"];
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  message.react('❌');
+  message.delete(9999);
+ }
+});
 
 client.on("message", (message) => {
   if(message.content === "k!") {
