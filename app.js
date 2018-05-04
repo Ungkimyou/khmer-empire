@@ -92,6 +92,14 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 });
 
+client.on("message", (message) => {
+const swearWords = ["fuck", "FUCK", "SHIT", "shit", "PORN", "porn", "xnxx", "XNXX"];
+message.delete(4500)
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  message.react('❌');
+ }
+});
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   let guild = newMember.guild;
@@ -202,13 +210,6 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
  
-const swearWords = ["FUCK", "fuck", "fk", "SHIT", "shit", "sht", "PORN", "porn", "XNXX", "xnxx","DICK"];
-message.delete('4500');
-message.react('❌');
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.reply("Oh no you said a bad word!!!");
-}
-
   if(command === "reminder") {
       let reminderTime = args[0];
       if(!reminderTime) return message.channel.send("**Specify a time for me to remind you. Usage: `k!remind 15min | Code**");
