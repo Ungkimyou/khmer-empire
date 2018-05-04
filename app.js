@@ -1,24 +1,86 @@
+const info = require('systeminformation');
+const urban = require("urban");
+const sm = require('string-similarity');
+const randomPuppy = require('random-puppy');
+const request = require("request");
+const db = require('quick.db');
+const figlet = require('figlet');
+const economy = require('discord-eco');
+const ms = require("ms");
+const weather = require('weather-js');
+const snek = require('snekfetch');
+const encode = require('strict-uri-encode');
+const superagent = require("superagent");
 const Discord = require("discord.js");
+const moment = require("moment");
+require("moment-duration-format");
 const config = require("./config.json");
-const Fortnite = require("fortnite");
+const fortnite = require('fortnite.js');
+const Fortnite = new fortnite(process.env.FORTNITEAPI);
+const platforms = ['PC', 'XBOX', 'PS4'];
+const fs = require('fs');
+function platform(query, fort) {
+    if(query == 'PC') return fort.PC;
+    else if(query == 'XBOX') return fort.XBOX;
+    else if(query == 'PS4') return fort.PS4;
+}
+const {
+    parse
+} = require('fast-html-parser');
+const {
+    get
+} = require('snekfetch');
+const {
+    parse: qs
+} = require('querystring');
+const {
+    lazy: uf
+} = require('unfluff');
+const profanities = require('profanities');
+const exec = require('child_process').exec;
 
-const ft = new Fortnite(process.env.FT_TOKEN);
+let os = require('os')
+let cpuStat = require("cpu-stat")
+
+ 
 const client = new Discord.Client();
 
+const api = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
+const talkedRecently = new Set();
 
+const randos = ['f84c6a790a4e45e0879bcd49ebd4c4e2', '879d4fb880a84b80bc474d0f85964a47', '61699b2ed3274a019f1e0ea8c3f06bc6', '853c80ef3c3749fdaa49938b674adae6'];
+
+async function getUUID (name) {
+	let json = await request( { uri: `https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`, json: true } );
+	if (!json || json.error) return undefined;
+	else return json.id;
+}
 
 const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
 ]
 
-const responses = [
-   'Yes , You Gay !', 'No , You Not Gay !', 'Maybe', 'I Don`t Know', 'Nope', 'Gay . 50%'
-]
+client.commands = new Discord.Collection();
+
+
+client.on("message", (message) => {
+  if(message.content === "k!") {
+    message.channel.send(" do kb!help for help !");
+    message.delete()
+  }
+});
+ 
+client.on("guildCreate", async guild => {
+  const invite = await guild.channels.first().createInvite({
+    maxAge: 0
+  });
+  console.log(`Bot Has Invite To New Guild » ${guild.name} with invite: https://discord.gg/${invite.code}`)
+});
 
 function setActivity() {
     //Variable Array for what the setGame can be set to
-    var Gameinfo = [`Prefix: ${config.prefix}`, `Running on ${client.guilds.size} Servers`, `Try ${config.prefix}help`, `${config.prefix}help`,
-        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping : ${(client.ping).toFixed(0)} Ms`, `KhmerBOT | Cambodia`
+    var Gameinfo = [`Prefix: ${config.prefix}`, `Run on ${client.guilds.size} Servers`, `${config.prefix}help`,
+        `Using ${(((process.memoryUsage().heapUsed)/1024)/1024).toFixed(0)}Mb's of RAM`, `Ping to API: ${(client.ping).toFixed(0)} Ms`, `BORK!!!` // Change these to what you want, add as many or as few as you want to
     ]
 
     var info = Gameinfo[Math.floor(Math.random() * Gameinfo.length)]; //Random Math to set the setGame to something in the GameInfo array
@@ -30,20 +92,8 @@ function setActivity() {
 
 }
 
-setInterval(setActivity, 1200 * 60 * 2)
+setInterval(setActivity, 1000 * 60 * 2)
 
-const talkedRecently = new Set();
-
-client.commands = new Discord.Collection();
-
-
-client.on("message", (message) => {
-  if(message.content === "k!") {
-    message.channel.send(" do k!help for help !");
-    message.delete()
-  }
-});
- 
 
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
@@ -110,6 +160,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
   }  
 });
 
+
 client.on('guildMemberAdd', member => {
     let role = member.guild.roles.find(`name`, "MEMBER");
     let channel = member.guild.channels.find('name', 'welcome-leave');
@@ -149,22 +200,445 @@ client.on("message", async message => {
 
   if(message.author.bot) return;
  
-
-  if(message.content.indexOf(config.prefix) !== 0) return;
+       if (talkedRecently.has(message.author.id)) {
+            message.channel.send("**Wait 20 Second Before Getting Typing This Again.** - " + message.author);
+    } else {
+   if(message.content.indexOf(config.prefix) !== 0) return;
    let mutedrole = message.guild.roles.find("name", "KE-Muted");
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  
+ 
+if (message.content === '@everyone') {
+    message.delete()
+    message.channel.send(args.join(" "))
+        .then(message => message.react("✅"))
+        .then(message.react("❌"));
+}
 
-  if(command === "ping") {
-    const newemb = new Discord.RichEmbed()
-    .setTitle(message.author.tag, true)
-    .setColor(0xFFBF00)
-    .addField('```Ping : ```', new Date().getTime() - message.createdTimestamp + " ms ", true)
-    message.channel.send({embed: newemb})
+  if(command === "reminder") {
+      let reminderTime = args[0];
+      if(!reminderTime) return message.channel.send("**Specify a time for me to remind you. Usage: `k!remind 15min | Code**");
+
+      let reminder = args.slice(1).join(" ");
+
+      let remindEmbed = new Discord.RichEmbed()
+      .setColor('#ffffff')
+      .setAuthor(`${message.author.username}`, message.author.displayAvatarURL)
+      .addField("Reminder", `\`\`\`${reminder}\`\`\``)
+      .addField("Time", `\`\`\`${reminderTime}\`\`\``)
+      .setTimestamp();
+
+      message.channel.send(remindEmbed);
+      message.delete(1000);
+
+
+      setTimeout(function(){
+        let remindEmbed = new Discord.RichEmbed()
+        .setColor('#ffffff')
+        .setAuthor(`${message.author.username}`, message.author.displayAvatarURL)
+        .addField("Reminder", `\`\`\`${reminder}\`\`\``)
+        .setTimestamp()
+
+        message.channel.send(remindEmbed);
+      }, ms(reminderTime));
+
+  }
+  
+  if(command === "meme") {
+  if(message.author.bot) return;
+  if(message.channel.type !=="text") return;
+  
+   randomPuppy('memes')
+  .then(url => {
+      const embed = new Discord.RichEmbed()
+        .setTimestamp()
+        .setImage(url)
+        .setColor('RANDOM')
+        message.channel.send({ embed });
+  })
+}
+
+  if(command === "get") {
+  let [title, contents] = args.join(" ").split("|");
+  if(!contents) {
+    [title, contents] = ["Achievement Get", title];
+  }
+  let rnd = Math.floor((Math.random() * 39) + 1);
+  if(args.join(" ").toLowerCase().includes("burn")) rnd = 38;
+  if(args.join(" ").toLowerCase().includes("cookie")) rnd = 21;
+  if(args.join(" ").toLowerCase().includes("cake")) rnd = 10;
+
+  if(title.length > 22 || contents.length > 22) return message.edit("Max Length: 22 Characters. Soz.").then(message.delete.bind(message), 2000);
+  const url = `https://www.minecraftskinstealer.com/achievement/a.php?i=${rnd}&h=${encodeURIComponent(title)}&t=${encodeURIComponent(contents)}`;
+  snek.get(url)
+   .then(r=>message.channel.send("", {files:[{attachment: r.body}]}));
+  message.delete(200);
+
 }
   
+  if(command === "hentai") {
+  if(!message.channel.nsfw) {return message.channel.send(`:underage: **This channel is not marked as NSFW!** :angry: `)}
+  else{
+  randomPuppy('hentai')
+            .then(url => {
+                const embed = new Discord.RichEmbed()             
+                .setTitle(`Hentai NSFW`)
+                .setFooter(`Requested by ${message.author.tag}`)
+                .setImage(url)
+                .setColor("#FF67CD")
+    return message.channel.send({ embed });
+            })
+  }
+}
+
+  if(command === "hastebin") {
+	if (!args.slice(0)
+		.join(' ')) return message.channel.send('Please, Provide the text! Usage: ${client.prefix}hastebin <text>')
+		.then(message => message.delete({
+			timeout: 10000
+		}));
+	snek.post('https://hastebin.com/documents')
+		.send(args.slice(0)
+			.join(' '))
+		.then(body => {
+			message.channel.send('**Posted Text To Hastebin**\n__**URL**__: https://hastebin.com/' + body.body.key);
+		});
+
+  }
+   
+  if(command === "svs") {
+  let msg =  client.guilds.map(guild => `**${guild.name}** Members: ${guild.memberCount}`).join('\n');
+  let embed = new Discord.RichEmbed()
+  .setTitle(`I am in ${client.guilds.size} guilds!`)
+  .setDescription(`${msg}`)
+  .setColor("#ebf442");
+  message.channel.send(embed);
+}
+
+  if(command === "pussy") {
+    if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
+
+    var subreddits = [
+        'pussy',
+        'rearpussy',
+        'simps',
+        'vagina',
+        'MoundofVenus',
+        'PerfectPussies',
+        'spreading'
+    ]
+    var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
+
+    randomPuppy(sub)
+        .then(url => {
+            snek.get(url).then(r => {
+                fs.writeFile(`pussy.jpg`, r.body)
+                message.channel.sendFile(r.body)
+                fs.unlink(`./pussy.jpg`)
+            })
+        })
+}
+
+  if(command === "boobs") {
+    var max = 12449;
+    var min = 10000;
+    var MathRan = Math.floor(Math.random() * (max - min + 0)) + min;
+    var MathLoL = Math.round(MathRan);
+    if (!message.channel.nsfw) {
+        message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
+    } else {
+        snek.get("http://media.oboobs.ru/boobs_preview/" + MathLoL + ".jpg").then(r => {
+            fs.writeFile(`boobs.jpg`, r.body)
+            message.channel.sendFile(r.body)
+            fs.unlink(`./boobs.jpg`)
+        })
+    }
+}
+
+
+  if(command === "anime") {
+    if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
+
+    var subreddits = [
+        'HENTAI_GIF',
+        'hentai_irl'
+    ]
+    var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
+
+    randomPuppy(sub)
+        .then(url => {
+            snek.get(url).then(r => {
+                fs.writeFile(`hentai.jpg`, r.body)
+                message.channel.sendFile(r.body)
+                fs.unlink(`./hentai.jpg`)
+            })
+        })
+}
+
+  if(command === "discrim") {
+    const embed = new Discord.RichEmbed()
+        .setColor(0xffffff);
+    if (isNaN(args[0]) || args[0] > 9999 || args[0] < 1) { // Run if out of parameters
+        embed.setFooter('Sorry, please enter a valid discrim.');
+        return message.channel.send(embed);
+        
+    }
+   let resp = '';
+   client.users.map(function(user) {
+       if (user.discriminator == args[0]) return resp += `${user.username}\n`;
+       else return; // If not, return
+       
+   })
+    embed.setTitle(`Discrim: ${args[0]}`)
+        .setDescription(resp);
+
+    message.channel.send(embed)
+    
+}
+ 
+  if(command === "ping") {
+    const newemb = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setDescription(`Ping | ${Date.now() - message.createdTimestamp} ms`)
+    message.channel.send({embed: newemb})
+    message.react("✅")
+}
+ 
+  if(command === "setwatching") {
+  if (message.author.id !== ('356510829920780289')) return message.channel.send("**You Can\'t Change Watching BOT | TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881**");
+  const status = args.join(' ');
+  if (status.length === 0) {
+    const embed = new Discord.RichEmbed()
+      .setColor("#7289DA")
+      .setDescription(`🚫 ${config.prefix}setwatching [status]!`);
+    message.channel.send({ embed });
+  }
+
+  else if (status.length !== 0) {
+  client.user.setActivity(`${status}`, {  type: "WATCHING"});
+  const embed = new Discord.RichEmbed()
+    .setColor("#7289DA")
+    .setDescription(`✅ ${message.author.tag} You Sucessfully Changed Watching Status !`);
+  message.channel.send({ embed });
+  message.delete(5000);
+  message.react('✅');
+}};
+
+  if(command === "search") {
+    const time = Date.now();
+    const term = args.join(' ');
+    const searchurl = 'http://google.com/search?safe=active&gl=uk&hl=en&q=' + encodeURIComponent(term);
+    const searchmessage = await message.channel.send('Searching For 🔍 ' + term);
+    const body = await get(searchurl);
+    const $ = new parse(body.text);
+    let badwords = args.join('porn', 'pornhub', 'big tits', 'black dick', 'black cock', 'pussy', 'hentai', 'nsfw', 'ecchi', 'xnxx', 'fuck', 'penis', 'Porn', 'NSFW', 'dick', 'SHIT', 'shit', 'dick');
+    if (!badwords) return message.author.send(":underage: This is Not an NSFW Channel :underage:");
+
+    const result = (await Promise.all(
+        $.querySelectorAll('.r')
+        .filter(e => e.childNodes[0].tagName === 'a' && e.childNodes[0].attributes.href)
+        .filter(e => e.childNodes[0].attributes.href.replace('/url?', '').indexOf('/search?') === -1)
+        .slice(0, 5)
+        .map(async (e) => {
+            let url = e.childNodes[0].attributes.href.replace('/url?', '');
+            if (url.startsWith('/')) url = 'http://google.com' + url;
+            else url = qs(url).q || url;
+
+            const body = await get(url);
+            const details = uf(body.text);
+            const obj = {
+                url,
+                snippet: () => {
+                    const x = (details.description() || '').substring(0, 240);
+                    const y = (details.text() || '').substring(0, 240) + '...';
+                    return y.includes(x) ? y : x + '\n' + y;
+                },
+                image: () => details.image()
+            };
+            try {
+                obj.title = new parse(body.text).querySelector('head').childNodes.find(e => e.tagName === 'title').childNodes[0].text;
+            } catch (e) {
+                obj.title = details.title() || 'No title found';
+            }
+            return obj;
+        })
+    ));
+    if (!result.length) return searchmessage.edit(`${lang.noRslt}` + term);
+    const first = result.shift();
+    const vanityurl_1 = /^https?:\/\/[\w\.\-_]+(?::\d+|\.\w*)(?:\/|$)/g.exec(first.url);
+    const vanityurl = vanityurl_1 && vanityurl_1[0] ? vanityurl_1[0] : first.url;
+    const embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setAuthor(`Results for "${term}"`, 'https://lh4.googleusercontent.com/-v0soe-ievYE/AAAAAAAAAAI/AAAAAAADwkE/KyrKDjjeV1o/photo.jpg', searchurl)
+        .setTitle(`${first.title.substring(0, 200)} - ${vanityurl.substring(0, 50) + (vanityurl.length > 50 ? '...' : '')}`)
+        .setURL(first.url);
+    try {
+        embed.setThumbnail(first.image().replace(/^\.*\/(.*)/, `${first.url}$1`));
+    } catch (e) {
+        embed.thumbnail = undefined;
+        void e;
+    }
+    embed.setDescription(first.snippet())
+        .setTimestamp()
+        .setFooter(Date.now() - time + ' ms');
+    const embeds = result.reduce((acc, r) => {
+        const vu_1 = /^https?:\/\/[\w\.\-_]+(?::\d+|\.\w*)(?:\/|$)/g.exec(r.url);
+        const vu = vu_1 && vu_1[0] ? vu_1[0] : r.url;
+        const u = r.url.substring(0, 200) + (r.url.length > 200 ? '...' : ''); //203
+        const text = `${r.title.substring(0, 200) + (r.title.length > 200 ? '...' : '')}\n[${u}](${u.endsWith('...') ? vu.substring(0, 300) + (vu.length > 300 ? '...' : '') : u})`;
+        if (acc[acc.length - 1].length + text.length < 1000) acc[acc.length - 1] += `${text}\n`;
+        else acc[acc.length] = text;
+        return acc;
+    }, ['']);
+    for (const [i, e] of embeds.entries()) {
+        embed.addField(i === 0 ? 'Top Results' : '\u200b', e);
+    }
+    searchmessage.edit({
+        embed
+    });
+}
+
+ if(command === "dadjokez") {
+    let sa = require ("superagent");
+    let {body} = await sa
+    .get(`https://icanhazdadjoke.com/slack`);
+
+    let o = new Discord.RichEmbed()
+        .setColor(0xFFFFFF)
+        .setDescription("**" + body.attachments.map(a => a.text) + "**")
+    message.channel.send(o)
+	
+}
+ 
+  if(command === "ascii") {
+  message.delete(5000);
+  message.react("✅");
+  if(args.join(' ').length > 14) return message.channel.send('Only 14 characters are admitted!') 
+  if (!args.join(' ')) return message.channel.send('Please, provide text to format in ASCII! Usage: ascii <text>').then(msg => msg.delete({timeout: 10000})); 
+    figlet(args.join(' '), (err, data) => {
+      message.channel.send('```' + data + '```')
+    })
+};
+
+ if(command === "cat") {
+  let {body} = await superagent
+  .get(`http://aws.random.cat/meow`);
+
+  let catembed = new Discord.RichEmbed()
+  .setColor("#7289DA")
+  .setTitle("Cat 🐱")
+  .setImage(body.file);
+
+  message.channel.send(catembed);
+
+}
+ 
+ if(command === "botspec") {
+  let cpuLol;
+  cpuStat.usagePercent(function(err, percent, seconds) {
+    if (err) {
+      return console.log(err);
+    }
+  const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+  const embedStats = new Discord.RichEmbed()
+    .setTitle("*** Stats ***")
+    .setColor("RANDOM")
+    .addField("• Mem Usage", `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, true)
+    .addField("• Uptime ", `${duration}`, true)
+    .addField("• Users", `${client.users.size.toLocaleString()}`, true)
+    .addField("• Servers", `${client.guilds.size.toLocaleString()}`, true)
+    .addField("• Channels ", `${client.channels.size.toLocaleString()}`, true)
+    .addField("• Discord.js", `v${client}`, true)
+    .addField("• Node", `${process.version}`, true)
+    .addField("• CPU", `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``)
+    .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
+    .addField("• Arch", `\`${os.arch()}\``,true)
+    .addField("• Platform", `\`\`${os.platform()}\`\``,true)
+    message.channel.send(embedStats)
+    message.delete(5000);
+    message.react("🚀");
+  });
+};
+
+ if(command === "yesorno") {
+    let color = ''
+      const { body } = await superagent
+    .get('https://yesno.wtf/api/');
+    if(body.answer === 'yes') color = '0x01DF01';
+    if(body.answer === 'no') color = '0xFF0000';
+    const embed = new Discord.RichEmbed()
+    .setColor(color)
+    .setImage(`${body.image}`)
+    message.channel.send(`The magic API says: **${body.answer}**`, {embed});
+
+}
+
+  if(command === "userinfo") {
+	let user;
+	// If the user mentions someone, display their stats. If they just run userinfo without mentions, it will show their own stats.
+    if (message.mentions.users.first()) {
+      user = message.mentions.users.first();
+    } else {
+        user = message.author;
+    }
+	// Define the member of a guild.
+    const member = message.guild.member(user);
+	
+	//Discord rich embed
+    const embed = new Discord.RichEmbed()
+		.setColor('RANDOM')
+		.setThumbnail(user.avatarURL)
+		.setTitle(`${user.username}#${user.discriminator}`)
+		.addField("ID:", `${user.id}`, true)
+		.addField("Nickname:", `${member.nickname !== null ? `${member.nickname}` : 'None'}`, true)
+		.addField("Created At:", `${moment.utc(user.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
+		.addField("Joined Server:", `${moment.utc(member.joinedAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, true)
+		.addField("Bot:", `${user.bot}`, true)
+		.addField("Status:", `${user.presence.status}`, true)
+		.addField("Game:", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
+		.addField("Roles:", member.roles.map(roles => `${roles.name}`).join(', '), true)
+		.setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
+     message.channel.send({embed});
+   }
+
+  if(command === "weather") {
+  weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) {
+      if (err) message.channel.send(err);
+      if (result === undefined || result.length === 0) {
+          message.channel.send('**Please enter a location!**')
+          return;
+      }
+      var current = result[0].current;
+      var location = result[0].location;
+      const embed = new Discord.RichEmbed()
+          .setDescription(`**${current.skytext}**`)
+          .setAuthor(`Weather for ${current.observationpoint}`)
+          .setThumbnail(current.imageUrl)
+          .setColor(0x00AE86)
+          .addField('Timezone',`UTC${location.timezone}`, true)
+          .addField('Degree Type',location.degreetype, true)
+          .addField('Temperature',`${current.temperature} Degrees`, true)
+          .addField('Feels Like', `${current.feelslike} Degrees`, true)
+          .addField('Winds',current.winddisplay, true)
+          .addField('Humidity', `${current.humidity}%`, true)
+          message.channel.send({embed});
+  })
+}  
+
+
+  if(command === "dog") {
+    const { body } = await superagent
+    .get('https://dog.ceo/api/breeds/image/random');
+    const embed = new Discord.RichEmbed()
+    .setColor(0x954D23)
+    .setTitle("Woof :dog2:")
+    .setImage(body.message)
+    message.channel.send({embed})
+    message.react("📖");
+    
+}
+
   if(command === "addrole") {
    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
    if(!rMember) return message.reply("Couldn't find that user, yo.");
@@ -185,6 +659,25 @@ client.on("message", async message => {
 
   }
 }
+
+ if(command === "randomdefine") {
+  urban.random().first(json => {
+    let uEmbed = new Discord.RichEmbed()
+    .setTitle(json.word)
+    .setDescription(json.definition || "None")
+    .addField("Upvotes :arrow_up_small: ", json.thumbs_up, true)
+    .addField("Downvotes :arrow_down_small: ", json.thumbs_down, true)
+    .setAuthor(`Author: ${json.author}`);
+    message.channel.send(uEmbed);
+  });
+}
+
+  if(command === "lmgtfy") {
+  let question = encode(args.join(' '));
+  let link = `https://www.lmgtfy.com/?q=${question}`; 
+  message.channel.send(`**<${link}>**`); 
+ 
+}  
 
   if(command === "removerole") {
    if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
@@ -209,51 +702,52 @@ client.on("message", async message => {
      message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
    }
  }
-
-  if(command === "fortnite") {
-
-  let username = args[1];
-  let platform = args[0];
  
-  let result = Math.floor((Math.random() * colours.length));             
-  let data = ft.getInfo(username, platform).then(data => {
+ if(command === "read") {
+    snek.get(api).then(r => {
+        let embed = new Discord.RichEmbed()
+        .setTitle('» Trump Quotes Generator')
+        .setDescription(r.body.message)
+        .setColor('RANDOM')
+        message.channel.send(embed)
+        message.react("📖")
+    })
+}
 
-    let stats = data.lifetimeStats;
-    let kills = stats.find(s => s.stat == 'kills');
-    let wins = stats.find(s => s.stat == 'wins');
-    let kd = stats.find(s => s.stat == 'kd');
-    let mPlayed = stats.find(s => s.stat == 'matchesPlayed');
-    let tPlayed = stats.find(s => s.stat == 'timePlayed');
-    let asTime = stats.find(s => s.stat == 'avgSurvivalTime');  
-    let rank = stats.find(s => s.stat == 'rank');
-
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM') // You can change the color, or anything in this file to what you want it to look like
-    .setTitle(`Statistics for ${data.username}`) // This will set the title of the emebd as the username
-    .setURL(data.url)
-    .addField(`Top Placements:`, `\n*Top 3:* \`${data.lifetimeStats[0].value}\`\n*Top 5:* \`${data.lifetimeStats[1].value}\`\n*Top 6:* \`${data.lifetimeStats[3].value}\`\n*Top 12:* \`${data.lifetimeStats[4].value}\`\n*Top 25:* \`${data.lifetimeStats[5].value}\``) // We can have other information look different, in fields or in the description.
-    .setThumbnail('https://i.imgur.com/vx8juC1.png') // Fortnite Logo
-    .addField('Total Score:', `\`${data.lifetimeStats[6].value}\``, true)
-    .addField('Matches Played:', `\`${data.lifetimeStats[7].value}\``, true)
-    .addField('Wins:', `\`${data.lifetimeStats[8].value}\``, true)
-    .addField('Win Percentage:', `\`${data.lifetimeStats[9].value}\``, true)
-    .addField('Kills:', `\`${data.lifetimeStats[10].value}\``, true)
-    .addField('K/D Ratio:', `\`${data.lifetimeStats[11].value}\``, true)
-    .addField('Kills Per Minute:', `\`${data.lifetimeStats[12].value}\``, true)
-    .setFooter('Requested by ' + message.author.username, message.author.displayAvatarURL)
-    
-    message.channel.send(embed);
-  }
 
   if(command === "clear") {
      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
-     if(!args[0]) return message.channel.send("no");
+     if(!args[0]) return message.channel.send("NOPE");
      message.channel.bulkDelete(args[0]).then(() => {
-    message.channel.send(`Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
+    message.channel.send(`» Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
  });
 
 }
  
+ if(command === "poll") {
+  if (!message.member.hasPermission('MANAGE_MESSAGE') && message.author.id !== '356510829920780289') return message.channels.send('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
+  if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
+  
+  const embed = new Discord.RichEmbed()
+    .setTitle(args.join(' '))
+    .setFooter('React To Vote On Poll!')
+    .setColor('RANDOM')
+    const pollTitle = await message.channel.send({ embed });
+      message.delete(200);
+      await pollTitle.react(`👍`);
+      await pollTitle.react(`👎`);
+  
+    const filter = (reaction) => reaction.emoji.name === '👍';
+    const collector = pollTitle.createReactionCollector(filter, { time: 15000 });
+      collector.on('thumbsup', r => console.log(`Collected ${r.emoji.name}`));
+      collector.on('thumbsdown', collected => console.log(`Collected ${collected.size} items`));
+  
+    const filter1 = (reaction) => reaction.emoji.name === '👎';
+    const collector1 = pollTitle.createReactionCollector(filter1, { time: 15000 });
+      collector1.on('thumbsup', r => console.log(`Collected ${r.emoji.name}`));
+      collector1.on('thumbsdown', collected => console.log(`Collected ${collected.size} items`));
+};
+
  if(command === "nick") {
   if(message.author.id !== config.ownerID) return;
   let nickname = args.join(' ')
@@ -261,7 +755,7 @@ client.on("message", async message => {
   	.setNickname(nickname);
   await message.channel.send({
   	embed: new Discord.RichEmbed()
-  	.setTitle(`Changed Bot Nickname To : ${nickname}`)
+  	.setTitle(`» Changed Bot Nickname To : ${nickname}`)
   })
  }
   
@@ -288,32 +782,15 @@ client.on("message", async message => {
   message.channel.send(`<@${message.author.id}> «PAT» ${args[0]}`, {embed: patEmb});
 
 }
-  if(command === "botspec") {
-    const os = require('os');
-    const arch = os.arch()
-    const used = process.memoryUsage().heapUsed / 1024 / 1024;
 
-    let totalSeconds = process.uptime();
-    let realTotalSecs = Math.floor(totalSeconds % 60);
-    let days = Math.floor((totalSeconds % 31536000) / 86400);
-    let hours = Math.floor((totalSeconds / 3600) % 24);
-    let mins = Math.floor((totalSeconds / 60) % 60);
-
-    var ping = client.ping
-    message.delete()
-    message.channel.send(`\n= Memory usage: ${Math.round(used * 100) / 100}MB\n= Ping: ${ping}\n= Uptime: Days: ${days} | Hours: ${hours} | Minutes: ${mins} | Seconds: ${realTotalSecs}\n= Node: ${process.version}\n= Library: discord.js\n= ARCH: ${arch}\n= Plataform: ${os.platform}\n= Servers: ${client.guilds.size}\n= Users: ${client.users.size}`, {
-        code: 'AsciiDoc'
-    })
-
-}
- 
  if(command === "luckymunber") {
   var LuckNumber = Math.floor((Math.random() * 12000) + 0.120);
   const numEmb = new Discord.RichEmbed()
   .setColor(0xFFFF00)
   .setAuthor('LUCKY NUMBER', 'https://vignette.wikia.nocookie.net/nintendo/images/0/02/Question_Block_NSMB.png/revision/latest?cb=20151206055532&path-prefix=en')
-  .addField('And your lucky number is...', `${LuckNumber}!`);
+  .addField('» Your LuckyMunber :', `${LuckNumber}!`);
   message.channel.send({embed: numEmb})
+  message.react("✅")
 
 }
 
@@ -339,14 +816,7 @@ client.on("message", async message => {
   message.channel.send({embed: reverseEmbed})
     
 }
-
-
-
-  if(command === "gay") {
-   message.reply(`${responses[Math.floor(Math.random() * responses.length)]}`);
-   message.delete()
-}  
-
+ 
   if(command === "dick") {
    message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
    message.delete()
@@ -401,7 +871,6 @@ var sayings = ["It is certain",
 			message.channel.send({embed: ballEmb})
 }
 
-
   if(command === "embed") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     const embed1 = new Discord.RichEmbed()
@@ -439,9 +908,9 @@ if (command === "serverinfo") {
 }
 
 
-if (command === "userinfo") {
+if (command === "myinfo") {
     if(args[0] == "help"){
-    message.reply("```k!userinfo [NAME] [YearOld] [Gander] [Home,] [Like,Playgame,more] [Dislike]:```");
+    message.reply("```kb!myinfo [NAME] [YearOld] [Gander] [Home,] [Like,Playgame,more] [Dislike]:```");
     return;
   }
   let [name, yearold, Gander, home, like, dislike] = args;
@@ -512,18 +981,46 @@ if (command === "userinfo") {
     .addField('» Ping ', "Check You Ms")
     .addField('» 8ball', "Question 8ball")
     .addField('» Pat ', "Pat a Play")
-    .addField('» Luckymunber', "Tell Your LuckyMunber")
+    .addField('» Fortnite', "Shows stats in Fortnite")
+    .addField('» Search', "Google Search 🔎")
+    .addField('» Dog', "Show Dog Image")
+    .addField('» Poll', "Reaction With Emoji")
+    .addField('» Cat', "Show Cat Image")
+    .addField('» Read', "Read a Book")
+    .addField('» Dadjokez', "Radom About Dad")
+    .addField('» Weather', "Check Location Weather")
+    .addField('» Luckymunber', "Show Your LuckyMunber")
     .addField('» Gay', "Tell You Gay or Not")
     .addField('» Dick', "Show Your Dick Size")
     .addField('» Serverinfo', "Show Info About in Server")
     .addField('» Botinfo', "Show Into About on BOT")
     .addField('» Avatar', "Check User Avatar | k!avatar @user")
-    .addField('» Userinfo ', "Show info About Yourself to #userinfo")
+    .addField('» Myinfo ', "Show info About Yourself to #userinfo")
+    .addField('» Userinfo', "Show Your Info About On Server")
+    .addField('» Adminhelp', "Show AdminCommands")
+    .addField('» NSFW', "NSFW")
+    .setThumbnail(useravatar)
+
+     message.author.send(helpembed);
+     message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
+     message.delete(800);
+     message.react("✅");
+  }
+
+   if(command === "adminhelp") {
+   if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry » You Don't Have ADMINISTRATOR Permission To View AdminCommands ");
+
+     let useravatar = message.author.avatarURL;
+     let adminhelpembed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire' !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
+    .setColor('RANDOM')
+    .setTitle("Admin-Commands :")
     .addField('» Say', "Bot is say")
     .addField('» Embed', "Bot is say Embed TEXT")
     .addField('» ChatEmbed', "Chat To #chat | k!chatembed help")
     .addField('» AnnEmbed', "Chat To #announcements | k!annembed help")
     .addField('» BotSpec', "Check Bot Spec")
+    .addField('» Tempmute', "Mute Plyaer With Second")
     .addField('» Addrole', "Addrole For Player ")
     .addField('» Removerole', "Remove Role From Player")
     .addField('» Mute', "Mute Player | k!mute help")
@@ -532,10 +1029,28 @@ if (command === "userinfo") {
     .addField('» Ban', "Ban Player From a Server")
     .addField('» AutoRoleJoin » NewUpdate', "Create Roles » MEMBER » Bot is AutoRole For New Member")
     .addField('» Welcome-leave » NewUpdate', "New Member Message » Create Channel » SetName: #welcome-leave » DONE")
-    .setThumbnail(useravatar)
 
-     message.channel.send(helpembed);
- 
+     message.author.send(adminhelpembed);
+     message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
+     message.delete(800);
+     message.react("✅"); 
+  }
+
+   if(command === "nsfw") {
+     let useravatar = message.author.avatarURL;
+     let nsfwembed = new Discord.RichEmbed()
+    .setAuthor("KhmerEmpire' !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
+    .setColor('#FF0000')
+    .setTitle("Random NSFW Image :")
+    .addField("» Boobs", "Random Boobs Image")
+    .addField("» Pussy", "Random Pussy Image")
+    .addField("» Anime", "Random Anime Image")
+    .addField("» Hentai", "Random Hentai Image")
+
+     message.author.send(nsfwembed);
+     message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
+     message.delete(800);
+     message.react("🔞"); 
   }
 
     if (command == "mute") { // creates the command mute
@@ -608,6 +1123,14 @@ if (command === "userinfo") {
   }
 
 }
+  
+  if(command === "ps") {
+       if(args[0] == "help"){
+      message.reply("PostStatus is Commands For » Player PostStatus » And Use Emoji Reaction !");
+      return;
+    }
+   message.react('👍');
+}
 
   if(command === "username") {
     if(message.mentions.users.first()) {
@@ -617,6 +1140,7 @@ if (command === "userinfo") {
     message.channel.sendMessage(output);
   } else {
           message.reply("Invalid user."); 
+          message.react('🚫');
     }
 }
 
@@ -681,7 +1205,7 @@ if (command === "userinfo") {
 
     }
      
-  if(command === "invite") {
+  if(command === "link") {
 
      let sicon = message.guild.iconURL;
      let inviteembed = new Discord.RichEmbed()
@@ -711,7 +1235,7 @@ else if (command === 'avatar') {
     const avatarList = message.mentions.users.map(user => {
         return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
     });
-  
+
   if(command === "username") {
      let sicon = message.guild.iconURL;
      let usernameembed = new Discord.RichEmbed()
@@ -722,6 +1246,20 @@ else if (command === 'avatar') {
      message.channel.send(usernameembed);
   } 
   
+  if(command === "eval") {
+      const code = args.join(" ");
+      let evaled = eval(code);
+
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);
+
+      message.channel.send(clean(evaled), {code:"xl"});
+      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.delete().catch(O_o=>{}); 
+      message.channel.send(sayMessage);
+      message.delete()
+    
+  }
 
     if (command == "mute") { // creates the command mute
     if(!message.member.permissions.has("MUTE_MEMBERS")) return message.channel.send("you don't have MUTE_MEMBERS permissions to use this !"); // if author has no perms
@@ -750,7 +1288,77 @@ else if (command === 'avatar') {
     message.channel.send(avatarList);
 }
 
+  if(command === "tempmute") {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(" you don\'t have permission to use this");
+  if(args[0] == "help"){
+    message.reply("Usage: !tempmute <user> <1s/m/h/d>");
+    return;
+  }
+  let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+  if(!tomute) return message.reply("Couldn't find user.");
+  if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
+  let reason = args.slice(2).join(" ");
+  if(!reason) return message.reply("Please supply a reason.");
 
+  let muterole = message.guild.roles.find(`name`, "muted");
+  //start of create role
+  if(!muterole){
+    try{
+      muterole = await message.guild.createRole({
+        name: "TempMute",
+        color: "#000000",
+        permissions:[]
+      })
+      message.guild.channels.forEach(async (channel, id) => {
+        await channel.overwritePermissions(muterole, {
+          SEND_MESSAGES: false,
+          ADD_REACTIONS: false
+        });
+      });
+    }catch(e){
+      console.log(e.stack);
+    }
+  }
+  //end of create role
+  let mutetime = args[1];
+  if(!mutetime) return message.reply("You didn't specify a time!");
+
+  message.delete().catch(O_o=>{});
+
+  try{
+    await tomute.send(`Hi! You've been muted for ${mutetime}. Sorry!`)
+  }catch(e){
+    message.channel.send(`A user has been muted... but their DMs are locked. They will be muted for ${mutetime}`)
+  }
+
+  let muteembed = new Discord.RichEmbed()
+  .setDescription(`Mute executed by ${message.author}`)
+  .setColor('#FF0000')
+  .addField("Muted User", tomute)
+  .addField("Muted in", message.channel)
+  .addField("Time", message.createdAt)
+  .addField("Length", mutetime)
+  .addField("Reason", reason);
+
+  let incidentschannel = message.guild.channels.find(`name`, "muted");
+  if(!incidentschannel) return message.reply("Please Create a #muted Channel first!");
+  incidentschannel.send(muteembed);
+
+  await(tomute.addRole(muterole.id));
+
+  setTimeout(function(){
+    tomute.removeRole(muterole.id);
+    message.channel.send(`<@${tomute.id}> has been unmuted!`);
+  }, ms(mutetime));
+
+  }
+
+       talkedRecently.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          talkedRecently.delete(message.author.id);
+        }, 8000);
+    }
 
 });
 
