@@ -15,15 +15,8 @@ const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 const config = require("./config.json");
-const fortnite = require('fortnite.js');
-const Fortnite = new fortnite(process.env.FORTNITEAPI);
-const platforms = ['PC', 'XBOX', 'PS4'];
 const fs = require('fs');
-function platform(query, fort) {
-    if(query == 'PC') return fort.PC;
-    else if(query == 'XBOX') return fort.XBOX;
-    else if(query == 'PS4') return fort.PS4;
-}
+
 const {
     parse
 } = require('fast-html-parser');
@@ -376,27 +369,6 @@ if (message.content === '@everyone') {
         })
 }
 
-  if(command === "discrim") {
-    const embed = new Discord.RichEmbed()
-        .setColor(0xffffff);
-    if (isNaN(args[0]) || args[0] > 9999 || args[0] < 1) { // Run if out of parameters
-        embed.setFooter('Sorry, please enter a valid discrim.');
-        return message.channel.send(embed);
-        
-    }
-   let resp = '';
-   client.users.map(function(user) {
-       if (user.discriminator == args[0]) return resp += `${user.username}\n`;
-       else return; // If not, return
-       
-   })
-    embed.setTitle(`Discrim: ${args[0]}`)
-        .setDescription(resp);
-
-    message.channel.send(embed)
-    
-}
- 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
     .setColor('RANDOM')
