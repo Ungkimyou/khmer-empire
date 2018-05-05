@@ -35,7 +35,7 @@ const exec = require('child_process').exec;
 let os = require('os')
 let cpuStat = require("cpu-stat")
 
-const hook = new Discord.WebhooksClient('442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6');
+const hook = new Discord.WebhookClient('442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6');
 const client = new Discord.Client();
 
 const api = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
