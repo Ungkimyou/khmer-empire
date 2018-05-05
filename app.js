@@ -976,7 +976,7 @@ if (command === "myinfo") {
 
      message.author.send(helpembed);
      message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
-     message.delete(800);
+     message.delete(1000);
      message.react("✅");
   }
 
@@ -1005,7 +1005,7 @@ if (command === "myinfo") {
 
      message.author.send(adminhelpembed);
      message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
-     message.delete(800);
+     message.delete(1000);
      message.react("✅"); 
   }
 
@@ -1022,7 +1022,7 @@ if (command === "myinfo") {
 
      message.author.send(nsfwembed);
      message.reply(":calling: This Command Sand To DMs . Please Check your DMs.")
-     message.delete(800);
+     message.delete(1000);
      message.react("🔞"); 
   }
 
@@ -1117,38 +1117,51 @@ if (command === "myinfo") {
     }
 }
 
-
   if(command === "kick") {
-    if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
-        var kickedmember = message.mentions.members.first(); // sets the mentioned user to the var kickedmember
-        if (!kickedmember) return message.reply("Please mention a valid member of this server!") // if there is no kickedmmeber var
-        if (!kickedmember.kickable) return message.reply("I cannot kick this member!") // if the member is unkickable
-        var kickreasondelete = 10 + kickedmember.user.id.length //sets the length of the kickreasondelete
-        var kickreason = message.content.substring(kickreasondelete).split(" "); // deletes the first letters until it reaches the reason
-        var kickreason = kickreason.join(" "); // joins the list kickreason into one line
-        if (!kickreason) return message.reply("Please indicate a reason for the kick!") // if no reason
-        kickedmember.kick(kickreason) //if reason, kick
-            .catch(error => message.reply(`Sorry @${message.author} I couldn't kick because of : ${error}`)); //if error, display error
-        message.reply(` Has Kick » ${kickedmember.user.username} Because: ${kickreason}`); // sends a message saying he was kicked
-    }
-  
-  if(command === "ban") {
-  if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Sorry : you don't have ADMINISTRATOR permission to do this ");
-    
-    let member = message.mentions.members.first();
-    if(!member)
-      return message.reply("```md Please mention one user in order to ban them! - k!ban [@user] [reason]```");
-    if(!member.bannable) 
-      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
-
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "No reason provided";
-    
-    await member.ban(reason)
-      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!kUser) return message.channel.send("Can't find user!");
+    let kReason = args.join(" ").slice(22);
+    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("you not have permission to use this !");
+    if(kUser.hasPermission("KICK_MEMBERS")) return message.channel.send("That person can't be kicked!");
+	  
+	  let kickEmbed = new Discord.RichEmbed()
+	  .setColor("#e56b00")
+	  .addField("Kicked User", `${kUser} with ID ${kUser.id}`)
+	  .addField("Kicked By", `<@${message.author.id}>`)
+	  .addField("Time", message.createdAt)
+	  .addField("Reason", kReason);
+	 
+	   let kickChannel = message.guild.channels.find(`name`, "ke-logs");
+	   if(!kickChannel) return message.channel.send("Can't find #ke-logs channel.");
+	
+	  message.guild.member(kUser).kick(kReason);
+	  kickChannel.send(kickEmbed);
+	  
+	  return;
   }
 
+       if(command === "ban") {
+	  
+	 let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+	 if(!bUser) return message.channel.send("Can't find user!");
+	 let bReason = args.join(" ").slice(22);
+	 if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("No can do pal!");
+	 if(bUser.hasPermission("BAN_MEMBERS")) return message.channel.send("That person can't be kicked!");
+	  
+	 let banEmbed = new Discord.RichEmbed()
+         .setColor('#FF0000')
+	 .addField("Banned User", `${bUser} with ID ${bUser.id}`)
+	 .addField("Banned By", `<@${message.author.id}>`)
+	 .addField("Time", message.createdAt)
+	 .addField("Reason", bReason);
+	     
+	 let incidentchannel = message.guild.channels.find(`name`, "ke-logs");
+	 if(!incidentchannel) return message.channel.send("Can't find #ke-logs channel.");	      
+	 message.guild.member(bUser).ban(bReason);
+	 incidentchannel.send(banEmbed);
+	     	      
+	  return;
+   }
 
   if(command === 'botinfo') {
     let bicon = client.user.displayAvatarURL;
