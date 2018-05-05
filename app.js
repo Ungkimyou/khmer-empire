@@ -1,4 +1,4 @@
-const hook = new Discord.WebhookClient('442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6');
+const hook = new Discord.WebhookClient['442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6'];
 const info = require('systeminformation');
 const urban = require("urban");
 const sm = require('string-similarity');
@@ -54,7 +54,7 @@ const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
 ]
 
-hook.send("📡 KhmerEmpire Restarting Successfully...");
+hook.send('📡 KhmerEmpire Restarting Successfully...');
 
 client.commands = new Discord.Collection();
 
