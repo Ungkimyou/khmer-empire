@@ -53,7 +53,7 @@ const responses1 = [
    'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
 ]
 
-client.hook.send('📡 KhmerEmpire Restarting Successfully...');
+hook.send('📡 KhmerEmpire Restarting Successfully...');
 
 client.commands = new Discord.Collection();
 
