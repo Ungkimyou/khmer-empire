@@ -272,6 +272,7 @@ client.on("message", async message => {
             .setImage(gifUrl)
         message.channel.send(embed);
     });
+ }
 
   if(command === "hastebin") {
 	if (!args.slice(0)
