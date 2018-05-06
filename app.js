@@ -49,10 +49,6 @@ async function getUUID (name) {
 	else return json.id;
 }
 
-const responses1 = [
-   'Size 8====D', 'Size 8=======D', 'Size 8=========D', 'Size 8=============D', 'Size 8================D'
-]
-
 hook.send('📡 KhmerEmpire Restarting Successfully...');
 
 client.commands = new Discord.Collection();
@@ -68,8 +64,8 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 client.on("message", (message) => {
   if(message.content === "k!") {
-    message.channel.send(" do kb!help for help !");
-    message.delete()
+    message.channel.send("Do k!help for help !");
+    message.delete(6000)
   }
 });
  
@@ -225,8 +221,7 @@ client.on("message", async message => {
       .addField("Time", `\`\`\`${reminderTime}\`\`\``)
       .setTimestamp();
 
-      message.channel.send(remindEmbed);
-      message.delete(1000);
+      message.channel.send(remindEmbed).then(message => message.delete({timeout: 1000}));;
 
 
       setTimeout(function(){
@@ -303,14 +298,6 @@ client.on("message", async message => {
 
   }
    
-  if(command === "svs") {
-  let msg =  client.guilds.map(guild => `**${guild.name}** Members: ${guild.memberCount}`).join('\n');
-  let embed = new Discord.RichEmbed()
-  .setTitle(`I am in ${client.guilds.size} guilds!`)
-  .setDescription(`${msg}`)
-  .setColor("#ebf442");
-  message.channel.send(embed);
-}
 
   if(command === "pussy") {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
@@ -474,18 +461,6 @@ client.on("message", async message => {
     });
 }
 
- if(command === "dadjokez") {
-    let sa = require ("superagent");
-    let {body} = await sa
-    .get(`https://icanhazdadjoke.com/slack`);
-
-    let o = new Discord.RichEmbed()
-        .setColor(0xFFFFFF)
-        .setDescription("**" + body.attachments.map(a => a.text) + "**")
-    message.channel.send(o)
-	
-}
- 
   if(command === "ascii") {
   message.delete(5000);
   message.react("✅");
@@ -793,20 +768,6 @@ client.on("message", async message => {
     
 }
  
-  if(command === "dick") {
-   message.reply(`${responses1[Math.floor(Math.random() * responses.length)]}`);
-   message.delete()
-}  
-
-
-  if(command === "say") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
-    const sayMessage = args.join(" ");
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
-
-  }
-
   if(command === "8ball") {
  
  if(!args[0]) {
@@ -915,7 +876,6 @@ if (command === "myinfo") {
     return;
   }
     let reportEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.tag)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
 
@@ -934,7 +894,6 @@ if (command === "myinfo") {
     return;
   }
     let annEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.tag)
     .setDescription(args.join(" "))
     .setColor('RANDOM')
     .setTimestamp()
@@ -966,8 +925,6 @@ if (command === "myinfo") {
     .addField('» Dadjokez', "Radom About Dad")
     .addField('» Weather', "Check Location Weather")
     .addField('» Luckymunber', "Show Your LuckyMunber")
-    .addField('» Gay', "Tell You Gay or Not")
-    .addField('» Dick', "Show Your Dick Size")
     .addField('» Serverinfo', "Show Info About in Server")
     .addField('» Botinfo', "Show Into About on BOT")
     .addField('» Avatar', "Check User Avatar | k!avatar @user")
