@@ -530,6 +530,7 @@ client.on("message", async message => {
     .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
     .addField("• Arch", `\`${os.arch()}\``,true)
     .addField("• Platform", `\`\`${os.platform()}\`\``,true)
+    .addFooter("• Bot Create By : TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ林坓龙#5881")
     message.channel.send(embedStats)
     message.delete(5000);
     message.react("🚀");
@@ -700,12 +701,12 @@ client.on("message", async message => {
 }
  
  if(command === "poll") {
-  if (!message.member.hasPermission('MANAGE_MESSAGE') && message.author.id !== '356510829920780289') return message.channels.send('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
+  if (!message.member.hasPermission('MANAGE_MESSAGE')) return message.reply('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
   if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
   
   const embed = new Discord.RichEmbed()
     .setTitle(args.join(' '))
-    .setFooter('React To Vote On Poll!')
+    .setFooter('React To Vote On Emoji!')
     .setColor('RANDOM')
     const pollTitle = await message.channel.send({ embed });
       message.delete(200);
