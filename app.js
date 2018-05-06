@@ -721,7 +721,7 @@ client.on("message", async message => {
 }
  
  if(command === "poll") {
-  if(!message.member.hasPermissions("MANAGE_MESSAGE")) return message.reply("You do not have permission to do that!").then(msg => msg.delete({timeout: 800}));
+  if(!message.member.hasPermissions("MANAGE_MESSAGE")) return message.reply("You do not have permission to do that!");
   if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
   
   const embed = new Discord.RichEmbed()
@@ -961,7 +961,6 @@ if (command === "myinfo") {
     .addField('» Ping ', "Check You Ms")
     .addField('» 8ball', "Question 8ball")
     .addField('» Pat ', "Pat a Play")
-    .addField('» Fortnite', "Shows stats in Fortnite")
     .addField('» Search', "Google Search 🔎")
     .addField('» Dog', "Show Dog Image")
     .addField('» Poll', "Reaction With Emoji")
