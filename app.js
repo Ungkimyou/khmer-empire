@@ -290,7 +290,7 @@ client.on("message", async message => {
   }
 
   if(command === "bond") {
-   if(!args[0]) return message.channel.send("**Mention a user or users that you want to bond.** `PREFIX bond <user> <user>`")
+  if(!args[0]) return message.channel.send("**Mention a user or users that you want to bond.** `PREFIX bond <user> <user>`")
 
    var bondLevel = Math.floor(Math.random() * 102);
    let user1 = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
@@ -352,8 +352,50 @@ client.on("message", async message => {
     if (bondLevel >= 0 && bondLevel < 10) {
         var ship = 'Not even possible...'
         var bondLevelResults = `🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤`
-    }  
+    }
 
+
+    if(!args[1]){
+        var bondEmbed = new Discord.RichEmbed()
+
+        .setColor("#f5a3fa")
+        .addField("Users", `${message.author} x ${args[0]}`)
+        .addField("Bond Score", `${bondLevel}%`)
+        .addField("Bond Bar", bondLevelResults)
+        .addField("Summary", ship);
+
+
+        return message.channel.send(bondEmbed)
+    }
+
+    if(!args[2]){
+        var bondEmbed2 = new Discord.RichEmbed()
+
+        .setColor("#f5a3fa")
+        .addField("Users", `${args[0]} x ${args[1]}`)
+        .addField("Bond Score", `${bondLevel}%`)
+        .addField("Bond Bar", bondLevelResults)
+        .addField("Summary", ship);
+
+
+        return message.channel.send(bondEmbed2)
+    }
+
+
+    if(!args[3]) {
+
+        var bondEmbed3 = new Discord.RichEmbed()
+
+        .setColor("#f5a3fa")
+        .addField("Users", `${args[0]} x ${args[1]} x ${args[2]}`)
+        .addField("Bond Score", `${bondLevel}%`)
+        .addField("Bond Bar", bondLevelResults)
+        .addField("Summary", ship);
+
+
+        return message.channel.send(bondEmbed)
+    }
+}
   if(command === "pussy") {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
 
@@ -709,7 +751,7 @@ client.on("message", async message => {
 }
  
  if(command === "poll") {
-  if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== '356510829920780289') return message.channels.send('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !").then(msg => msg.delete({timeout: 8000}));
   if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
   
   const embed = new Discord.MessageEmbed()
