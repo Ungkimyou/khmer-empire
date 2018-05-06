@@ -1,3 +1,4 @@
+const gifSearch = require("gif-search");
 const info = require('systeminformation');
 const urban = require("urban");
 const sm = require('string-similarity');
@@ -37,7 +38,7 @@ let cpuStat = require("cpu-stat")
 
 const hook = new Discord.WebhookClient('442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6');
 const client = new Discord.Client();
-
+const PREFIX = "k!";
 const api = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
 const talkedRecently = new Set();
 
@@ -254,6 +255,26 @@ client.on("message", async message => {
     return message.channel.send({ embed });
             })
   }
+}
+  
+    if(command === "gif") {
+  if (message.author.bot) return;
+  if (message.channel.type == "dm") return;
+
+    if (!args[0]) return message.channel.send("`"+PREFIX+"gif <gname>`");
+
+    gifSearch.random(args[0]).then(
+        gifUrl => {
+
+        let randomcolor = ((1 << 24) * Math.random() | 0).toString(16) //Optional
+        var embed = new Discord.RichEmbed()
+            .setColor(`#${randomcolor}`)
+            .setImage(gifUrl)
+        message.author.send(embed);
+    });
+
+    message.channel.send(`<@${message.author.id}> **Check Your DM!** :postbox:`);
+
 }
 
   if(command === "hastebin") {
