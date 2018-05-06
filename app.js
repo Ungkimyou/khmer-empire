@@ -288,7 +288,71 @@ client.on("message", async message => {
 		});
 
   }
-   
+
+  if(command === "bond") {
+   if(!args[0]) return message.channel.send("**Mention a user or users that you want to bond.** `PREFIX bond <user> <user>`")
+
+   var bondLevel = Math.floor(Math.random() * 102);
+   let user1 = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+   let user2 = message.guild.member(message.guild.members.get(args[1]));
+   let user3 = message.guild.member(message.guild.members.get(args[2]));
+
+    if (bondLevel > 100 ) {
+        var ship = 'Perfect Couple <3_<3 :ok_hand:'
+        var bondLevelResults = `♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥`
+    } else
+    if (bondLevel == 100) {
+        var ship = 'Lit Couple <3 :ok_hand:'
+        var bondLevelResults = `♥♥♥♥♥♥♥♥♥♥`
+    } else
+    if (bondLevel >= 90 && bondLevel < 100) {
+        var ship = 'Great Couple <3'
+        var bondLevelResults = `♥♥♥♥♥♥♥♥♥🖤`
+    } else
+    if (bondLevel >= 80 && bondLevel < 90) {
+        var ship = 'Great Couple <3'
+        var bondLevelResults = `♥♥♥♥♥♥♥♥🖤🖤`
+    } else
+    if (bondLevel >= 75 && bondLevel < 80) {
+        var ship = 'Great Couple <3'
+        var bondLevelResults = `♥♥♥♥♥♥♥🖤🖤🖤`
+    } else
+    if (bondLevel >= 70 && bondLevel < 75) {
+        var ship = 'A littly risky but can work out! '
+        var bondLevelResults = `♥♥♥♥♥♥♥🖤🖤🖤`
+    } else
+    if (bondLevel >= 60 && bondLevel < 70) {
+        var ship = 'Eh.'
+        var bondLevelResults = `♥♥♥♥♥♥🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 50 && bondLevel < 60) {
+        var ship = 'Eh. '
+        var bondLevelResults = `♥♥♥♥♥🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 40 && bondLevel < 50) {
+        var ship = 'Eh. '
+        var bondLevelResults = `♥♥♥♥🖤🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 30 && bondLevel < 40) {
+        var ship = 'Eh. '
+        var bondLevelResults = `♥♥♥🖤🖤🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 25 && bondLevel < 30) {
+        var ship = 'No Comment'
+        var bondLevelResults = `♥♥🖤🖤🖤🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 20 && bondLevel < 25) {
+        var ship = 'Rip'
+        var bondLevelResults = `♥♥🖤🖤🖤🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 10 && bondLevel < 20) {
+        var ship = 'Rip'
+        var bondLevelResults = `♥🖤🖤🖤🖤🖤🖤🖤🖤🖤`
+    } else
+    if (bondLevel >= 0 && bondLevel < 10) {
+        var ship = 'Not even possible...'
+        var bondLevelResults = `🖤🖤🖤🖤🖤🖤🖤🖤🖤🖤`
+    }  
 
   if(command === "pussy") {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
@@ -582,24 +646,20 @@ client.on("message", async message => {
 }
 
   if(command === "addrole") {
-   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-   if(!rMember) return message.reply("Couldn't find that user, yo.");
-   let role = args.join(" ").slice(22);
-   if(!role) return message.reply("Specify a role!");
-   let gRole = message.guild.roles.find(`name`, role);
-   if(!gRole) return message.reply("Couldn't find that role.");
+  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("**You don't have premmsions to do that!**");
+  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!args[0]) return message.channel.send('**Mention a user, and type a role to give to the user.** `ium addrole <user> <role>`')
+  if(!rMember) return message.channel.send("**User not found.** `PREFIX addrole <user> <role>`");
+  let role = args.join(" ").slice(22);
+  if(!role) return message.channel.send("**Specify a role!** `PREFIX addrole <user> <role>`");
+  let gRole = message.guild.roles.find(`name`, role);
+  if(!gRole) return message.channel.send("**Role not found.** `PREFIX addrole <user> <role>`");
 
-   if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
-   await(rMember.addRole(gRole.id));
+  if(rMember.roles.has(gRole.id)) return message.channel.send("This user already has that role.");
+  await(rMember.addRole(gRole.id));
 
-   try{
-     message.delete()
-     await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
-   }catch(e){
-     console.log(e.stack);
-     message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
-
-  }
+  message.channel.send(`**${rMember}** has the role **${gRole.name}** now!`)
+  message.delete(800);
 }
 
  if(command === "randomdefine") {
@@ -622,28 +682,22 @@ client.on("message", async message => {
 }  
 
   if(command === "removerole") {
-   if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sorry pal, you can't do that.");
-   if(args[0] == "help"){
-     message.reply("Usage: !removerole <user> <role>");
-     return;
-   }
-   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-   if(!rMember) return message.reply("Couldn't find that user, yo.");
-   let role = args.join(" ").slice(22);
-   if(!role) return message.reply("Specify a role!");
-   let gRole = message.guild.roles.find(`name`, role);
-   if(!gRole) return message.reply("Couldn't find that role.");
+  if(!message.member.hasPermissions("MANAGE_ROLES")) return message.reply("You do not have permission to do that!");
+  let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!rMember) return message.reply("User not found.");
+  let role = args.join(" ").slice(22);
+  if(!role) return message.reply("Specify a role!");
+  let gRole = message.guild.roles.find(`name`, role);
+  if(!gRole) return message.reply("Role not found.");
 
-   if(!rMember.roles.has(gRole.id)) return message.reply("They don't have that role.");
-   await(rMember.removeRole(gRole.id));
+  if(!rMember.roles.has(gRole.id)) return message.reply("This user doesn't have that role.");
+  await(rMember.removeRole(gRole.id));
 
-   try{
-     message.delete()
-     await rMember.send(`RIP, you lost the ${gRole.name} role.`)
-   }catch(e){
-     message.channel.send(`RIP to <@${rMember.id}>, We removed ${gRole.name} from them. We tried to DM them, but their DMs are locked.`)
-   }
- }
+  await message.channel.send(`**${rMember} deos not have the role, ${gRole.name} anymore!**`)
+
+  message.delete();
+
+}
  
  if(command === "read") {
     snek.get(api).then(r => {
@@ -667,7 +721,7 @@ client.on("message", async message => {
 }
  
  if(command === "poll") {
-  if (!message.member.hasPermission('MANAGE_MESSAGE')) return message.reply('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
+  if(!message.member.hasPermissions("MANAGE_MESSAGE")) return message.reply("You do not have permission to do that!").then(msg => msg.delete({timeout: 800}));
   if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
   
   const embed = new Discord.RichEmbed()
@@ -1243,7 +1297,7 @@ else if (command === 'avatar') {
     try{
       muterole = await message.guild.createRole({
         name: "TempMute",
-        color: "#000000",
+        color: "#FF000",
         permissions:[]
       })
       message.guild.channels.forEach(async (channel, id) => {
