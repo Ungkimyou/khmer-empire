@@ -270,12 +270,8 @@ client.on("message", async message => {
         var embed = new Discord.RichEmbed()
             .setColor(`#${randomcolor}`)
             .setImage(gifUrl)
-        message.author.send(embed);
+        message.channel.send(embed);
     });
-
-    message.channel.send(`<@${message.author.id}> **Check Your DM!** :postbox:`);
-
-}
 
   if(command === "hastebin") {
 	if (!args.slice(0)
