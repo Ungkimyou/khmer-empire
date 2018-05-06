@@ -64,7 +64,7 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 
 client.on("message", (message) => {
   if(message.content === "k!") {
-    message.channel.send("Do k!help for help !");
+    message.channel.send("`Do k!help for help !`");
     message.delete(6000)
   }
 });
@@ -208,33 +208,6 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
  
-  if(command === "reminder") {
-      let reminderTime = args[0];
-      if(!reminderTime) return message.channel.send("**Specify a time for me to remind you. Usage: `k!remind 15min | Code**");
-
-      let reminder = args.slice(1).join(" ");
-
-      let remindEmbed = new Discord.RichEmbed()
-      .setColor('#ffffff')
-      .setAuthor(`${message.author.username}`, message.author.displayAvatarURL)
-      .addField("Reminder", `\`\`\`${reminder}\`\`\``)
-      .addField("Time", `\`\`\`${reminderTime}\`\`\``)
-      .setTimestamp();
-
-      message.channel.send(remindEmbed).then(message => message.delete({timeout: 1000}));;
-
-
-      setTimeout(function(){
-        let remindEmbed = new Discord.RichEmbed()
-        .setColor('#ffffff')
-        .setAuthor(`${message.author.username}`, message.author.displayAvatarURL)
-        .addField("Reminder", `\`\`\`${reminder}\`\`\``)
-        .setTimestamp()
-
-        message.channel.send(remindEmbed);
-      }, ms(reminderTime));
-
-  }
   
   if(command === "meme") {
   if(message.author.bot) return;
