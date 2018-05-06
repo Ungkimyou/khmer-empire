@@ -396,6 +396,7 @@ client.on("message", async message => {
         return message.channel.send(bondEmbed)
     }
 }
+
   if(command === "pussy") {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
 
@@ -435,7 +436,6 @@ client.on("message", async message => {
         })
     }
 }
-
 
   if(command === "anime") {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
@@ -751,23 +751,23 @@ client.on("message", async message => {
 }
  
  if(command === "poll") {
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !").then(msg => msg.delete({timeout: 8000}));
+  if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== '356510829920780289') return message.channels.send('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
   if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
   
   const embed = new Discord.MessageEmbed()
     .setTitle(args.join(' '))
-    .setFooter('React with Emoji !')
+    .setFooter('React to vote on Poll!')
     .setColor('#7289DA')
     const pollTitle = await message.channel.send({ embed });
-      await pollTitle.react(`👍`);
-      await pollTitle.react(`👎`);
+      await pollTitle.react(`ðŸ‘`);
+      await pollTitle.react(`ðŸ‘Ž`);
   
-    const filter = (reaction) => reaction.emoji.name === '👍';
+    const filter = (reaction) => reaction.emoji.name === 'ðŸ‘';
     const collector = pollTitle.createReactionCollector(filter, { time: 15000 });
       collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
       collector.on('end', collected => console.log(`Collected ${collected.size} items`));
   
-    const filter1 = (reaction) => reaction.emoji.name === '👎';
+    const filter1 = (reaction) => reaction.emoji.name === 'ðŸ‘Ž';
     const collector1 = pollTitle.createReactionCollector(filter1, { time: 15000 });
       collector1.on('collect', r => console.log(`Collected ${r.emoji.name}`));
       collector1.on('end', collected => console.log(`Collected ${collected.size} items`));
