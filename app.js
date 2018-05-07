@@ -1240,20 +1240,19 @@ if (command === "myinfo") {
 
     }
 
+  if(command === "avatar") {
+    let msg = await message.channel.send("Generating avatar...");
+    let mentionedUser = message.mentions.users.first() || message.author;
 
-else if (command === 'avatar') {
-    if (!message.mentions.users.size) {
-        let avatarembed = new Discord.RichEmbed()
-        .setTitle(" Avatar")
-        .setImage(message.author.displayAvatarURL)
-        
-        message.channel.sand(avatarembed);
-
-    }
-
-    const avatarList = message.mentions.users.map(user => {
-        return `${user.username}'s Avatar: ${user.displayAvatarURL}`;
-    });
+    let avatarEmbed = new Discord.RichEmbed()
+    .setImage(mentionedUser.displayAvatarURL)
+    .setColor(`RANDOM`)
+    .setTitle(`Avatar`)
+    .setDescription("[Avatar Link]("+mentionedUser.displayAvatarURL+")")
+    .setFooter(`Requested by ${message.author.tag}`);
+    message.channel.send(avatarEmbed)
+    msg.delete(500);
+}
 
   if(command === "username") {
      let sicon = message.guild.iconURL;
