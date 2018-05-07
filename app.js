@@ -602,7 +602,7 @@ client.on("message", async message => {
     .addField("• CPU usage", `\`${percent.toFixed(2)}%\``,true)
     .addField("• Arch", `\`${os.arch()}\``,true)
     .addField("• Platform", `\`\`${os.platform()}\`\``,true)
-    .addFooter("• Bot Create By : TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ林坓龙#5881")
+    .setFooter("• Bot Create By : TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ林坓龙#5881")
     message.channel.send(embedStats)
     message.delete(5000);
     message.react("🚀");
