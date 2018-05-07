@@ -1250,6 +1250,7 @@ if (command === "myinfo") {
     .setDescription("[Avatar Link]("+mentionedUser.displayAvatarURL+")")
     .setFooter(`Requested by ${message.author.tag}`);
     message.channel.send(avatarEmbed)
+  }
 }
 
   if(command === "username") {
