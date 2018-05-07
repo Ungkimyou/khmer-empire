@@ -1241,7 +1241,6 @@ if (command === "myinfo") {
     }
 
   if(command === "avatar") {
-    let msg = await message.channel.send("Generating avatar...");
     let mentionedUser = message.mentions.users.first() || message.author;
 
     let avatarEmbed = new Discord.RichEmbed()
@@ -1251,7 +1250,6 @@ if (command === "myinfo") {
     .setDescription("[Avatar Link]("+mentionedUser.displayAvatarURL+")")
     .setFooter(`Requested by ${message.author.tag}`);
     message.channel.send(avatarEmbed)
-    msg.delete(500);
 }
 
   if(command === "username") {
