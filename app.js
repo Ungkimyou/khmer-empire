@@ -1302,9 +1302,6 @@ if (command === "myinfo") {
     }  
 
 
-    message.channel.send(avatarList);
-}
-
   if(command === "tempmute") {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(" you don\'t have permission to use this");
   if(args[0] == "help"){
