@@ -278,13 +278,14 @@ client.on("message", async message => {
 	if (!args.slice(0)
 		.join(' ')) return message.channel.send('Please, Provide the text! Usage: ${client.prefix}hastebin <text>')
 		.then(message => message.delete({
-			timeout: 10000
+			timeout: 1000
 		}));
 	snek.post('https://hastebin.com/documents')
 		.send(args.slice(0)
 			.join(' '))
 		.then(body => {
 			message.channel.send('**Posted Text To Hastebin**\n__**URL**__: https://hastebin.com/' + body.body.key);
+                        message.delete()
 		});
 
   }
