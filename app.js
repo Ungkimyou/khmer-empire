@@ -36,7 +36,7 @@ const exec = require('child_process').exec;
 let os = require('os')
 let cpuStat = require("cpu-stat")
 
-const hook = new Discord.WebhookClient('442255952813490199', 'ezSavA3yHjyby-taCzzGFpKkAFDnIPZ89SKfCz519iljNzPHbrFELxVJf1UthBS6_PK6');
+const hook = new Discord.WebhookClient('443801693856071680', 'PaMCS-n2NVz2DVKYzJZedt3J60i28HO42rHayqdu4beDcgIv7fXzy7rmm0nOxnkxDC99');
 const client = new Discord.Client();
 const PREFIX = "k!";
 const api = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
@@ -242,21 +242,6 @@ client.on("message", async message => {
 
 }
   
-  if(command === "hentai") {
-  if(!message.channel.nsfw) {return message.channel.send(`:underage: **This channel is not marked as NSFW!** :angry: `)}
-  else{
-  randomPuppy('hentai')
-            .then(url => {
-                const embed = new Discord.RichEmbed()             
-                .setTitle(`Hentai NSFW`)
-                .setFooter(`Requested by ${message.author.tag}`)
-                .setImage(url)
-                .setColor("#FF67CD")
-    return message.channel.send({ embed });
-            })
-  }
-}
-  
     if(command === "gif") {
   if (message.author.bot) return;
   if (message.channel.type == "dm") return;
@@ -395,46 +380,6 @@ client.on("message", async message => {
 
 
         return message.channel.send(bondEmbed)
-    }
-}
-
-  if(command === "pussy") {
-    if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
-
-    var subreddits = [
-        'pussy',
-        'rearpussy',
-        'simps',
-        'vagina',
-        'MoundofVenus',
-        'PerfectPussies',
-        'spreading'
-    ]
-    var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
-
-    randomPuppy(sub)
-        .then(url => {
-            snek.get(url).then(r => {
-                fs.writeFile(`pussy.jpg`, r.body)
-                message.channel.sendFile(r.body)
-                fs.unlink(`./pussy.jpg`)
-            })
-        })
-}
-
-  if(command === "boobs") {
-    var max = 12449;
-    var min = 10000;
-    var MathRan = Math.floor(Math.random() * (max - min + 0)) + min;
-    var MathLoL = Math.round(MathRan);
-    if (!message.channel.nsfw) {
-        message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
-    } else {
-        snek.get("http://media.oboobs.ru/boobs_preview/" + MathLoL + ".jpg").then(r => {
-            fs.writeFile(`boobs.jpg`, r.body)
-            message.channel.sendFile(r.body)
-            fs.unlink(`./boobs.jpg`)
-        })
     }
 }
 
@@ -808,6 +753,14 @@ client.on("message", async message => {
   message.channel.send(`<@${message.author.id}> «PAT» ${args[0]}`, {embed: patEmb});
 
 }
+ 
+   if(command === "say") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
+    const sayMessage = args.join(" ");
+    message.delete().catch(O_o=>{}); 
+    message.channel.send(sayMessage);
+
+  }
 
  if(command === "luckymunber") {
   var LuckNumber = Math.floor((Math.random() * 12000) + 0.120);
