@@ -276,7 +276,7 @@ client.on("message", async message => {
   }
 
   if(command === "bond") {
-  if(!args[0]) return message.channel.send("**Mention a user or users that you want to bond.** `PREFIX bond <user> <user>`")
+  if(!args[0]) return message.channel.send("**Mention a user or users that you want to bond.** `k!bond <user> <user>`")
 
    var bondLevel = Math.floor(Math.random() * 102);
    let user1 = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
@@ -636,7 +636,7 @@ client.on("message", async message => {
   if(command === "addrole") {
   if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("**You don't have premmsions to do that!**");
   let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!args[0]) return message.channel.send('**Mention a user, and type a role to give to the user.** `ium addrole <user> <role>`')
+  if(!args[0]) return message.channel.send('**Mention a user, and type a role to give to the user.** ` addrole <user> <role>`')
   if(!rMember) return message.channel.send("**User not found.** `PREFIX addrole <user> <role>`");
   let role = args.join(" ").slice(22);
   if(!role) return message.channel.send("**Specify a role!** `PREFIX addrole <user> <role>`");
@@ -1103,6 +1103,7 @@ if (command === "myinfo") {
 }
 
   if(command === "kick") {
+ if(!message.member.permissions.has("KICK_MEMBERS")) return message.channel.send("you don't have KICK_MEMBERS permissions to use this !");
     let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!kUser) return message.channel.send("Can't find user!");
     let kReason = args.join(" ").slice(22);
@@ -1126,7 +1127,7 @@ if (command === "myinfo") {
   }
 
        if(command === "ban") {
-	  
+        if(!message.member.permissions.has("BAN_MEMBERS")) return message.channel.send("you don't have BAN_MEMBERS permissions to use this !");
 	 let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 	 if(!bUser) return message.channel.send("Can't find user!");
 	 let bReason = args.join(" ").slice(22);
@@ -1157,7 +1158,7 @@ if (command === "myinfo") {
     .addField("Bot Name", client.user.username, true)
     .addField("TotalUser", client.users.size, true)
     .addField("On Servers", client.guilds.size, true)
-    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881", true)
+    .addField("Bot Create By :", "TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ林坓龙#5881", true)
     .addField("Created On", client.user.createdAt, true);
 
     return message.channel.send(botembed);
