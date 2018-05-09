@@ -949,7 +949,6 @@ if (command === "myinfo") {
     .addField('» Poll', "Reaction With Emoji")
     .addField('» Cat', "Show Cat Image")
     .addField('» Read', "Read a Book")
-    .addField('» Dadjokez', "Radom About Dad")
     .addField('» Weather', "Check Location Weather")
     .addField('» Luckymunber', "Show Your LuckyMunber")
     .addField('» Serverinfo', "Show Info About in Server")
@@ -958,7 +957,6 @@ if (command === "myinfo") {
     .addField('» Myinfo ', "Show info About Yourself to #userinfo")
     .addField('» Userinfo', "Show Your Info About On Server")
     .addField('» Adminhelp', "Show AdminCommands")
-    .addField('» NSFW', "NSFW")
     .setThumbnail(useravatar)
 
      message.author.send(helpembed);
@@ -996,7 +994,7 @@ if (command === "myinfo") {
      message.react("✅"); 
   }
 
-   if(command === "nsfw") {
+   if(command === "nsff") {
      let useravatar = message.author.avatarURL;
      let nsfwembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire' !", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=1024")
