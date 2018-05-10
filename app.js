@@ -16,9 +16,9 @@ const moment = require("moment");
 require("moment-duration-format");
 const config = require("./config.json");
 const fs = require('fs');
-const Discord = require("discord.js"),
-      arraySort = require('array-sort'),
-      table = require('table')
+const Discord = require("discord.js");
+const arraySort = require('array-sort');
+const table = require('table');
 const {
     parse
 } = require('fast-html-parser');
@@ -403,20 +403,16 @@ client.on("message", async message => {
         })
 }
   
-    if(command === "top invites") {
+    if(command === "invites") {
       let invites = await message.guild.fetchInvites().catch(error => {
         return message.channel.send('***I dont have the proper permission to access server invites!***');
     });
-
     invites = invites.array();
-
     arraySort(invites, 'users', { reverse: true });
-
     let possibleInvites = [['User', 'Invites']];
     invites.forEach(function(invite) {
         possibleInvites.push([invite.inviter.username, invite.uses]);
     });
-
     const embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setTitle('🏆 Top Server Invites :')
