@@ -973,6 +973,7 @@ if (command === "myinfo") {
     .addField('» Serverinfo', "Show Info About in Server")
     .addField('» Botinfo', "Show Into About on BOT")
     .addField('» Avatar', "Check User Avatar | k!avatar @user")
+    .addField('» Website', "Discord & BOT - Website")
     .addField('» Myinfo ', "Show info About Yourself to #userinfo")
     .addField('» Userinfo', "Show Your Info About On Server")
     .addField('» Adminhelp', "Show AdminCommands")
@@ -1196,20 +1197,19 @@ if (command === "myinfo") {
 
     }
      
-  if(command === "link") {
+  if(command === "website") {
 
      let sicon = message.guild.iconURL;
      let inviteembed = new Discord.RichEmbed()
-    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/35ccf504013fd1b7870a3d717ede2ec4.jpg?size=2048")
-    .addField("Oppaai :", ":dog: ")
-    .setColor("#437afb")
-    .setThumbnail(message.author.avatarURL)
-    .setFooter("Bot Create By : TaMoToJiᵛᵉʳᶦᶠᶦᵉᵈ#5881")
+    .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=2048")
+    .addField("▫ Discord Website :", "[CLICK HERE](http://www.tamotoji.tk)", true)
+    .addField("▫ Bot Website :", "[CLICK HERE](http://www.tamotoji.tk)", true)
+    .setColor("RANDOM")
+    .setThumbnail("https://cdn.discordapp.com/attachments/364284401497931786/444477160015790081/Png.JPG")
+    .setFooter(`Requested by ${message.author.tag}`);
 
     message.channel.send(inviteembed);
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
-
+    message.react("📥");
     }
 
   if(command === "avatar") {
