@@ -1202,14 +1202,15 @@ if (command === "myinfo") {
      let sicon = message.guild.iconURL;
      let inviteembed = new Discord.RichEmbed()
     .setAuthor("KhmerEmpire :", "https://cdn.discordapp.com/avatars/438304216893620240/56e6af0be67496ad591a1eba34075fc5.png?size=2048")
-    .addField("▫ Discord Website :", "[CLICK HERE](http://www.tamotoji.tk)", true)
-    .addField("▫ Bot Website :", "[CLICK HERE](http://www.tamotoji.tk)", true)
+    .addField("▫ Discord Website :", "  [CLICK HERE](http://www.tamotoji.tk)", true)
+    .addField("▫ Bot Website :", "  [CLICK HERE](http://www.tamotoji.tk)", true)
     .setColor("RANDOM")
-    .setThumbnail("https://cdn.discordapp.com/attachments/364284401497931786/444477160015790081/Png.JPG")
+    .setImage("https://cdn.discordapp.com/attachments/364284401497931786/444477160015790081/Png.JPG")
     .setFooter(`Requested by ${message.author.tag}`);
 
     message.channel.send(inviteembed);
     message.react("📥");
+    message.delete(10000);
     }
 
   if(command === "avatar") {
