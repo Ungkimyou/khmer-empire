@@ -404,23 +404,20 @@ client.on("message", async message => {
 }
   
     if(command === "invites") {
-    let username = message.mentions.users.first();
-    let invites = await message.guild.fetchInvites().catch(error => {
-        return message.channel.send('***I dont have the proper permission to access server invites!***');
-    });
-
+    let invites = await message.guild.fetchInvites().catch(error => { // This will store all of the invites into the variable
+        return message.channel.send('Sorry, I don\'t have the proper permissions to view invites!');
+    }) 
     invites = invites.array();
 
-    arraySort(invites, 'users', { reverse: true });
+    arraySort(invites, 'uses', { reverse: true }); 
 
-    let possibleInvites = [['User', 'Invite']];
+    let possibleInvites = [['User', 'Uses']]; 
     invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.username, invite.uses]);
-    });
+        possibleInvites.push([invite.inviter.username, invite.uses]); 
+    })
 
     const embed = new Discord.RichEmbed()
-        .setColor("#000000")
-        .setTitle('Server Invites')
+        .setColor(0xCB5A5E)
         .addField('Leaderboard', `\`\`\`${table.table(possibleInvites)}\`\`\``);
 
     message.channel.send(embed);
