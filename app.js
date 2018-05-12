@@ -388,17 +388,17 @@ client.on("message", async message => {
     if (!message.channel.nsfw) return message.channel.send(":underage: NSFW Command. Please switch to NSFW channel in order to use this command.")
 
     var subreddits = [
-        'HENTAI_GIF',
-        'hentai_irl'
+        'ANIME_GIF',
+        'anime_irl'
     ]
     var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
 
     randomPuppy(sub)
         .then(url => {
             snek.get(url).then(r => {
-                fs.writeFile(`hentai.jpg`, r.body)
+                fs.writeFile(`anime.jpg`, r.body)
                 message.channel.sendFile(r.body)
-                fs.unlink(`./hentai.jpg`)
+                fs.unlink(`./anime.jpg`)
             })
         })
 }
@@ -413,7 +413,7 @@ client.on("message", async message => {
 
     let possibleInvites = [['User', 'Uses']]; 
     invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.username, invite.uses]); 
+        possibleInvites.push([invite.inviter.tag, invite.uses]); 
     })
 
     const embed = new Discord.RichEmbed()
