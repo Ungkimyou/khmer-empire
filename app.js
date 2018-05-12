@@ -30,9 +30,9 @@ const {
 } = require('unfluff');
 const profanities = require('profanities');
 const exec = require('child_process').exec;
-const Discord = require("discord.js"),
-      arraySort = require('array-sort'),
-      table = require('table');
+const Discord = require("discord.js");
+const arraySort = require('array-sort');
+const table = require('table');
 
 let os = require('os')
 let cpuStat = require("cpu-stat")
@@ -389,39 +389,41 @@ client.on("message", async message => {
 
     var subreddits = [
         'ANIME_GIF',
-        'anime_irl'
+        'hentai_irl'
     ]
     var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
 
     randomPuppy(sub)
         .then(url => {
             snek.get(url).then(r => {
-                fs.writeFile(`anime.jpg`, r.body)
+                fs.writeFile(`hentai.jpg`, r.body)
                 message.channel.sendFile(r.body)
-                fs.unlink(`./anime.jpg`)
+                fs.unlink(`./hentai.jpg`)
             })
         })
 }
   
     if(command === "invites") {
-    let invites = await message.guild.fetchInvites().catch(error => { // This will store all of the invites into the variable
-        return message.channel.send('Sorry, I don\'t have the proper permissions to view invites!');
-    }) 
+    let invites = await message.guild.fetchInvites().catch(error => {
+        return message.channel.send('***I dont have the proper permission to access server invites!***');
+    });
+
     invites = invites.array();
 
-    arraySort(invites, 'uses', { reverse: true }); 
+    arraySort(invites, 'users', { reverse: true });
 
-    let possibleInvites = [['User', 'Uses']]; 
+    let possibleInvites = [['User', 'User']];
     invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.tag, invite.uses]); 
-    })
+        possibleInvites.push([invite.inviter.username, invite.uses]);
+    });
 
     const embed = new Discord.RichEmbed()
-        .setColor(0xCB5A5E)
+        .setColor("#000000")
+        .setTitle('Server Invites')
         .addField('Leaderboard', `\`\`\`${table.table(possibleInvites)}\`\`\``);
 
     message.channel.send(embed);
-}  
+} 
 
   if(command === "ping") {
     const newemb = new Discord.RichEmbed()
