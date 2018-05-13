@@ -234,6 +234,28 @@ client.on("message", async message => {
     message.delete();
 };  
 
+  if(command === "sp-server") {
+  const embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .addField("Supprt Server Link :", "https://discord.gg/7mS9GEY")
+    const pollTitle = await message.channel.send({ embed });
+      await pollTitle.react(`444878652090613763`);
+      await pollTitle.react(`444873045488697375`);
+      await pollTitle.react(`444873046776348679`);
+      await pollTitle.react(`444873175747133471`);
+      await pollTitle.react(`444873284622745610`);
+    const filter = (reaction) => reaction.emoji.name === '444878652090613763';
+    const collector = pollTitle.createReactionCollector(filter, { time: 150 });
+    const filter1 = (reaction) => reaction.emoji.name === '444873045488697375';
+    const collector1 = pollTitle.createReactionCollector(filter1, { time: 150 });
+    const filter3 = (reaction) => reaction.emoji.name === '444873046776348679';
+    const collector3 = pollTitle.createReactionCollector(filter3, { time: 150 });
+    const filter4 = (reaction) => reaction.emoji.name === '444873175747133471';
+    const collector4 = pollTitle.createReactionCollector(filter4, { time: 150 });
+    const filter5 = (reaction) => reaction.emoji.name === '444873284622745610';
+    const collector5 = pollTitle.createReactionCollector(filter5, { time: 150 });
+    message.delete();
+};
 
   if(command === "meme") {
   if(message.author.bot) return;
