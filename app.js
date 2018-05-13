@@ -234,11 +234,8 @@ client.on("message", async message => {
     message.delete();
 };  
 
-  if(command === "sp-server") {
-  const embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .addField("Supprt Server Link :", "https://discord.gg/7mS9GEY")
-    const pollTitle = await message.channel.send({ embed });
+  if(command === "discord") {
+    const pollTitle = await message.channel.send("**[https://discord.gg/7mS9GEY ]**");
       await pollTitle.react(`444878652090613763`);
       await pollTitle.react(`444873045488697375`);
       await pollTitle.react(`444873046776348679`);
