@@ -214,11 +214,11 @@ client.on("message", async message => {
    if(command == "annsay") {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
     if(args[0] == "help"){
-    message.reply("```Create #annoucements first and do k!annsay on the channel you want message sand to #annoucements```");
+    message.reply("```Create #annoucements first and do k!annsay on the channel you want message sand to #announcements```");
     return;
   }
-    let chatchannel = message.guild.channels.find(`name`, "annoucements");
-    if(!chatchannel) return message.channel.send("you need create channel #annoucements to chat !");
+    let chatchannel = message.guild.channels.find(`name`, "announcements");
+    if(!chatchannel) return message.channel.send("you need create channel #announcements !");
     message.delete().catch(O_o=>{});
     chatchannel.send(args.join(" "));
 
