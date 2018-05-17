@@ -788,13 +788,12 @@ client.on("message", async message => {
 }
 
 
-  if(command === "clear") {
-     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
-     if(!args[0]) return message.channel.send("NOPE");
-     message.channel.bulkDelete(args[0]).then(() => {
-    message.channel.send(`» Message Has Been Clear ${args[0]} .`).then(msg => msg.delete(2000));
- });
-
+    if(command === "clear") {
+        if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("you don't have permssion MANAGE_MESSAGE to use this !");
+        if(!args[0]) return message.channel.send(`${config.prefix}clear [limit to clear]`);
+        message.channel.bulkDelete(args[0]).then(() => {
+       message.channel.send(`${message.author.username} Has Been Clear Message To **${args[0]}** .`).then(msg => msg.delete(2000));
+    });
 }
  
  if(command === "poll") {
@@ -806,15 +805,15 @@ client.on("message", async message => {
     .setFooter('React to vote on Poll!')
     .setColor('#7289DA')
     const pollTitle = await message.channel.send({ embed });
-      await pollTitle.react(`ðŸ‘`);
-      await pollTitle.react(`ðŸ‘Ž`);
+      await pollTitle.react(`👍`);
+      await pollTitle.react(`👎`);
   
-    const filter = (reaction) => reaction.emoji.name === 'ðŸ‘';
+    const filter = (reaction) => reaction.emoji.name === '👍';
     const collector = pollTitle.createReactionCollector(filter, { time: 15000 });
       collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
       collector.on('end', collected => console.log(`Collected ${collected.size} items`));
   
-    const filter1 = (reaction) => reaction.emoji.name === 'ðŸ‘Ž';
+    const filter1 = (reaction) => reaction.emoji.name === '👎';
     const collector1 = pollTitle.createReactionCollector(filter1, { time: 15000 });
       collector1.on('collect', r => console.log(`Collected ${r.emoji.name}`));
       collector1.on('end', collected => console.log(`Collected ${collected.size} items`));
