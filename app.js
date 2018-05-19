@@ -1,4 +1,4 @@
-const gifSearch = require("gif-search");
+ const gifSearch = require("gif-search");
 const info = require('systeminformation');
 const urban = require("urban");
 const sm = require('string-similarity');
@@ -30,10 +30,10 @@ const {
 } = require('unfluff');
 const profanities = require('profanities');
 const exec = require('child_process').exec;
-const Discord = require('discord.js');
-  //  arraySort = require('array-sort'),
- //   table = require('table'),
- //  send = require('quick.hook');
+const Discord = require('discord.js'),
+    arraySort = require('array-sort'),
+    table = require('table'),
+    send = require('quick.hook');
 
 let os = require('os')
 let cpuStat = require("cpu-stat")
