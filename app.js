@@ -30,10 +30,10 @@ const {
 } = require('unfluff');
 const profanities = require('profanities');
 const exec = require('child_process').exec;
-const Discord = require('discord.js'),
-      arraySort = require('array-sort'),
-      table = require('table'),
-      send = require('quick.hook');
+const Discord = require('discord.js');
+  //  arraySort = require('array-sort'),
+ //   table = require('table'),
+ //  send = require('quick.hook');
 
 let os = require('os')
 let cpuStat = require("cpu-stat")
@@ -513,7 +513,7 @@ client.on("message", async message => {
 
     let possibleInvites = [['User', 'User']];
     invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.user, invite.uses]);
+        possibleInvites.push([invite.inviter.username//, invite.uses]);
     });
 
     const embed = new Discord.RichEmbed()
