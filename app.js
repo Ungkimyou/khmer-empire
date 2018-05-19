@@ -31,9 +31,9 @@ const {
 const profanities = require('profanities');
 const exec = require('child_process').exec;
 const Discord = require('discord.js'),
-    arraySort = require('array-sort'),
-    table = require('table'),
-    send = require('quick.hook');
+     arraySort = require('array-sort'),
+     table = require('table'),
+     send = require('quick.hook');
 
 let os = require('os')
 let cpuStat = require("cpu-stat")
