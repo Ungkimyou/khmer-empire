@@ -30,9 +30,10 @@ const {
 } = require('unfluff');
 const profanities = require('profanities');
 const exec = require('child_process').exec;
-const Discord = require("discord.js");
-const arraySort = require('array-sort');
-const table = require('table');
+const Discord = require('discord.js'),
+      arraySort = require('array-sort'),
+      table = require('table'),
+      send = require('quick.hook');
 
 let os = require('os')
 let cpuStat = require("cpu-stat")
@@ -223,6 +224,26 @@ client.on("message", async message => {
     chatchannel.send(args.join(" "));
 
    }
+ 
+    if(command === "topinvites" || command === "invites") {
+    let invites = await message.guild.fetchInvites().catch(error => { // This will store all of the invites into the variable
+        return message.channel.send('Sorry, I don\'t have the proper permissions to view invites!');
+    }) // This will store all of the invites into the variable
+    invites = invites.array();
+    arraySort(invites, 'uses', { reverse: true }); // Be sure to enable 'reverse'
+    let possibleInvites = [['User', 'Invite']]; // Each array object is a rown in the array, we can start up by setting the header as 'User' & 'Uses'
+    invites.forEach(function(invite) {
+        possibleInvites.push([invite.inviter.username, invite.uses]); // This will then push 2 items into another row
+    })
+    const embed = new Discord.RichEmbed()
+        .setColor(0xCB5A5E)
+        .addField('Leaderboard', `\`\`\`${table.table(possibleInvites)}\`\`\``);
+    send(message.channel, embed, {
+        name: 'Server Invites',
+        icon: 'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/trophy-128.png'
+    })
+    
+}
 
  if(command === "sayreact") {
   let botmessage = args.join(" ");
