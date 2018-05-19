@@ -519,7 +519,7 @@ client.on("message", async message => {
     const embed = new Discord.RichEmbed()
         .setColor("#000000")
         .setTitle('Server Invites')
-        .addField('Leaderboard', `\`\`\`${table.table(possibleInvites)}\`\`\``);
+        .addField('🏆 Leaderboard 🏆', `\`\`\`${table.table(possibleInvites)}\`\`\``);
 
     message.channel.send(embed);
 } 
