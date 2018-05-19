@@ -513,7 +513,7 @@ client.on("message", async message => {
 
     let possibleInvites = [['User', 'User']];
     invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.username//, invite.uses]);
+        possibleInvites.push([invite.inviter.username, invite.uses]);
     });
 
     const embed = new Discord.RichEmbed()
